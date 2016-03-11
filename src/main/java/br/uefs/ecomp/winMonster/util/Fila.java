@@ -33,8 +33,8 @@ public class Fila implements IFila{
             ultimo=primeiro; //aponta a referência do último para o primeiro, já que só tem 1 elemento na fila
         }
         else { //caso já tenham elementos cadastrados
-            ultimo.setProximo(celulaNova); //aponta a referência do próximo do último elemento da lista para a 
-            ultimo=celulaNova;
+            ultimo.setProximo(celulaNova); //aponta a referência do próximo do último elemento da lista para a nova célula criada
+            ultimo=celulaNova; //define a nova célula como último elemento
         }
         tamanho ++;
     }
