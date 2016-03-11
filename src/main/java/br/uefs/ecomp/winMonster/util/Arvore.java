@@ -35,6 +35,22 @@ public class Arvore {
 		}else{
 			CelulaArvore atual=raiz;
 			CelulaArvore pai;
+			while(true){
+				pai=atual;
+				if(celula.getChave()<atual.getChave()){
+					atual=atual.getEsquerda();
+					if(atual==null){
+						pai.setEsquerda(novaCelula);
+						return;
+					}
+				}else{
+					atual=atual.getDireita();
+					if(atual==null){
+						pai.setDireita(novaCelula);
+						return;
+					}
+				}
+			}
 		}
 	}
 	
