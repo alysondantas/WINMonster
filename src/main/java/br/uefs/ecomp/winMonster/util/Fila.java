@@ -30,7 +30,7 @@ public class Fila implements IFila{
     	Celula celulaNova=new Celula(o);
         if (primeiro==null) {
             primeiro=celulaNova;
-            ultimo=primeiro;
+            ultimo=primeiro; //teste
         }
         else {
             ultimo.setProximo(celulaNova);
