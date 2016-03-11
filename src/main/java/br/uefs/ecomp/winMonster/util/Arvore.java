@@ -29,7 +29,13 @@ public class Arvore {
 	}
 	
 	public void inserir(CelulaArvore celula){
-		CelulaArvore novaCelula;
+		CelulaArvore novaCelula=celula;
+		if(raiz==null){
+			raiz=novaCelula;
+		}else{
+			CelulaArvore atual=raiz;
+			CelulaArvore pai;
+		}
 	}
 	
 }
