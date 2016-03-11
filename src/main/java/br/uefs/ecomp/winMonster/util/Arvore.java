@@ -26,6 +26,10 @@ public class Arvore {
 			}
 		}
 		return atual;
-		
 	}
+	
+	public void inserir(CelulaArvore celula){
+		CelulaArvore novaCelula;
+	}
+	
 }
