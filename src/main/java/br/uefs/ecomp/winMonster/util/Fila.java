@@ -3,34 +3,34 @@ package br.uefs.ecomp.winMonster.util;
 
 public class Fila implements IFila{
 
-    private Celula primeiro;
-    private Celula ultimo;
-    private int tamanho = 0 ;
+    private Celula primeiro; //primeiro elemento da fila
+    private Celula ultimo; //último elemento da fila
+    private int tamanho = 0 ; //contador de elementos
     
     public Fila(){
-		primeiro = null;
+		primeiro = null; //inicializa o primeiro e o último como nulos
 		ultimo = null;
 	}
     
     @Override
-    public boolean estaVazia() {
-    	if(primeiro == null){
-    		return true;
-    	}
-        return false;
+    public boolean estaVazia() { //método para verificar se a lista está vazia
+    	if(primeiro == null){ //caso a primeira posição esteja vazia
+    		return true; //retorne true
+    	} //caso contrário
+        return false; //retorne false
     }
 
     @Override
-    public int obterTamanho() {
-        return tamanho;
+    public int obterTamanho() { //método pra obter o número de elementos da fila
+        return tamanho; //retorna o contador da classe
     }
 
     @Override
-    public void inserirFinal(Object o) {
-    	Celula celulaNova=new Celula(o);
+    public void inserirFinal(Object o) { //método para inserir elementos na fila
+    	Celula celulaNova=new Celula(o); //cria uma nova célula chamada "celulaNova" com o objeto recebido pelo método
         if (primeiro==null) {
             primeiro=celulaNova;
-            ultimo=primeiro; //teste
+            ultimo=primeiro;
         }
         else {
             ultimo.setProximo(celulaNova);
