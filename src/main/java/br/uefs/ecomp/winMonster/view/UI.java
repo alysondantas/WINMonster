@@ -10,6 +10,7 @@ public class UI {
 	 }
 	 public static void main(String[] args) throws IOException {
 		 new UI().mensagem();
+		 System.out.println("Teste");
 	 }
 
 }
