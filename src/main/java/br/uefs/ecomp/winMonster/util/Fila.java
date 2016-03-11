@@ -34,38 +34,38 @@ public class Fila implements IFila{
         }
         else { //caso já tenham elementos cadastrados
             ultimo.setProximo(celulaNova); //aponta a referência do próximo do último elemento da lista para a nova célula criada
-            ultimo=celulaNova; //define a nova célula como último elemento
+            ultimo=celulaNova; //define a nova célula como último elemento 
         }
-        tamanho ++;
+        tamanho ++; //acresce um no contador de elementos
     }
 
     @Override
-    public Object removerInicio() {
-        Celula auxiliar = null;
-        if(primeiro!=null) {
-            auxiliar = primeiro;
-            if(primeiro == ultimo) {
-            	auxiliar=primeiro;
-                primeiro = null;
-                ultimo = null;
-            } else {
-            	auxiliar=primeiro;
-                primeiro = primeiro.getProximo();
+    public Object removerInicio() { //método para remover um elemento da fila
+        Celula auxiliar = null; //cria uma celula para auxiliar nas remoções e inicializa ela como nulo
+        if(primeiro!=null) { //caso existam elementos cadastrados na fila
+            auxiliar = primeiro; //copia o primeiro elemento no auxiliar
+            if(primeiro == ultimo) { //caso só exista um elemento cadastrado na fila
+            	auxiliar=primeiro; //copia o primeiro elemento no auxiliar
+                primeiro = null; //deleta o primeiro elemento
+                ultimo = null; //deleta o último elemento
+            } else { //caso tenha mais de um elemento na fila
+            	auxiliar=primeiro; //copia o primeiro no auxiliar
+                primeiro = primeiro.getProximo(); //passa a primeira posição para o segundo elemento da fila
             }
-            tamanho--;
+            tamanho--; //decresce um do contador de elementos
         }
-        return auxiliar.getObjeto();
+        return auxiliar.getObjeto(); //retorna a cópia do elemento removido
     }
 
     @Override
-    public Object recuperarInicio() {
-        return primeiro.getObjeto();
+    public Object recuperarInicio() { //método para retornar o primeiro elemento da fila
+        return primeiro.getObjeto(); //retorna o objeto existente dentro do primeiro elemento da fila
     }
 
     @Override
-    public Iterador iterador() {
-        MeuIterador iterador = new MeuIterador(primeiro);
-        return iterador;
+    public Iterador iterador() { //método para criar um iterador da fila
+        MeuIterador iterador = new MeuIterador(primeiro); //cria um novo iterador passando o primeiro elemento da fila como parâmetro
+        return iterador; //retorna o iterador criado
     }
     
 }

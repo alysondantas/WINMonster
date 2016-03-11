@@ -9,5 +9,5 @@ public class Arvore {
 	public int obterTamanho() {
 		return tamanho;//quando sair do laço retorna o tamanho da lista
 	}
-	//novo comentário
+
 }
