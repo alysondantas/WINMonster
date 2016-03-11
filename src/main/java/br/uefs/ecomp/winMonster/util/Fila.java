@@ -28,12 +28,12 @@ public class Fila implements IFila{
     @Override
     public void inserirFinal(Object o) { //método para inserir elementos na fila
     	Celula celulaNova=new Celula(o); //cria uma nova célula chamada "celulaNova" com o objeto recebido pelo método
-        if (primeiro==null) {
-            primeiro=celulaNova;
-            ultimo=primeiro;
+        if (primeiro==null) { //caso a primeira posição esteja vazia
+            primeiro=celulaNova; //atribui a primeira posição da fila à célula nova
+            ultimo=primeiro; //aponta a referência do último para o primeiro, já que só tem 1 elemento na fila
         }
-        else {
-            ultimo.setProximo(celulaNova);
+        else { //caso já tenham elementos cadastrados
+            ultimo.setProximo(celulaNova); //aponta a referência do próximo do último elemento da lista para a 
             ultimo=celulaNova;
         }
         tamanho ++;
