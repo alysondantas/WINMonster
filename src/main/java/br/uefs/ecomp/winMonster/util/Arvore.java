@@ -33,3 +33,27 @@ public class Arvore {
 	}
 	
 }
+
+public void inserir2(No node, int valor) {
+    //Verifica se o valor a ser inserido é menor que o nodo corrente da árovre, se sim vai para subarvore esquerda
+    if (valor < node.valor) {
+        //Se tiver elemento no nodo esquerdo continua a busca
+        if (node.esquerda != null) {
+            inserir(node.esquerda, valor);
+        } else {
+            //Se nodo esquerdo vazio insere o novo nodo aqui
+            System.out.println("  Inserindo " + valor + " a esquerda de " + node.valor);
+            node.esquerda = new No(valor);
+        }
+    //Verifica se o valor a ser inserido é maior que o nodo corrente da árvore, se sim vai para subarvore direita
+    } else if (valor > node.valor) {
+        //Se tiver elemento no nodo direito continua a busca
+        if (node.direita != null) {
+            inserir(node.direita, valor);
+        } else {
+            //Se nodo direito vazio insere o novo nodo aqui
+            System.out.println("  Inserindo " + valor + " a direita de " + node.valor);
+            node.direita = new No(valor);
+        }
+    }
+}
