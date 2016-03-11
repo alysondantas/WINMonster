@@ -25,8 +25,8 @@ do código, e estou ciente que estes trechos não serão considerados para fins de 
  * Classe para a celula generica
  */
 public class CelulaArvore {//Classe para um celula generica
-	private Celula direita;//Referencia para a proxima celula
-	private Celula esquerda;
+	private Celula direita;//Referencia para a celula filha da direita
+	private Celula esquerda;//Referencia para a celula filha da esquerda
 	private int chave;
 	private Object objeto;//Objeto generico que vai estar dentro da celula
 	/**
@@ -37,7 +37,6 @@ public class CelulaArvore {//Classe para um celula generica
 		this.chave=key;
 		this.objeto=o;//objeto recebe object que foi passado
 	}
-	
 	//Os dois a baixo tem o mesmo papel que o get e set acima.
 	public Object getObjeto() {
 		return objeto;
@@ -45,43 +44,36 @@ public class CelulaArvore {//Classe para um celula generica
 	public void setObjeto(Object objeto) {
 		this.objeto = objeto;
 	}
-	//
-
 	/**
 	 * @return the direita
 	 */
 	public Celula getDireita() {
 		return direita;
 	}
-
 	/**
 	 * @param direita the direita to set
 	 */
 	public void setDireita(Celula direita) {
 		this.direita = direita;
 	}
-
 	/**
 	 * @return the esquerda
 	 */
 	public Celula getEsquerda() {
 		return esquerda;
 	}
-
 	/**
 	 * @param esquerda the esquerda to set
 	 */
 	public void setEsquerda(Celula esquerda) {
 		this.esquerda = esquerda;
 	}
-
 	/**
 	 * @return the chave
 	 */
 	public int getChave() {
 		return chave;
 	}
-
 	/**
 	 * @param chave the chave to set
 	 */
