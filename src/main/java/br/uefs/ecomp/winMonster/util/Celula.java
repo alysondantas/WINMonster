@@ -24,14 +24,60 @@ do código, e estou ciente que estes trechos não serão considerados para fins de 
  * @author Alyson
  * Classe para a celula generica
  */
+
+
 public class Celula {//Classe para um celula generica
 	private Celula proximo;//Referencia para a proxima celula
-	private Object objeto;//Objeto generico que vai estar dentro da celula
+	private Celula anterior; //Referência para a célula anterior
+	private Object conteudo;//Objeto generico que vai estar dentro da celula
 	/**
 	 * Metodo construtor da classe obrigando que venha um objeto quando criar celula
 	 * @param o
 	 */
-	public Celula(Object o){
+	
+	public Celula(Celula anterior, Celula proximo, Object conteudo) {
+        this.proximo = proximo;
+        this.anterior = anterior;
+        this.conteudo = conteudo;
+    }
+
+    public Celula() { //construtor auxiliar que inicializa o conteúdo como nulo
+        this.conteudo = null;
+    }
+
+    public Celula getProximo() {
+        return proximo;
+    }
+
+    public void setProximo(Celula proximo) {
+        this.proximo = proximo;
+    }
+
+    public Celula getAnterior() {
+        return anterior;
+    }
+
+    public void setAnterior(Celula anterior) {
+        this.anterior = anterior;
+    }
+
+    public Object getObjeto() {
+        return conteudo;
+    }
+
+    public void setObjeto(Object conteudo) {
+        this.conteudo = conteudo;
+    }
+
+} 
+
+
+
+//////////////////////////////////Classe antiga////////////////////////////////////////////////
+
+
+
+	/*public Celula(Object o){
 		this.objeto=o;//objeto recebe object que foi passado
 	}
 	//Construtores do encapsulamento
@@ -50,4 +96,4 @@ public class Celula {//Classe para um celula generica
 		this.objeto = objeto;
 	}
 	//
-}
+}*/

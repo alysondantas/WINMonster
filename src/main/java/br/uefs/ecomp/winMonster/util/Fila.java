@@ -1,13 +1,98 @@
+    
+    /**
+     * Componente Curricular: Módulo Integrado de Programação
+     * Autor: Bruno Menezes de Lima e Bernardo Oliveira Rosa
+     * Data:  07/03/2016
+     *
+     * Declaro que este código foi elaborado por nós de forma individual e
+     * não contém nenhum trecho de código de outro colega ou de outro autor,
+     * tais como provindos de livros e apostilas, e páginas ou documentos
+     * eletrônicos da Internet. Qualquer trecho de código de outra autoria que
+     * uma citação para o  não a minha está destacado com  autor e a fonte do
+     * código, e estou ciente que estes trechos não serão considerados para fins
+     * de avaliação. Alguns trechos do código podem coincidir com de outros
+     * colegas pois estes foram discutidos em sessões tutorias.
+     */
 
 package br.uefs.ecomp.winMonster.util;
 
 public class Fila implements IFila{
 
-    private Celula primeiro; //primeiro elemento da fila
+    private Celula primeiro; //primeira posição da fila
     private Celula ultimo; //último elemento da fila
     private int tamanho = 0 ; //contador de elementos
+
+        public Fila() {
+            this.primeiro = null;           //Inicializa o primeiro elemento como nulo
+            this.ultimo = this.primeiro;    //e iguala o último ao primeiro
+            this.tamanho = 0;        //além de inicializar o contador como 0    
+        }
+        
+        @Override
+        public boolean estaVazia() {
+            if (this.primeiro == null) { //se o primeiro elemento for nulo
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public int obterTamanho() {
+            return tamanho;
+        }
+
+        @Override
+        public void inserirFinal(Object o) {
+            Celula no = new Celula(this.ultimo, null, o); //Cria um novo nó usando o último da lista como anterior, nulo como próximo e com o objeto o como conteúdo
+            if (!estaVazia()) {
+                this.ultimo.setProximo(no); //diz que o próximo do último da lista é o novo nó
+                this.ultimo = no; //aponta a última posição para esse novo nó
+                tamanho++;
+            } else {
+                this.primeiro = no; //aponta o primeiro da lista para o novo nú
+                this.ultimo = this.primeiro; //como só tem 1 elemento, o último se torna o primeiro
+                tamanho++;
+            }
+        }
+
+        @Override
+        public Object removerInicio() {
+            if (tamanho == 1) { //se só existir um elemento na lista
+                Celula aux = this.primeiro; //cria uma cópia do elemento a ser removido pra retorno
+                this.primeiro = this.primeiro.getProximo(); //o primeiro agora aponta pra o próximo do primeiro elemento
+                tamanho--;
+                return aux; //retorna a cópia do elemento removido
+            } else if (!estaVazia()) { 
+                Celula aux = this.primeiro; //cópia do elemento a ser removido
+                this.primeiro = this.primeiro.getProximo();     //a cabeça da lista se torna o próximo elemento
+                this.primeiro.setAnterior(null); //direciona o anterior da nova cabeça pra nulo
+                tamanho--;
+                return aux; //retorna a cópia
+            } else {
+                return null;
+            }
+        }
+
+        @Override
+        public Object recuperarInicio() {
+            return this.primeiro;
+        }
+
+        @Override
+        public Iterador iterador() {
+            return new MeuIterador(this.primeiro); //retorna um iterador com a cabeça da lista
+
+        }
+
+    }
     
-    public Fila(){
+
+    
+    ///////////////////////////////////////// Classe antiga //////////////////////////////////////////////
+    
+    
+    
+    /*public Fila(){
 		primeiro = null; //inicializa o primeiro e o último como nulos
 		ultimo = null;
 	}
@@ -68,4 +153,4 @@ public class Fila implements IFila{
         return iterador; //retorna o iterador criado
     }
     
-}
+}*/
