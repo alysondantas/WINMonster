@@ -54,6 +54,28 @@ public class Fila implements IFila{
                 tamanho++;
             }
         }
+        
+        public void inserir(int chave, Object o) { //método para inserir elementos na fila
+            Celula no = new Celula(chave, o); //Cria um novo nó usando o último da lista como anterior, nulo como próximo e com o objeto o como conteúdo
+            if (!estaVazia()) {
+                Celula aux = this.ultimo; //cria um auxiliar para percorrer a fila inicializado como o último
+                while(aux != this.primeiro || aux.getChave() < no.getChave()) { //enquanto não chegar ao início da lista ou a chave do elemento for menor do que a do elemento a ser inserido
+                	aux = aux.getAnterior(); //volta uma posição da lista
+                	if (aux == this.primeiro) { //caso tenha chegado ao início da lista, insere no início
+                		this.primeiro.setAnterior(no); //aponta o anterior do primeiro da lista para o novo nó
+                		no.setProximo(this.primeiro); //aponta o próximo do novo nó para o primeiro da lista 
+                		this.primeiro = no; //passa a posição de primeiro para o novo nó
+                	} //ao encontrar a posição correta do auxiliar
+                	no.setProximo(aux.getProximo()); //aponta o próximo do novo nó para o próximo do auxiliar
+                	aux.setProximo(aux); //aponta o próximo do auxiliar agora para o novo nó
+                	no.setAnterior(aux); //aponta o anterior do novo nó para o auxiliar
+                }
+            } else { //caso a fila esteja vazia
+                this.primeiro = no; //aponta o primeiro da fila para o novo nó
+                this.ultimo = this.primeiro; //como só tem 1 elemento, o último se torna o primeiro
+                tamanho++;
+            }
+        }
 
         @Override
         public Object removerInicio() { //método para remover elementos da fila

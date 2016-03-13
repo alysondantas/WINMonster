@@ -42,6 +42,13 @@ public class Celula {//Classe para um celula generica
         this.anterior = anterior;
         this.conteudo = conteudo;
     }
+	
+	public Celula(int chave, Object conteudo) {
+		this.chave = chave;
+		this.proximo = null;
+		this.anterior = null;
+		this.conteudo = conteudo;
+	}
 
     public Celula() { //construtor auxiliar que inicializa o conteúdo como nulo
         this.conteudo = null;

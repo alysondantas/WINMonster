@@ -26,7 +26,7 @@ public class AdministradorController {
 		return linha; //retorna a String com todo o conteúdo do arquivo de texto
 	}
 
-	public void escreverArquivo(String local) throws IOException {
+	public void escreverArquivo(String local) throws IOException { //método deixado aqui só para inspiração. Não vai ser usado do jeito que está descrito no momento
 		BufferedWriter buffWrite = new BufferedWriter(new FileWriter(local)); //crio um novo objeto para escrita de arquivos e passo como parâmetro um novo objeto de escrita do arquivo no local especificado
 		String linha = ""; //crio uma string auxiliar para gravar a linha do arquivo e a inicializo como vazia
 		Scanner in = new Scanner(System.in); //inicializo um objeto para capturar os dados de entrada do usuário
@@ -47,12 +47,12 @@ public class AdministradorController {
 					cont++; //incrementa um no contador
 				}
 			}
-			fila.inserirFinal(linha.substring(0, 1)); //crio uma string somente com a primeira letra de linha e insiro ela na fila
+			fila.inserir(cont, linha.substring(0, 1)); //crio uma string somente com a primeira letra de linha e insiro ela na fila, passando também o número de vezes que a letra se repete como chave
 			aux = Character.toString(linha.charAt(0)); //atribui agora a primeira letra da string ao valor de aux
 			linha = linha.replace(aux, ""); //remove todas as ocorrências da primeira letra na string
-			fila.recuperarFinal().setChave(cont); //Altera a chave do elemento inserido para o número de vezes que ele se repete
 		} //repete o ciclo
 		return fila; //retorno a fila com cada letra da string separada em células com suas respectivas chaves
 	}
 
+	
 }
