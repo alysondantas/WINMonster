@@ -29,7 +29,7 @@ public class Fila implements IFila{
         }
         
         @Override
-        public boolean estaVazia() {
+        public boolean estaVazia() { //método para informar se a fila está vazia
             if (this.primeiro == null) { //se o primeiro elemento for nulo
                 return true;
             }
@@ -37,34 +37,34 @@ public class Fila implements IFila{
         }
 
         @Override
-        public int obterTamanho() {
+        public int obterTamanho() { //método para obter o número de elementos inseridos na fila
             return tamanho;
         }
 
         @Override
-        public void inserirFinal(Object o) {
+        public void inserirFinal(Object o) { //método para inserir elementos na fila
             Celula no = new Celula(this.ultimo, null, o); //Cria um novo nó usando o último da lista como anterior, nulo como próximo e com o objeto o como conteúdo
             if (!estaVazia()) {
                 this.ultimo.setProximo(no); //diz que o próximo do último da lista é o novo nó
                 this.ultimo = no; //aponta a última posição para esse novo nó
                 tamanho++;
             } else {
-                this.primeiro = no; //aponta o primeiro da lista para o novo nú
+                this.primeiro = no; //aponta o primeiro da fila para o novo nó
                 this.ultimo = this.primeiro; //como só tem 1 elemento, o último se torna o primeiro
                 tamanho++;
             }
         }
 
         @Override
-        public Object removerInicio() {
-            if (tamanho == 1) { //se só existir um elemento na lista
+        public Object removerInicio() { //método para remover elementos da fila
+            if (tamanho == 1) { //se só existir um elemento na fila
                 Celula aux = this.primeiro; //cria uma cópia do elemento a ser removido pra retorno
                 this.primeiro = this.primeiro.getProximo(); //o primeiro agora aponta pra o próximo do primeiro elemento
                 tamanho--;
                 return aux; //retorna a cópia do elemento removido
             } else if (!estaVazia()) { 
                 Celula aux = this.primeiro; //cópia do elemento a ser removido
-                this.primeiro = this.primeiro.getProximo();     //a cabeça da lista se torna o próximo elemento
+                this.primeiro = this.primeiro.getProximo();     //a cabeça da fila se torna o próximo elemento
                 this.primeiro.setAnterior(null); //direciona o anterior da nova cabeça pra nulo
                 tamanho--;
                 return aux; //retorna a cópia
@@ -74,13 +74,17 @@ public class Fila implements IFila{
         }
 
         @Override
-        public Object recuperarInicio() {
+        public Object recuperarInicio() { //método para retornar o elemento na frente da fila
             return this.primeiro;
+        }
+        
+        public Celula recuperarFinal() {
+        	return this.ultimo;
         }
 
         @Override
-        public Iterador iterador() {
-            return new MeuIterador(this.primeiro); //retorna um iterador com a cabeça da lista
+        public Iterador iterador() { //método para criar um iterador com o início da fila
+            return new MeuIterador(this.primeiro); //retorna um iterador com a cabeça da fila
 
         }
 

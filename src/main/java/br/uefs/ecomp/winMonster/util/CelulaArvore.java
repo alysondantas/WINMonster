@@ -35,7 +35,7 @@ public class CelulaArvore {//Classe para um celula generica
 	 */
 	public CelulaArvore(int key,Object o){
 		this.chave=key;
-		this.objeto=o;//objeto recebe object que foi passado
+		this.objeto=o; //objeto recebe object que foi passado
 	}
 	//Os dois a baixo tem o mesmo papel que o get e set acima.
 	public Object getObjeto() {

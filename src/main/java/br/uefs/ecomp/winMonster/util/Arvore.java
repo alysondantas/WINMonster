@@ -1,8 +1,15 @@
 package br.uefs.ecomp.winMonster.util;
 
 public class Arvore {
-	CelulaArvore raiz;
-	int tamanho=0;
+	
+	CelulaArvore raiz; //elemento inicial da árvore
+	int tamanho; //número de elementos da árvore
+	
+	public Arvore (){ //construtor padrão para a árvore que inicializa sua raíz como nulo e seu tamanho como zero
+		this.raiz = null;
+		this.tamanho = 0;
+	}
+	
 	public boolean estaVazia() {
 		return raiz==null;//retorna true se a primeira celula for nula
 	}

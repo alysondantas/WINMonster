@@ -27,6 +27,7 @@ do código, e estou ciente que estes trechos não serão considerados para fins de 
 
 
 public class Celula {//Classe para um celula generica
+	private int chave; //valor para representar a prioridade do elemento
 	private Celula proximo;//Referencia para a proxima celula
 	private Celula anterior; //Referência para a célula anterior
 	private Object conteudo;//Objeto generico que vai estar dentro da celula
@@ -36,6 +37,7 @@ public class Celula {//Classe para um celula generica
 	 */
 	
 	public Celula(Celula anterior, Celula proximo, Object conteudo) {
+		this.chave = 0;
         this.proximo = proximo;
         this.anterior = anterior;
         this.conteudo = conteudo;
@@ -68,6 +70,16 @@ public class Celula {//Classe para um celula generica
     public void setObjeto(Object conteudo) {
         this.conteudo = conteudo;
     }
+
+	public int getChave() {
+		return chave;
+	}
+
+	public void setChave(int chave) {
+		this.chave = chave;
+	}
+    
+    
 
 } 
 
