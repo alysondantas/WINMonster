@@ -61,12 +61,12 @@ public class Arvore {
 		}
 	}*/
 
-	public CelulaArvore retornaRaiz(){
-		return raiz;
+	public CelulaArvore retornaRaiz(){//metodo para retornar a raiz
+		return raiz;//retorno da raiz
 	}
 
-	public void colocaRaiz(CelulaArvore raiz1){
-		this.raiz=raiz1;
+	public void colocaRaiz(CelulaArvore raiz1){//metodo set para raiz
+		this.raiz=raiz1;//mudando a raiz para a nova
 	}
 
 	public Arvore inserirHuffman(Fila filaprioridade){//metodo para remover os dois elementos da fila e colocar em uma arvore
