@@ -27,23 +27,15 @@ do código, e estou ciente que estes trechos não serão considerados para fins de 
 public class CelulaArvore {//Classe para um celula generica
 	private CelulaArvore direita;//Referencia para a celula filha da direita
 	private CelulaArvore esquerda;//Referencia para a celula filha da esquerda
-	private int chave;
-	private Object objeto;//Objeto generico que vai estar dentro da celula
+	private String caractere="";//Objeto generico que vai estar dentro da celula
 	/**
 	 * Metodo construtor da classe obrigando que venha um objeto quando criar celula
 	 * @param o
 	 */
-	public CelulaArvore(int key,Object o){
-		this.chave=key;
-		this.objeto=o; //objeto recebe object que foi passado
+	public CelulaArvore(){
+		
 	}
 	//Os dois a baixo tem o mesmo papel que o get e set acima.
-	public Object getObjeto() {
-		return objeto;
-	}
-	public void setObjeto(Object objeto) {
-		this.objeto = objeto;
-	}
 	/**
 	 * @return the direita
 	 */
@@ -69,15 +61,15 @@ public class CelulaArvore {//Classe para um celula generica
 		this.esquerda = esquerda;
 	}
 	/**
-	 * @return the chave
+	 * @return the caractere
 	 */
-	public int getChave() {
-		return chave;
+	public String getCaractere() {
+		return caractere;
 	}
 	/**
-	 * @param chave the chave to set
+	 * @param caractere the caractere to set
 	 */
-	public void setChave(int chave) {
-		this.chave = chave;
+	public void setCaractere(String caractere) {
+		this.caractere = caractere;
 	}
 }
