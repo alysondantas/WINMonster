@@ -45,7 +45,7 @@ public class Fila implements IFila{
         public void inserirFinal(Object o) { //método para inserir elementos na fila
             Celula no = new Celula(this.ultimo, null, o); //Cria um novo nó usando o último da lista como anterior, nulo como próximo e com o objeto o como conteúdo
             if (!estaVazia()) {
-                this.ultimo.setProximo(no); //diz que o próximo do último da lista é o novo nó
+                this.ultimo.setProxDir(no); //diz que o próximo do último da lista é o novo nó
                 this.ultimo = no; //aponta a última posição para esse novo nó
                 tamanho++;
             } else {
@@ -60,15 +60,15 @@ public class Fila implements IFila{
             if (!estaVazia()) {
                 Celula aux = this.ultimo; //cria um auxiliar para percorrer a fila inicializado como o último
                 while(aux != this.primeiro || aux.getChave() < no.getChave()) { //enquanto não chegar ao início da lista ou a chave do elemento for menor do que a do elemento a ser inserido
-                	aux = aux.getAnterior(); //volta uma posição da lista
+                	aux = aux.getAntEsq(); //volta uma posição da lista
                 	if (aux == this.primeiro) { //caso tenha chegado ao início da lista, insere no início
-                		this.primeiro.setAnterior(no); //aponta o anterior do primeiro da lista para o novo nó
-                		no.setProximo(this.primeiro); //aponta o próximo do novo nó para o primeiro da lista 
+                		this.primeiro.setAntEsq(no); //aponta o anterior do primeiro da lista para o novo nó
+                		no.setProxDir(this.primeiro); //aponta o próximo do novo nó para o primeiro da lista 
                 		this.primeiro = no; //passa a posição de primeiro para o novo nó
                 	} //ao encontrar a posição correta do auxiliar
-                	no.setProximo(aux.getProximo()); //aponta o próximo do novo nó para o próximo do auxiliar
-                	aux.setProximo(aux); //aponta o próximo do auxiliar agora para o novo nó
-                	no.setAnterior(aux); //aponta o anterior do novo nó para o auxiliar
+                	no.setProxDir(aux.getProxDir()); //aponta o próximo do novo nó para o próximo do auxiliar
+                	aux.setProxDir(aux); //aponta o próximo do auxiliar agora para o novo nó
+                	no.setAntEsq(aux); //aponta o anterior do novo nó para o auxiliar
                 }
             } else { //caso a fila esteja vazia
                 this.primeiro = no; //aponta o primeiro da fila para o novo nó
@@ -81,13 +81,13 @@ public class Fila implements IFila{
         public Object removerInicio() { //método para remover elementos da fila
             if (tamanho == 1) { //se só existir um elemento na fila
                 Celula aux = this.primeiro; //cria uma cópia do elemento a ser removido pra retorno
-                this.primeiro = this.primeiro.getProximo(); //o primeiro agora aponta pra o próximo do primeiro elemento
+                this.primeiro = this.primeiro.getProxDir(); //o primeiro agora aponta pra o próximo do primeiro elemento
                 tamanho--;
                 return aux; //retorna a cópia do elemento removido
             } else if (!estaVazia()) { 
                 Celula aux = this.primeiro; //cópia do elemento a ser removido
-                this.primeiro = this.primeiro.getProximo();     //a cabeça da fila se torna o próximo elemento
-                this.primeiro.setAnterior(null); //direciona o anterior da nova cabeça pra nulo
+                this.primeiro = this.primeiro.getProxDir();     //a cabeça da fila se torna o próximo elemento
+                this.primeiro.setAntEsq(null); //direciona o anterior da nova cabeça pra nulo
                 tamanho--;
                 return aux; //retorna a cópia
             } else {

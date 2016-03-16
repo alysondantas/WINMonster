@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.util.Scanner;
 import br.uefs.ecomp.winMonster.util.Arvore;
 import br.uefs.ecomp.winMonster.util.Celula;
-import br.uefs.ecomp.winMonster.util.CelulaArvore;
 import br.uefs.ecomp.winMonster.util.Fila;
 import br.uefs.ecomp.winMonster.util.MeuIterador;
 
