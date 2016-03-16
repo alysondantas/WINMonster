@@ -28,25 +28,26 @@ do código, e estou ciente que estes trechos não serão considerados para fins de 
 
 public class Celula {//Classe para um celula generica
 	private int chave; //valor para representar a prioridade do elemento
-	private Celula proximo;//Referencia para a proxima celula
-	private Celula anterior; //Referência para a célula anterior
+	private Celula proxDir;//Referencia para a proxima celula
+	private Celula antEsq; //Referência para a célula antEsq
 	private Object conteudo;//Objeto generico que vai estar dentro da celula
+	private String caractere="";//Objeto generico que vai estar dentro da celula
 	/**
 	 * Metodo construtor da classe obrigando que venha um objeto quando criar celula
 	 * @param o
 	 */
 	
-	public Celula(Celula anterior, Celula proximo, Object conteudo) {
+	public Celula(Celula antEsq, Celula proxDir, Object conteudo) {
 		this.chave = 0;
-        this.proximo = proximo;
-        this.anterior = anterior;
+        this.proxDir = proxDir;
+        this.antEsq = antEsq;
         this.conteudo = conteudo;
     }
 	
 	public Celula(int chave, Object conteudo) {
 		this.chave = chave;
-		this.proximo = null;
-		this.anterior = null;
+		this.proxDir = null;
+		this.antEsq = null;
 		this.conteudo = conteudo;
 	}
 
@@ -54,20 +55,20 @@ public class Celula {//Classe para um celula generica
         this.conteudo = null;
     }
 
-    public Celula getProximo() {
-        return proximo;
+    public Celula getProxDir() {
+        return proxDir;
     }
 
-    public void setProximo(Celula proximo) {
-        this.proximo = proximo;
+    public void setProxDir(Celula proxDir) {
+        this.proxDir = proxDir;
     }
 
-    public Celula getAnterior() {
-        return anterior;
+    public Celula getAntEsq() {
+        return antEsq;
     }
 
-    public void setAnterior(Celula anterior) {
-        this.anterior = anterior;
+    public void setAntEsq(Celula antEsq) {
+        this.antEsq = antEsq;
     }
 
     public Object getObjeto() {

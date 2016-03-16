@@ -53,7 +53,7 @@ public class MeuIterador implements Iterador {//Meu iterador implementa a interf
 	 */
 	public Object obterProximo() {
 		Celula aux2 = auxiliar;//aux2 copia a célula atual
-		auxiliar=auxiliar.getProximo();//celula atual passa pra proxima
+		auxiliar=auxiliar.getProxDir();//celula atual passa pra proxima
 		return aux2;//retorna aux2
 	}
 	/**
