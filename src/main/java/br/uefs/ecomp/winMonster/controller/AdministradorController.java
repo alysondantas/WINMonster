@@ -16,16 +16,16 @@ import br.uefs.ecomp.winMonster.util.MeuIterador;
 
 public class AdministradorController {
 	public String lerArquivo(String local) throws IOException { //método que lê um arquivo de texto e converte todo o seu conteúdo para uma String
-		FileReader arq = new FileReader(local);
-		BufferedReader buffRead = new BufferedReader(arq); //crio um novo objeto para leitura de arquivos e passo como parâmetro a leitura do arquivo no local especificado
+		FileReader arq = new FileReader(local); //inicializo arq como a leitura de arquivos no local especificado
+		BufferedReader buffRead = new BufferedReader(arq); //crio um novo objeto BuffReader e passo para ele a leitura do local em arq
 		String linha = buffRead.readLine(); //crio uma string auxiliar e já armazeno a primeira linha do arquivo
 		String c = ""; //crio uma string auxiliar para armazenar o conteúdo da string
 		
 		while(linha != null) { //enquanto não chegar no fim do arquivo
 			c = c + linha; //salvo o a letra da string na posição atual
-			c = c + "\n";
+			c = c + "\n"; //acrescento uma quebra de linha em "c" a cada fim de linha em "linha"
 			linha = buffRead.readLine(); //salvo a linha atual do arquivo na string
-		} arq.close();
+		} arq.close(); //fecho o arquivo para a leitura
 		
 		return c; //retorna a String com todo o conteúdo do arquivo de texto
 	}
