@@ -11,7 +11,7 @@ public class main {
 		//GUI gui = new GUI();
 		AdministradorController controller = new AdministradorController();
 		try {
-			String str = controller.lerArquivo("C:\\Users\Megazord\Desktop\Anime\\temp.txt");
+			String str = controller.lerArquivo("C:\\temp.txt");
 			System.out.println(str);
 		} catch (IOException e) {
 			e.printStackTrace();

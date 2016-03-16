@@ -6,6 +6,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+
+import javax.swing.JOptionPane;
+
 import br.uefs.ecomp.winMonster.util.Arvore;
 import br.uefs.ecomp.winMonster.util.Celula;
 import br.uefs.ecomp.winMonster.util.Fila;
@@ -17,8 +20,10 @@ public class AdministradorController {
 		String linha = ""; //crio uma string auxiliar e a inicializo como vazia
 		while(linha != null) { //enquanto não chegar no fim do arquivo
 			linha = buffRead.readLine(); //salvo a linha atual do arquivo na string
-			for(int i = 0; i < linha.length(); i++) { //percorro letra por letra do arquivo, até o seu fim
-				String c = ""; //c
+			int i;
+			JOptionPane.showMessageDialog(null, linha.length());
+			for(i = 0; i < linha.length(); i++) { //percorro letra por letra do arquivo, até o seu fim
+				String c = ""; //crio uma string auxiliar para armazenar o caractere da string
 				c = c + linha.charAt(i); //salvo o a letra da string na posição atual
 			}
 		}
@@ -35,9 +40,7 @@ public class AdministradorController {
 		      FileReader arq = new FileReader(nome);
 		      BufferedReader lerArq = new BufferedReader(arq);
 
-		      String linha = lerArq.readLine(); // lê a primeira linha
-		// a variável "linha" recebe o valor "null" quando o processo
-		// de repetição atingir o final do arquivo texto
+		      String linha = lerArq.readLine(); // lê a primeira linha a variável "linha" recebe o valor "null" quando o processo de repetição atingir o final do arquivo texto
 		      while (linha != null) {
 		        System.out.printf("%s\n", linha);
 
