@@ -79,7 +79,6 @@ public class Arvore {
 					verificador=false;
 					return binario;//retorna o binario completo
 				}else{
-					//binario = binario.substring(0, binario.length()-1);
 					return binario;
 				}
 			}
@@ -92,7 +91,6 @@ public class Arvore {
 					verificador=false;
 					return binario;//retorna o binario completo
 				}else{
-					//binario = binario.substring(0, binario.length()-1);
 					return binario;
 				}
 			}
