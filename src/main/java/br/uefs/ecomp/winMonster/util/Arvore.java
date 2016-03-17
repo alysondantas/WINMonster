@@ -45,10 +45,11 @@ public class Arvore {
 				filaprioridade.inserir(frequencia, nova);//insere na fila uma nova celula sendo ela uma arvore
 				inserirHuffman(filaprioridade);//recursivo enquanto existir mais que de um elemento na fila
 			}
+			Celula inicio = (Celula) filaprioridade.recuperarInicio();//pega o primeiro elemento da fila
+			Arvore arv3 = (Arvore) inicio.getObjeto();//pega a arvore do primeiro elemento da fila
+			return arv3;//retorna a arvore pronta
 		}
-		Celula inicio = (Celula) filaprioridade.recuperarInicio();//pega o primeiro elemento da fila
-		Arvore arv3 = (Arvore) inicio.getObjeto();//pega a arvore do primeiro elemento da fila
-		return arv3;//retorna a arvore pronta
+		return null;
 	}
 
 	public void construirDicionario(Fila dicionario) throws CaractereInexistenteException{//metodo para criar o dicionario na estrutura copia da fila original
