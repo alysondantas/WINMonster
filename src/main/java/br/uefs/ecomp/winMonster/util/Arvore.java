@@ -48,6 +48,38 @@ public class Arvore {
 		Arvore arv3 = (Arvore) inicio.getObjeto();//pega a arvore do primeiro elemento da fila
 		return arv3;//retorna a arvore pronta
 	}
+	public void construirDicionario(Fila dicionario){
+		MeuIterador iterador=(MeuIterador) dicionario.iterador();
+		Celula aux;
+		String caractere;
+		String binario="";
+		while(iterador.temProximo()){
+			aux=(Celula) iterador.obterProximo();
+			caractere=aux.getCaractere();
+			binario=pegarCaractere(caractere, raiz, binario);
+			aux.setBinario(binario);
+		}
+	}
+	
+	public String pegarCaractere(String caractere, Celula celula, String binario){
+		if(celula.getAntEsq()==null && celula.getProxDir()==null){//interrompe a recursividade e coloca o caractere no dicionario
+			return binario;
+		}else{
+			//para esquerda
+			binario=binario+"0";
+			String esq=pegarCaractere(caractere,celula.getAntEsq(),binario);
+			binario = binario.substring(0, binario.length()-1);
+			//para direita se não for esquerda
+			binario=binario+"1";
+			String dir=pegarCaractere(caractere,celula.getProxDir(),binario);
+			binario = binario.substring(0, binario.length()-1);
+			if(esq==null){
+				return dir;
+			}else{
+				return esq;
+			}
+		}
+	}
 
 
 	

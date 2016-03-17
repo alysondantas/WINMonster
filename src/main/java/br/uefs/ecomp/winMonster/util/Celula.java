@@ -32,6 +32,7 @@ public class Celula {//Classe para um celula generica
 	private Celula antEsq; //Referência para a célula antEsq
 	private Object conteudo;//Objeto generico que vai estar dentro da celula
 	private String caractere="";//Objeto generico que vai estar dentro da celula
+	private String binario="";
 	/**
 	 * Metodo construtor da classe obrigando que venha um objeto quando criar celula
 	 * @param o
@@ -85,6 +86,34 @@ public class Celula {//Classe para um celula generica
 
 	public void setChave(int chave) {
 		this.chave = chave;
+	}
+
+	/**
+	 * @return the caractere
+	 */
+	public String getCaractere() {
+		return caractere;
+	}
+
+	/**
+	 * @param caractere the caractere to set
+	 */
+	public void setCaractere(String caractere) {
+		this.caractere = caractere;
+	}
+
+	/**
+	 * @return the binario
+	 */
+	public String getBinario() {
+		return binario;
+	}
+
+	/**
+	 * @param binario the binario to set
+	 */
+	public void setBinario(String binario) {
+		this.binario = binario;
 	}
     
     
