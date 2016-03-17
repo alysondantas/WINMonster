@@ -16,8 +16,9 @@ public class main {
 		try {
 			String str = controller.lerArquivo("C:\\temp.txt");
 			System.out.println(str);
-			Fila copia = new Fila();
-			Fila fila = controller.gerarPrioridade(str, copia);
+			//Fila copia = new Fila();
+			Fila copia=controller.getFilaPrioridade();
+			Fila fila = controller.gerarPrioridade(str);
 			controller.imprimirFila(fila);
 			Arvore arvore = new Arvore();
 			arvore.inserirHuffman(fila);

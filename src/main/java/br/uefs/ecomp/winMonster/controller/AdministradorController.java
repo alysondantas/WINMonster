@@ -13,6 +13,16 @@ import br.uefs.ecomp.winMonster.util.*;
 import br.uefs.ecomp.winMonster.exceptions.*;
 
 public class AdministradorController {
+	Arvore arvoreHuffman= new Arvore();
+	Fila fila = new Fila(); //crio uma fila para salvar a prioridade
+	Fila dicionario = new Fila();
+	String arquivoOriginal="";
+	
+	public Fila getFilaPrioridade(){
+		return fila;
+	}
+	
+	
 	public String lerArquivo(String local) throws IOException { //método que lê um arquivo de texto e converte todo o seu conteúdo para uma String
 		FileReader arq = new FileReader(local); //inicializo arq como a leitura de arquivos no local especificado
 		BufferedReader buffRead = new BufferedReader(arq); //crio um novo objeto BuffReader e passo para ele a leitura do local em arq
@@ -25,6 +35,7 @@ public class AdministradorController {
 			linha = buffRead.readLine(); //salvo a linha atual do arquivo na string
 		} arq.close(); //fecho o arquivo para a leitura
 		
+		arquivoOriginal=c;//Uma varaivel local recebe a string com todo o conteudo do arquivo
 		return c; //retorna a String com todo o conteúdo do arquivo de texto
 	}
 
@@ -38,10 +49,9 @@ public class AdministradorController {
 		buffWrite.close(); //fecho o arquivo aberto
 	}
 	
-	public Fila gerarPrioridade(String linha, Fila copia) throws IOException { //método para gerar uma fila de prioridade a partir de uma String recebida
-		Fila fila = new Fila(); //crio uma fila para salvar a prioridade
+	public Fila gerarPrioridade(String linha) throws IOException { //método para gerar uma fila de prioridade a partir de uma String recebida
 		boolean copiaNula = false; //variável para verificar se é necesário criar uma fila cópia. Caso ela continue como false, vai ser gerada uma fila cópia igual a fila a ser retornada
-		if(copia == null) { //caso a cópia passada seja nula, marque a variável como true
+		if(dicionario == null) { //caso a cópia passada seja nula, marque a variável como true
 			copiaNula = true;
 		}
 		while(linha != "") { //enquanto a string não estiver vazia
@@ -56,7 +66,7 @@ public class AdministradorController {
 			Celula auxCel = new Celula(linha.substring(0,1));
 			fila.inserir(cont, auxCel); //crio uma string somente com a primeira letra de linha e insiro ela na fila, passando também o número de vezes que a letra se repete como chave
 			if(copiaNula == false) //caso a cópia não seja nula, preencha a fila cópia
-				copia.inserir(cont, linha.substring(0,1)); //preencho a cópia com o mesmo conteúdo da fila original
+				dicionario.inserir(cont, linha.substring(0,1)); //preencho a cópia com o mesmo conteúdo da fila original
 			aux = Character.toString(linha.charAt(0)); //atribui agora a primeira letra da string ao valor de aux
 			linha = linha.replace(aux, ""); //remove todas as ocorrências da primeira letra na string
 		} //repete o ciclo
@@ -71,5 +81,11 @@ public class AdministradorController {
 			System.out.println(aux.getChave());
 			System.out.println(aux.getBinario());
 		}
+	}
+	
+	public void criaArquivo() throws CaractereInexistenteException{
+		arvoreHuffman=arvoreHuffman.inserirHuffman(fila);
+		arvoreHuffman.construirDicionario(dicionario);
+		
 	}
 }
