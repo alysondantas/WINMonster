@@ -56,35 +56,45 @@ public class Arvore {
 		Celula aux;//auxiliar do tipo celula pra recuperar o objeto que esta no iterador
 		String caractere;//caractere que esta na celula
 		String binario="";//novo binario do caractere
+		boolean verificador=true;
 		while(iterador.temProximo()){//enquanto existir proximo
 			aux=(Celula) iterador.obterProximo();//aux recebe o atual e iterador passa pro proximo
 			caractere=aux.getCaractere();//caractere recebe o caractere que esta dentro do auxiliar
-			binario=pegarCaractere(caractere, raiz, binario);//binario recebe o binario criado pelo metodo que percorre a arvore
+			verificador=true;
+			binario=pegarCaractere(caractere, raiz, binario,verificador);//binario recebe o binario criado pelo metodo que percorre a arvore
 			aux.setBinario(binario);//binario é colocado dentro da celula auxiliar
 		}
 	}
 
-	public String pegarCaractere(String caractere, Celula celula, String binario) throws CaractereInexistenteException{
+	public String pegarCaractere(String caractere, Celula celula, String binario, boolean verificador) throws CaractereInexistenteException{
 		if(celula==null){//interrompe a recursividade e coloca o caractere no dicionario
 			throw new CaractereInexistenteException();
-		}else{
+		}else if(verificador==false){
+			return binario;
+		} else{
 			//para esquerda
 			binario=binario+"0";
 			if(celula.getAntEsq()==null && celula.getProxDir()==null){//interrompe a recursividade e coloca o caractere no dicionario
 				if(celula.getCaractere().equals(caractere)){
 					return binario;//retorna o binario completo
+				}else{
+					binario = binario.substring(0, binario.length()-1);
+					return binario;
 				}
 			}
-			String esq=pegarCaractere(caractere,celula.getAntEsq(),binario);
+			String esq=pegarCaractere(caractere,celula.getAntEsq(),binario, verificador);
 			binario = binario.substring(0, binario.length()-1);
 			//para direita se não for esquerda
 			binario=binario+"1";
 			if(celula.getAntEsq()==null && celula.getProxDir()==null){//interrompe a recursividade e coloca o caractere no dicionario
 				if(celula.getCaractere().equals(caractere)){
 					return binario;//retorna o binario completo
+				}else{
+					binario = binario.substring(0, binario.length()-1);
+					return binario;
 				}
 			}
-			String dir=pegarCaractere(caractere,celula.getProxDir(),binario);
+			String dir=pegarCaractere(caractere,celula.getProxDir(),binario, verificador);
 			binario = binario.substring(0, binario.length()-1);
 			if(esq==null){
 				return dir;
