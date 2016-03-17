@@ -78,8 +78,8 @@ public class Arvore {
 				if(celula.getCaractere().equals(caractere)){
 					verificador=false;
 					return binario;//retorna o binario completo
-				}else if(celula.getCaractere().equals(caractere)){
-					binario = binario.substring(0, binario.length()-1);
+				}else{
+					//binario = binario.substring(0, binario.length()-1);
 					return binario;
 				}
 			}
@@ -91,8 +91,8 @@ public class Arvore {
 				if(celula.getCaractere().equals(caractere)){
 					verificador=false;
 					return binario;//retorna o binario completo
-				}else if(celula.getCaractere().equals(caractere)){
-					binario = binario.substring(0, binario.length()-1);
+				}else{
+					//binario = binario.substring(0, binario.length()-1);
 					return binario;
 				}
 			}
