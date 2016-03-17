@@ -17,24 +17,24 @@ public class AdministradorController {
 	Fila fila = new Fila(); //crio uma fila para salvar a prioridade
 	Fila dicionario = new Fila();
 	String arquivoOriginal="";
-	
+
 	public Fila getFilaPrioridade(){
 		return fila;
 	}
-	
-	
+
+
 	public String lerArquivo(String local) throws IOException { //método que lê um arquivo de texto e converte todo o seu conteúdo para uma String
 		FileReader arq = new FileReader(local); //inicializo arq como a leitura de arquivos no local especificado
 		BufferedReader buffRead = new BufferedReader(arq); //crio um novo objeto BuffReader e passo para ele a leitura do local em arq
 		String linha = buffRead.readLine(); //crio uma string auxiliar e já armazeno a primeira linha do arquivo
 		String c = ""; //crio uma string auxiliar para armazenar o conteúdo da string
-		
+
 		while(linha != null) { //enquanto não chegar no fim do arquivo
 			c = c + linha; //salvo o a letra da string na posição atual
 			c = c + "\n"; //acrescento uma quebra de linha em "c" a cada fim de linha em "linha"
 			linha = buffRead.readLine(); //salvo a linha atual do arquivo na string
 		} arq.close(); //fecho o arquivo para a leitura
-		
+
 		arquivoOriginal=c;//Uma varaivel local recebe a string com todo o conteudo do arquivo
 		return c; //retorna a String com todo o conteúdo do arquivo de texto
 	}
@@ -48,7 +48,7 @@ public class AdministradorController {
 		buffWrite.append(linha + "\n"); //anexo essa string no arquivo de texto
 		buffWrite.close(); //fecho o arquivo aberto
 	}
-	
+
 	public Fila gerarPrioridade(String linha) throws IOException { //método para gerar uma fila de prioridade a partir de uma String recebida
 		boolean copiaNula = false; //variável para verificar se é necesário criar uma fila cópia. Caso ela continue como false, vai ser gerada uma fila cópia igual a fila a ser retornada
 		if(dicionario == null) { //caso a cópia passada seja nula, marque a variável como true
@@ -82,10 +82,24 @@ public class AdministradorController {
 			System.out.println(aux.getBinario());
 		}
 	}
-	
+
 	public void criaArquivo() throws CaractereInexistenteException{
 		arvoreHuffman=arvoreHuffman.inserirHuffman(fila);
 		arvoreHuffman.construirDicionario(dicionario);
-		
+		Celula celulaCaractere;
+		String caractere;
+		String novoBinario="";
+		String binariodic;
+		MeuIterador iterador=dicionario.iterador();
+		for (int j = 0; j < arquivoOriginal.length(); j++) { //Repetição: Início = Segunda letra da String; Condição = Até o fim da String
+			while(iterador.temProximo()){
+				celulaCaractere=(Celula) iterador.obterProximo();
+				caractere=celulaCaractere.getCaractere();
+				binariodic=celulaCaractere.getBinario();
+				if (caractere.charAt(0) == arquivoOriginal.charAt(j)) { //caso a letra do dicionario seja igual a letra atual
+					novoBinario=novoBinario+binariodic;//binario concatena com o binario do dicionario
+				}
+			}
+		} //repete o ciclo
 	}
 }
