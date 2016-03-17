@@ -9,10 +9,8 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
-import br.uefs.ecomp.winMonster.util.Arvore;
-import br.uefs.ecomp.winMonster.util.Celula;
-import br.uefs.ecomp.winMonster.util.Fila;
-import br.uefs.ecomp.winMonster.util.MeuIterador;
+import br.uefs.ecomp.winMonster.util.*;
+import br.uefs.ecomp.winMonster.exceptions.*;
 
 public class AdministradorController {
 	public String lerArquivo(String local) throws IOException { //método que lê um arquivo de texto e converte todo o seu conteúdo para uma String
