@@ -34,15 +34,14 @@ public class Arvore {
 				int frequencia=0;//frequencia que esta na celula
 				Celula obj1 = (Celula) filaprioridade.removerInicio();//filha da esquerda que vem da fila
 				Celula obj2 = (Celula) filaprioridade.removerInicio();//filha da esquerda que vem da fila
-				Arvore arv1,arv2,nova=new Arvore();//cria tres variaveis de arvore sendo o nova a nova arvore e as outras duas auxiliares
 				frequencia= obj1.getChave()+obj2.getChave();//frequencia recebe as frequencias do primeiro e segundo elemento da fila
+				obj1=(Celula) obj1.getObjeto();
+				obj2=(Celula) obj2.getObjeto();
 				Celula novaCelula=new Celula();//cria nova celula da arvore
-				arv1=(Arvore) obj1.getObjeto();//arv1 recebe a arvore do primeiro elemento da fila
-				novaCelula.setAntEsq(arv1.retornaRaiz());// a referencia da esquerda recebe o primeiro elemento da fila
-				arv2=(Arvore) obj2.getObjeto();//arv2 recebe a arvore do segundo elemento da fila
-				novaCelula.setProxDir(arv2.retornaRaiz());// a referencia da direita recebe o segundo elemento da fila
-				nova.colocaRaiz(novaCelula);//a raiz da arvore agora é a nova celula
-				filaprioridade.inserir(frequencia, nova);//insere na fila uma nova celula sendo ela uma arvore
+				novaCelula.setChave(frequencia);
+				novaCelula.setAntEsq(obj1);// a referencia da esquerda recebe o primeiro elemento da fila
+				novaCelula.setProxDir(obj2);// a referencia da direita recebe o segundo elemento da fila
+				filaprioridade.inserir(frequencia, novaCelula);//insere na fila uma nova celula sendo ela uma arvore
 				inserirHuffman(filaprioridade);//recursivo enquanto existir mais que de um elemento na fila
 			}
 			Celula inicio = (Celula) filaprioridade.recuperarInicio();//pega o primeiro elemento da fila
