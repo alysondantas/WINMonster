@@ -59,6 +59,10 @@ public class Arvore {
 		boolean verificador=true;
 		while(iterador.temProximo()){//enquanto existir proximo
 			aux=(Celula) iterador.obterProximo();//aux recebe o atual e iterador passa pro proximo
+			if(aux.getObjeto() instanceof String){
+				caractere=(String) aux.getObjeto();
+				aux.setCaractere(caractere);
+			}
 			caractere=aux.getCaractere();//caractere recebe o caractere que esta dentro do auxiliar
 			verificador=true;
 			binario=pegarCaractere(caractere, raiz, binario,verificador);//binario recebe o binario criado pelo metodo que percorre a arvore
