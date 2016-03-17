@@ -51,6 +51,13 @@ public class Celula {//Classe para um celula generica
 		this.antEsq = null;
 		this.conteudo = conteudo;
 	}
+	
+	public Celula(String caractere) {
+		this.chave = 0;
+		this.proxDir = null;
+		this.antEsq = null;
+		this.caractere = caractere;
+	}
 
     public Celula() { //construtor auxiliar que inicializa o conteúdo como nulo
         this.conteudo = null;

@@ -59,6 +59,21 @@ public class Fila implements IFila{
             Celula no = new Celula(chave, o); //Cria um novo nó usando o último da lista como anterior, nulo como próximo e com o objeto o como conteúdo
             if (!estaVazia()) {
                 Celula aux = this.ultimo; //cria um auxiliar para percorrer a fila inicializado como o último
+                if(tamanho == 1) {
+                	if(aux.getChave() <= no.getChave()) {
+                		aux.setAntEsq(no);
+                		no.setProxDir(aux);
+                		this.primeiro = no;
+                		return;
+                	}
+                	else {
+                		aux.setProxDir(no);
+                		no.setAntEsq(aux);
+                		this.primeiro = aux;
+                		this.ultimo = no;
+                		return;
+                	}
+                }
                 while(aux != this.primeiro || aux.getChave() < no.getChave()) { //enquanto não chegar ao início da lista ou a chave do elemento for menor do que a do elemento a ser inserido
                 	aux = aux.getAntEsq(); //volta uma posição da lista
                 	if (aux == this.primeiro) { //caso tenha chegado ao início da lista, insere no início

@@ -53,9 +53,10 @@ public class AdministradorController {
 					cont++; //incrementa um no contador
 				}
 			}
-			fila.inserir(cont, linha.substring(0, 1)); //crio uma string somente com a primeira letra de linha e insiro ela na fila, passando também o número de vezes que a letra se repete como chave
+			Celula auxCel = new Celula(cont, linha.substring(0,1));
+			fila.inserir(cont, auxCel); //crio uma string somente com a primeira letra de linha e insiro ela na fila, passando também o número de vezes que a letra se repete como chave
 			if(copiaNula == false) //caso a cópia não seja nula, preencha a fila cópia
-				copia.inserir(cont, linha.substring(0, 1)); //preencho a cópia com o mesmo conteúdo da fila original
+				copia.inserir(cont, linha.substring(0,1)); //preencho a cópia com o mesmo conteúdo da fila original
 			aux = Character.toString(linha.charAt(0)); //atribui agora a primeira letra da string ao valor de aux
 			linha = linha.replace(aux, ""); //remove todas as ocorrências da primeira letra na string
 		} //repete o ciclo
