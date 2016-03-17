@@ -84,6 +84,9 @@ public class Arvore {
 			}
 			String esq=pegarCaractere(caractere,celula.getAntEsq(),binario, verificador);
 			binario = binario.substring(0, binario.length()-1);
+			if(verificador == false) { //saída da função, caso o elemento já tenha sido encontrado
+				return binario; //retorna o binário correto
+			}
 			//para direita se não for esquerda
 			binario=binario+"1";
 			if(celula.getAntEsq()==null && celula.getProxDir()==null){//interrompe a recursividade e coloca o caractere no dicionario
