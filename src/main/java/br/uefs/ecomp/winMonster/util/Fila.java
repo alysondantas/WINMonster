@@ -105,7 +105,7 @@ public class Fila implements IFila{
         }
 
         @Override
-        public Iterador iterador() { //método para criar um iterador com o início da fila
+        public MeuIterador iterador() { //método para criar um iterador com o início da fila
             return new MeuIterador(this.primeiro); //retorna um iterador com a cabeça da fila
 
         }

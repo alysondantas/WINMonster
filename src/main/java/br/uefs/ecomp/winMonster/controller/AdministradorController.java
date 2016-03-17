@@ -64,4 +64,13 @@ public class AdministradorController {
 		return fila; //retorno a fila com cada letra da string separada em células com suas respectivas chaves
 	}
 
+	public void imprimirFila(Fila fila) {
+		MeuIterador it = fila.iterador();
+		while(it.temProximo()) {
+			Celula aux = (Celula)it.obterProximo();
+			System.out.println(aux.getCaractere());
+			System.out.println(aux.getChave());
+			System.out.println(aux.getBinario());
+		}
+	}
 }
