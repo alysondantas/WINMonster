@@ -1,5 +1,7 @@
 package br.uefs.ecomp.winMonster.util;
 
+import br.uefs.ecomp.winMonster.exceptions.CaractereInexistenteException;
+
 public class Arvore {
 
 	Celula raiz; //elemento inicial da árvore
@@ -48,25 +50,31 @@ public class Arvore {
 		Arvore arv3 = (Arvore) inicio.getObjeto();//pega a arvore do primeiro elemento da fila
 		return arv3;//retorna a arvore pronta
 	}
-	public void construirDicionario(Fila dicionario){
-		MeuIterador iterador=(MeuIterador) dicionario.iterador();
-		Celula aux;
-		String caractere;
-		String binario="";
-		while(iterador.temProximo()){
-			aux=(Celula) iterador.obterProximo();
-			caractere=aux.getCaractere();
-			binario=pegarCaractere(caractere, raiz, binario);
-			aux.setBinario(binario);
+
+	public void construirDicionario(Fila dicionario) throws CaractereInexistenteException{//metodo para criar o dicionario na estrutura copia da fila original
+		MeuIterador iterador=(MeuIterador) dicionario.iterador(); //crio um iterador pra percorrer a estrutura dicionario
+		Celula aux;//auxiliar do tipo celula pra recuperar o objeto que esta no iterador
+		String caractere;//caractere que esta na celula
+		String binario="";//novo binario do caractere
+		while(iterador.temProximo()){//enquanto existir proximo
+			aux=(Celula) iterador.obterProximo();//aux recebe o atual e iterador passa pro proximo
+			caractere=aux.getCaractere();//caractere recebe o caractere que esta dentro do auxiliar
+			binario=pegarCaractere(caractere, raiz, binario);//binario recebe o binario criado pelo metodo que percorre a arvore
+			aux.setBinario(binario);//binario é colocado dentro da celula auxiliar
 		}
 	}
-	
-	public String pegarCaractere(String caractere, Celula celula, String binario){
-		if(celula.getAntEsq()==null && celula.getProxDir()==null){//interrompe a recursividade e coloca o caractere no dicionario
-			return binario;
+
+	public String pegarCaractere(String caractere, Celula celula, String binario) throws CaractereInexistenteException{
+		if(celula==null){//interrompe a recursividade e coloca o caractere no dicionario
+			throw new CaractereInexistenteException();
 		}else{
 			//para esquerda
 			binario=binario+"0";
+			if(celula.getAntEsq()==null && celula.getProxDir()==null){//interrompe a recursividade e coloca o caractere no dicionario
+				if(celula.getCaractere().equals(caractere)){
+					return binario;//retorna o binario completo
+				}
+			}
 			String esq=pegarCaractere(caractere,celula.getAntEsq(),binario);
 			binario = binario.substring(0, binario.length()-1);
 			//para direita se não for esquerda
@@ -82,5 +90,5 @@ public class Arvore {
 	}
 
 
-	
+
 }
