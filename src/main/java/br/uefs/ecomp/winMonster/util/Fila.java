@@ -64,6 +64,7 @@ public class Fila implements IFila{
                 		aux.setAntEsq(no);
                 		no.setProxDir(aux);
                 		this.primeiro = no;
+                		tamanho ++;
                 		return;
                 	}
                 	else {
@@ -71,6 +72,7 @@ public class Fila implements IFila{
                 		no.setAntEsq(aux);
                 		this.primeiro = aux;
                 		this.ultimo = no;
+                		tamanho ++;
                 		return;
                 	}
                 }
@@ -84,6 +86,8 @@ public class Fila implements IFila{
                 	no.setProxDir(aux.getProxDir()); //aponta o próximo do novo nó para o próximo do auxiliar
                 	aux.setProxDir(aux); //aponta o próximo do auxiliar agora para o novo nó
                 	no.setAntEsq(aux); //aponta o anterior do novo nó para o auxiliar
+                	tamanho ++;
+                	return;
                 }
             } else { //caso a fila esteja vazia
                 this.primeiro = no; //aponta o primeiro da fila para o novo nó

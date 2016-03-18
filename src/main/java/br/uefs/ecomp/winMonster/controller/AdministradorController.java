@@ -60,8 +60,8 @@ public class AdministradorController {
 		if(dicionario == null) { //caso a cópia passada seja nula, marque a variável como true
 			copiaNula = true;
 		}
-		while(linha != "") { //enquanto a string não estiver vazia
-			int cont = 0; //variável para armazenar quantas vezes a letra se repete na string
+		while(!linha.isEmpty()) { //enquanto a string não estiver vazia
+			int cont = 1; //variável para armazenar quantas vezes a letra se repete na string
 			String aux; //string auxiliar para ajudar nas operações
 			for (int j = 1; j < linha.length(); j++) { //Repetição: Início = Segunda letra da String; Condição = Até o fim da String
 				aux = Character.toString(linha.charAt(j)); //Converte o caractere da string na posição atual para uma string separada para poder ser manipulado
@@ -69,12 +69,13 @@ public class AdministradorController {
 					cont++; //incrementa um no contador
 				}
 			}
-			Celula auxCel = new Celula(linha.substring(0,1));
+			Celula auxCel = new Celula();
+			auxCel.setCaractere(linha.substring(0,1));
 			fila.inserir(cont, auxCel); //crio uma string somente com a primeira letra de linha e insiro ela na fila, passando também o número de vezes que a letra se repete como chave
 			if(copiaNula == false) //caso a cópia não seja nula, preencha a fila cópia
 				dicionario.inserir(cont, linha.substring(0,1)); //preencho a cópia com o mesmo conteúdo da fila original
 			aux = Character.toString(linha.charAt(0)); //atribui agora a primeira letra da string ao valor de aux
-			linha = linha.replace(aux, ""); //remove todas as ocorrências da primeira letra na string
+			linha = linha.replaceAll(aux, ""); //remove todas as ocorrências da primeira letra na string
 		} //repete o ciclo
 		return fila; //retorno a fila com cada letra da string separada em células com suas respectivas chaves
 	}
@@ -83,9 +84,9 @@ public class AdministradorController {
 		MeuIterador it = fila.iterador();
 		while(it.temProximo()) {
 			Celula aux = (Celula)it.obterProximo();
-			System.out.println(aux.getCaractere());
+			Celula aux2 = (Celula)aux.getObjeto();
+			System.out.println(aux2.getCaractere());
 			System.out.println(aux.getChave());
-			System.out.println(aux.getBinario());
 		}
 	}
 
