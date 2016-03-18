@@ -5,7 +5,13 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import javax.swing.JOptionPane;
 
@@ -81,6 +87,19 @@ public class AdministradorController {
 			System.out.println(aux.getChave());
 			System.out.println(aux.getBinario());
 		}
+	}
+
+	public String md5(String string){//pra ser bem sicero.. não sei explicar isso ainda não
+		String novomd5 = "";
+		MessageDigest md = null;
+		try {
+			md = MessageDigest.getInstance("MD5");
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		BigInteger hash = new BigInteger(1, md.digest(string.getBytes()));
+		novomd5 = hash.toString(16);			
+		return novomd5;
 	}
 
 	public void criaArquivo() throws CaractereInexistenteException{
