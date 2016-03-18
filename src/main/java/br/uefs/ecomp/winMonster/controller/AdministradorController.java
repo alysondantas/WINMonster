@@ -69,7 +69,8 @@ public class AdministradorController {
 					cont++; //incrementa um no contador
 				}
 			}
-			Celula auxCel = new Celula(linha.substring(0,1));
+			Celula auxCel = new Celula();
+			auxCel.setCaractere(linha.substring(0,1));
 			fila.inserir(cont, auxCel); //crio uma string somente com a primeira letra de linha e insiro ela na fila, passando também o número de vezes que a letra se repete como chave
 			if(copiaNula == false) //caso a cópia não seja nula, preencha a fila cópia
 				dicionario.inserir(cont, linha.substring(0,1)); //preencho a cópia com o mesmo conteúdo da fila original
