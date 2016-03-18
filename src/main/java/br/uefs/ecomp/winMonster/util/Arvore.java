@@ -45,8 +45,9 @@ public class Arvore {
 				inserirHuffman(filaprioridade);//recursivo enquanto existir mais que de um elemento na fila
 			}
 			Celula inicio = (Celula) filaprioridade.recuperarInicio();//pega o primeiro elemento da fila
-			Arvore arv3 = (Arvore) inicio.getObjeto();//pega a arvore do primeiro elemento da fila
-			return arv3;//retorna a arvore pronta
+			Arvore arv = new Arvore();
+			arv.colocaRaiz((Celula)inicio.getObjeto());//pega a arvore do primeiro elemento da fila
+			return arv;//retorna a arvore pronta
 		}
 		return null;
 	}
