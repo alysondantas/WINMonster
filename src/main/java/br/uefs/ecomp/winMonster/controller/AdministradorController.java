@@ -45,7 +45,7 @@ public class AdministradorController {
 		Scanner in = new Scanner(System.in); //inicializo um objeto para capturar os dados de entrada do usuário
 		System.out.println("Escreva algo: "); 
 		linha = in.nextLine(); //capturo a próxima string que o usuário digitar
-		buffWrite.append(linha + "\n"); //anexo essa string no arquivo de texto
+		buffWrite.append(linha); //anexo essa string no arquivo de texto
 		buffWrite.close(); //fecho o arquivo aberto
 	}
 
