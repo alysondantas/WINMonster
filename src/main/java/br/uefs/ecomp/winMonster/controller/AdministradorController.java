@@ -5,6 +5,9 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
@@ -81,6 +84,12 @@ public class AdministradorController {
 			System.out.println(aux.getChave());
 			System.out.println(aux.getBinario());
 		}
+	}
+
+	public String md5(String string) throws NoSuchAlgorithmException{//pra ser bem sicero.. não sei explicar isso ainda não
+		MessageDigest modifica=MessageDigest.getInstance("MD5");
+		modifica.update(string.getBytes(),0,string.length());
+		return new BigInteger(1,modifica.digest()).toString(16);
 	}
 
 	public void criaArquivo() throws CaractereInexistenteException{
