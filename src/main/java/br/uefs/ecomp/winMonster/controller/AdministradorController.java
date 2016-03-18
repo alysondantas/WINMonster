@@ -9,6 +9,9 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import javax.swing.JOptionPane;
 
@@ -86,10 +89,17 @@ public class AdministradorController {
 		}
 	}
 
-	public String md5(String string) throws NoSuchAlgorithmException{//pra ser bem sicero.. não sei explicar isso ainda não
-		MessageDigest modifica=MessageDigest.getInstance("MD5");
-		modifica.update(string.getBytes(),0,string.length());
-		return new BigInteger(1,modifica.digest()).toString(16);
+	public String md5(String string){//pra ser bem sicero.. não sei explicar isso ainda não
+		String novomd5 = "";
+		MessageDigest md = null;
+		try {
+			md = MessageDigest.getInstance("MD5");
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		BigInteger hash = new BigInteger(1, md.digest(string.getBytes()));
+		novomd5 = hash.toString(16);			
+		return novomd5;
 	}
 
 	public void criaArquivo() throws CaractereInexistenteException{
