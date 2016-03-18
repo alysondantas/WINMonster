@@ -82,11 +82,18 @@ public class AdministradorController {
 
 	public void imprimirFila(Fila fila) {
 		MeuIterador it = fila.iterador();
+		Celula primeiro = fila.getPrimeiro();
+		Celula ultimo = fila.getUltimo();
+		Celula aux3 = (Celula)primeiro.getObjeto();
+		System.out.println("Primeiro " + aux3.getCaractere());
+		aux3 = (Celula)ultimo.getObjeto();
+		System.out.println("Ultimo " + aux3.getCaractere());
+		System.out.println("Tamanho " + fila.obterTamanho() + "\n");
 		while(it.temProximo()) {
 			Celula aux = (Celula)it.obterProximo();
 			Celula aux2 = (Celula)aux.getObjeto();
-			System.out.println(aux2.getCaractere());
-			System.out.println(aux.getChave());
+			System.out.println("Caractere " + aux2.getCaractere());
+			System.out.println("Frequência " + aux.getChave());
 		}
 	}
 

@@ -60,9 +60,9 @@ public class Fila implements IFila{
             if (!estaVazia()) {
                 Celula aux = this.ultimo; //cria um auxiliar para percorrer a fila inicializado como o último
                 if(tamanho == 1) {
-                	if(aux.getChave() <= no.getChave()) {
-                		aux.setAntEsq(no);
+                	if(aux.getChave() < no.getChave()) {
                 		no.setProxDir(aux);
+                		aux.setAntEsq(no);
                 		this.primeiro = no;
                 		tamanho ++;
                 		return;
@@ -76,19 +76,37 @@ public class Fila implements IFila{
                 		return;
                 	}
                 }
-                while(aux != this.primeiro || aux.getChave() < no.getChave()) { //enquanto não chegar ao início da lista ou a chave do elemento for menor do que a do elemento a ser inserido
+                while(aux.getChave() < no.getChave()) { //enquanto a chave do elemento for menor do que a do elemento a ser inserido
                 	aux = aux.getAntEsq(); //volta uma posição da lista
-                	if (aux == this.primeiro) { //caso tenha chegado ao início da lista, insere no início
+                	if (aux == this.primeiro && aux.getChave() < no.getChave()) { //caso tenha chegado ao início da lista, insere no início
                 		this.primeiro.setAntEsq(no); //aponta o anterior do primeiro da lista para o novo nó
                 		no.setProxDir(this.primeiro); //aponta o próximo do novo nó para o primeiro da lista 
                 		this.primeiro = no; //passa a posição de primeiro para o novo nó
-                	} //ao encontrar a posição correta do auxiliar
-                	no.setProxDir(aux.getProxDir()); //aponta o próximo do novo nó para o próximo do auxiliar
-                	aux.setProxDir(aux); //aponta o próximo do auxiliar agora para o novo nó
-                	no.setAntEsq(aux); //aponta o anterior do novo nó para o auxiliar
+                		tamanho ++;
+                		return;
+                	}
+                	else if (aux == this.primeiro) {
+                		this.primeiro.setProxDir(no);
+                		no.setAntEsq(aux);
+                		no.setProxDir(aux.getProxDir());
+                		tamanho ++;
+                		return;
+                	}
+                } //ao encontrar a posição correta do auxiliar
+                	if(aux == this.ultimo) {
+                		this.ultimo = no;
+                		no.setProxDir(null); //aponta o próximo do novo nó para o próximo do auxiliar
+                    	aux.setProxDir(no); //aponta o próximo do auxiliar agora para o novo nó
+                    	no.setAntEsq(aux); //aponta o anterior do novo nó para o auxiliar
+                	}
+                	else {
+                		no.setProxDir(aux.getProxDir()); //aponta o próximo do novo nó para o próximo do auxiliar
+                    	aux.setProxDir(no); //aponta o próximo do auxiliar agora para o novo nó
+                    	no.setAntEsq(aux); //aponta o anterior do novo nó para o auxiliar
+                	}
                 	tamanho ++;
                 	return;
-                }
+                
             } else { //caso a fila esteja vazia
                 this.primeiro = no; //aponta o primeiro da fila para o novo nó
                 this.ultimo = this.primeiro; //como só tem 1 elemento, o último se torna o primeiro
@@ -129,6 +147,13 @@ public class Fila implements IFila{
 
         }
 
+        public Celula getPrimeiro() {
+        	return this.primeiro;
+        }
+        
+        public Celula getUltimo() {
+        	return this.ultimo;
+        }
     }
     
 
