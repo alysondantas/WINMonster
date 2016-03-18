@@ -111,22 +111,33 @@ public class AdministradorController {
 	}
 
 	public void criaArquivo() throws CaractereInexistenteException{
-		arvoreHuffman=arvoreHuffman.inserirHuffman(fila);
+		arvoreHuffman = arvoreHuffman.inserirHuffman(fila);
 		arvoreHuffman.construirDicionario(dicionario);
 		Celula celulaCaractere;
 		String caractere;
-		String novoBinario="";
+		String novoBinario = "";
 		String binariodic;
+		String md = md5(arquivoOriginal);
+		String dic = "";
+		String arquivoNovo = "";
 		MeuIterador iterador=dicionario.iterador();
 		for (int j = 0; j < arquivoOriginal.length(); j++) { //Repetição: Início = Segunda letra da String; Condição = Até o fim da String
 			while(iterador.temProximo()){
-				celulaCaractere=(Celula) iterador.obterProximo();
-				caractere=celulaCaractere.getCaractere();
-				binariodic=celulaCaractere.getBinario();
+				celulaCaractere = (Celula) iterador.obterProximo();
+				caractere = celulaCaractere.getCaractere();
+				binariodic = celulaCaractere.getBinario();
 				if (caractere.charAt(0) == arquivoOriginal.charAt(j)) { //caso a letra do dicionario seja igual a letra atual
-					novoBinario=novoBinario+binariodic;//binario concatena com o binario do dicionario
+					novoBinario=novoBinario + binariodic;//binario concatena com o binario do dicionario
 				}
 			}
 		} //repete o ciclo
+		iterador.reiniciar();
+		while(iterador.temProximo()){
+			celulaCaractere = (Celula) iterador.obterProximo();
+			caractere = celulaCaractere.getCaractere();
+			binariodic = celulaCaractere.getBinario();
+			dic = caractere + " " + binariodic + " ";
+		}
+		arquivoNovo = dic + "\n" + "\n" + md + "\n" + "\n" + novoBinario;
 	}
 }
