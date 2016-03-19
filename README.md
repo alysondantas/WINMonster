@@ -1,4 +1,4 @@
 # WINMonster
 
-Alyson Dantas
+Alyson Dantas,
 Bruno Menezes
