@@ -40,8 +40,8 @@ public class Arvore {
 				obj2=(Celula) obj2.getObjeto();
 				Celula novaCelula=new Celula();//cria nova celula da arvore
 				novaCelula.setChave(frequencia);
-				novaCelula.setAntEsq(obj2);// a referencia da esquerda recebe o primeiro elemento da fila
-				novaCelula.setProxDir(obj1);// a referencia da direita recebe o segundo elemento da fila
+				novaCelula.setAntEsq(obj1);// a referencia da esquerda recebe o primeiro elemento da fila
+				novaCelula.setProxDir(obj2);// a referencia da direita recebe o segundo elemento da fila
 				filaprioridade.inserir(frequencia, novaCelula);//insere na fila uma nova celula sendo ela uma arvore
 				inserirHuffman(filaprioridade);//recursivo enquanto existir mais que de um elemento na fila
 			}
