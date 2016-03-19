@@ -45,13 +45,9 @@ public class AdministradorController {
 		return c; //retorna a String com todo o conteúdo do arquivo de texto
 	}
 
-	public void escreverArquivo(String local) throws IOException { //método deixado aqui só para inspiração. Não vai ser usado do jeito que está descrito no momento
+	public void escreverArquivo(String texto, String local) throws IOException { //método deixado aqui só para inspiração. Não vai ser usado do jeito que está descrito no momento
 		BufferedWriter buffWrite = new BufferedWriter(new FileWriter(local)); //crio um novo objeto para escrita de arquivos e passo como parâmetro um novo objeto de escrita do arquivo no local especificado
-		String linha = ""; //crio uma string auxiliar para gravar a linha do arquivo e a inicializo como vazia
-		Scanner in = new Scanner(System.in); //inicializo um objeto para capturar os dados de entrada do usuário
-		System.out.println("Escreva algo: "); 
-		linha = in.nextLine(); //capturo a próxima string que o usuário digitar
-		buffWrite.append(linha); //anexo essa string no arquivo de texto
+		buffWrite.append(texto); //anexo essa string no arquivo de texto
 		buffWrite.close(); //fecho o arquivo aberto
 	}
 
