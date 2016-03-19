@@ -86,9 +86,9 @@ public class Fila implements IFila{
                 		return;
                 	}
                 	else if (aux == this.primeiro) {
-                		this.primeiro.setProxDir(no);
-                		no.setAntEsq(aux);
                 		no.setProxDir(aux.getProxDir());
+                		no.setAntEsq(aux);
+                		this.primeiro.setProxDir(no);
                 		tamanho ++;
                 		return;
                 	}
@@ -135,6 +135,12 @@ public class Fila implements IFila{
         @Override
         public Object recuperarInicio() { //método para retornar o elemento na frente da fila
             return this.primeiro;
+        }
+        
+        public void limpar() {
+        	this.primeiro = null;
+        	this.ultimo = null;
+        	tamanho = 0;
         }
         
         public Celula recuperarFinal() {
