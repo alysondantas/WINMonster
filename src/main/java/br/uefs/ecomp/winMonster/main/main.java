@@ -14,9 +14,9 @@ import br.uefs.ecomp.winMonster.util.Fila;
 
 public class main {
 	public static void main (String[] args) {
-		/*AdministradorController controller = new AdministradorController();
-		GUI gui = new GUI(controller);*/
 		AdministradorController controller = new AdministradorController();
+		GUI gui = new GUI(controller);
+		/*AdministradorController controller = new AdministradorController();
 		try {
 			String str = controller.lerArquivo("C:\\temp.txt");
 			System.out.println(str);
@@ -35,7 +35,7 @@ public class main {
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "Erro 2");
 			e.printStackTrace();
-		}
+		}*/
 		
 	}
 }
