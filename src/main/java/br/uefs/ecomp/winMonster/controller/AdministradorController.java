@@ -107,7 +107,7 @@ public class AdministradorController {
 		return novomd5;
 	}
 
-	public void criaArquivo() throws CaractereInexistenteException{
+	public String criaArquivo() throws CaractereInexistenteException{
 		arvoreHuffman = arvoreHuffman.inserirHuffman(fila);
 		arvoreHuffman.construirDicionario(dicionario);
 		Celula celulaCaractere;
@@ -136,6 +136,7 @@ public class AdministradorController {
 			dic = caractere + " " + binariodic + " ";
 		}
 		arquivoNovo = dic + "\n" + md + "\n" + novoBinario;
+		return arquivoNovo;
 	}
 
 	public void descompacta(String local) throws IOException, DescompactarStringNulaException{
@@ -205,6 +206,20 @@ public class AdministradorController {
 			} //repete o ciclo
 		}
 		//falta escrever o novo arquivo que esta dentro do arquivoDescompactado
+	}
+	
+	public String compactarArquivo(String local){
+		fila.limpar();
+		try {
+			gerarPrioridade(lerArquivo(local));
+			String arq = criaArquivo();
+			return arq;
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (CaractereInexistenteException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

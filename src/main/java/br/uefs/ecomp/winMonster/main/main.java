@@ -1,5 +1,6 @@
 package br.uefs.ecomp.winMonster.main;
 
+import br.uefs.ecomp.winMonster.view.EscolherArquivo;
 import br.uefs.ecomp.winMonster.view.GUI;
 
 import java.io.IOException;
@@ -11,7 +12,8 @@ import br.uefs.ecomp.winMonster.util.Fila;
 
 public class main {
 	public static void main (String[] args) {
-		//GUI gui = new GUI();
+		/*AdministradorController controller = new AdministradorController();
+		GUI gui = new GUI(controller);*/
 		AdministradorController controller = new AdministradorController();
 		try {
 			String str = controller.lerArquivo("C:\\temp.txt");
@@ -19,7 +21,6 @@ public class main {
 			//Fila copia = new Fila();
 			Fila copia=controller.getFilaPrioridade();
 			Fila fila = controller.gerarPrioridade(str);
-			controller.imprimirFila(fila);
 			Arvore arvore = new Arvore();
 			arvore.inserirHuffman(fila);
 			try {
@@ -31,8 +32,6 @@ public class main {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		
 		
 	}
 }
