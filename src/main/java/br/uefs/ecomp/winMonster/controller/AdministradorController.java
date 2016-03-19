@@ -23,7 +23,7 @@ public class AdministradorController {
 	Fila fila = new Fila(); //crio uma fila para salvar a prioridade
 	Fila dicionario = new Fila();
 	String arquivoOriginal="";
-
+	
 	public Fila getFilaPrioridade(){
 		return fila;
 	}
@@ -107,7 +107,7 @@ public class AdministradorController {
 		return novomd5;
 	}
 
-	public void criaArquivo() throws CaractereInexistenteException{
+	public void criaArquivo(String local) throws CaractereInexistenteException, IOException{
 		arvoreHuffman = arvoreHuffman.inserirHuffman(fila);
 		arvoreHuffman.construirDicionario(dicionario);
 		Celula celulaCaractere;
@@ -136,6 +136,7 @@ public class AdministradorController {
 			dic = caractere + " " + binariodic + " ";
 		}
 		arquivoNovo = dic + "\n" + md + "\n" + novoBinario;
+		escreverArquivo(arquivoNovo, local, "Arquivocompactado.monster");
 	}
 
 	public void descompacta(String local) throws IOException, DescompactarStringNulaException{
