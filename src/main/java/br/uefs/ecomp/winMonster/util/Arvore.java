@@ -1,5 +1,6 @@
 package br.uefs.ecomp.winMonster.util;
 
+import br.uefs.ecomp.winMonster.model.*;
 import br.uefs.ecomp.winMonster.exceptions.CaractereInexistenteException;
 
 public class Arvore {
@@ -67,12 +68,15 @@ public class Arvore {
 			caractere=aux.getCaractere();//caractere recebe o caractere que esta dentro do auxiliar
 			verificador=true;
 			binario = "";
-			binario=pegarCaractere(caractere, raiz, binario,verificador);//binario recebe o binario criado pelo metodo que percorre a arvore
+			BinarioDoCaractere binarioCarectere = new BinarioDoCaractere();
+			binario=pegarCaractere(caractere, raiz, binarioCarectere);//binario recebe o binario criado pelo metodo que percorre a arvore
 			aux.setBinario(binario);//binario é colocado dentro da celula auxiliar
 		}
 	}
 
-	public String pegarCaractere(String caractere, Celula celula, String binario, boolean verificador) throws CaractereInexistenteException{
+	public String pegarCaractere(String caractere, Celula celula, BinarioDoCaractere binarioCarectere) throws CaractereInexistenteException{
+		String binario=binarioCarectere.getBinario();
+		boolean verificador=binarioCarectere.isVerificador();
 		if(celula==null){//interrompe a recursividade e coloca o caractere no dicionario
 			throw new CaractereInexistenteException();
 		}else if(verificador==false){
@@ -88,7 +92,9 @@ public class Arvore {
 					return binario;
 				}
 			}
-			String esq=pegarCaractere(caractere,celula.getAntEsq(),binario, verificador);
+			binarioCarectere.setBinario(binario);
+			binarioCarectere.setVerificador(verificador);
+			String esq=pegarCaractere(caractere,celula.getAntEsq(),binarioCarectere);
 			binario = binario.substring(0, binario.length()-1);
 			if(verificador == false) { //saída da função, caso o elemento já tenha sido encontrado
 				return binario; //retorna o binário correto
@@ -103,7 +109,9 @@ public class Arvore {
 					return binario;
 				}
 			}
-			String dir=pegarCaractere(caractere,celula.getProxDir(),binario, verificador);
+			binarioCarectere.setBinario(binario);
+			binarioCarectere.setVerificador(verificador);
+			String dir=pegarCaractere(caractere,celula.getProxDir(),binarioCarectere);
 			binario = binario.substring(0, binario.length()-1);
 			if(esq==null){
 				return dir;

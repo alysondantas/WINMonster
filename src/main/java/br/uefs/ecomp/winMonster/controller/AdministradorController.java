@@ -16,6 +16,7 @@ import java.security.NoSuchAlgorithmException;
 import javax.swing.JOptionPane;
 
 import br.uefs.ecomp.winMonster.util.*;
+import br.uefs.ecomp.winMonster.model.*;
 import br.uefs.ecomp.winMonster.exceptions.*;
 
 public class AdministradorController {
