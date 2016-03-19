@@ -71,54 +71,63 @@ public class Arvore {
 			BinarioDoCaractere binarioCarectere = new BinarioDoCaractere();
 			binarioCarectere.setBinario(binario);
 			binarioCarectere.setVerificador(verificador);
-			binario=pegarCaractere(caractere, raiz, binarioCarectere);//binario recebe o binario criado pelo metodo que percorre a arvore
+			binarioCarectere=pegarCaractere(caractere, raiz, binarioCarectere);//binario recebe o binario criado pelo metodo que percorre a arvore
+			binario=binarioCarectere.getBinario();
 			aux.setBinario(binario);//binario é colocado dentro da celula auxiliar
 		}
 	}
 
-	public String pegarCaractere(String caractere, Celula celula, BinarioDoCaractere binarioCarectere) throws CaractereInexistenteException{
+	public BinarioDoCaractere pegarCaractere(String caractere, Celula celula, BinarioDoCaractere binarioCarectere) throws CaractereInexistenteException{
 		String binario=binarioCarectere.getBinario();
 		boolean verificador=binarioCarectere.isVerificador();
 		if(celula==null){//interrompe a recursividade e coloca o caractere no dicionario
 			throw new CaractereInexistenteException();
 		}else if(verificador==false){
-			return binario;
+			return binarioCarectere;
 		} else{
 			//para esquerda
 			binario=binario+"0";
 			if(celula.getAntEsq()==null && celula.getProxDir()==null){//interrompe a recursividade e coloca o caractere no dicionario
 				if(celula.getCaractere().equals(caractere)){
 					verificador=false;
-					return binario;//retorna o binario completo
+					binarioCarectere.setVerificador(verificador);
+					return binarioCarectere;//retorna o binario completo
 				}else{
-					return binario;
+					return binarioCarectere;
 				}
 			}
 			binarioCarectere.setBinario(binario);
 			binarioCarectere.setVerificador(verificador);
-			String esq=pegarCaractere(caractere,celula.getAntEsq(),binarioCarectere);
+			BinarioDoCaractere binarioesq= new BinarioDoCaractere();
+			binarioesq.setVerificador(verificador);
+			binarioesq=pegarCaractere(caractere,celula.getAntEsq(),binarioCarectere);
+			String esq=binarioesq.getBinario();
 			binario = binario.substring(0, binario.length()-1);
 			if(verificador == false) { //saída da função, caso o elemento já tenha sido encontrado
-				return binario; //retorna o binário correto
+				return binarioCarectere; //retorna o binário correto
 			}
 			//para direita se não for esquerda
 			binario=binario+"1";
 			if(celula.getAntEsq()==null && celula.getProxDir()==null){//interrompe a recursividade e coloca o caractere no dicionario
 				if(celula.getCaractere().equals(caractere)){
 					verificador=false;
-					return binario;//retorna o binario completo
+					binarioCarectere.setVerificador(verificador);
+					return binarioCarectere;//retorna o binario completo
 				}else{
-					return binario;
+					return binarioCarectere;
 				}
 			}
 			binarioCarectere.setBinario(binario);
 			binarioCarectere.setVerificador(verificador);
-			String dir=pegarCaractere(caractere,celula.getProxDir(),binarioCarectere);
+			BinarioDoCaractere binariodir= new BinarioDoCaractere();
+			binariodir.setVerificador(verificador);
+			binariodir=pegarCaractere(caractere,celula.getProxDir(),binarioCarectere);
+			String dir=binariodir.getBinario();
 			binario = binario.substring(0, binario.length()-1);
 			if(esq==null){
-				return dir;
+				return binariodir;
 			}else{
-				return esq;
+				return binarioesq;
 			}
 		}
 	}
