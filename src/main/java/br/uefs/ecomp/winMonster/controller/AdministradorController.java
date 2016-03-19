@@ -45,7 +45,8 @@ public class AdministradorController {
 		return c; //retorna a String com todo o conteúdo do arquivo de texto
 	}
 
-	public void escreverArquivo(String texto, String local) throws IOException { //método deixado aqui só para inspiração. Não vai ser usado do jeito que está descrito no momento
+	public void escreverArquivo(String texto, String local, String nome) throws IOException { //método deixado aqui só para inspiração. Não vai ser usado do jeito que está descrito no momento
+		local = local + nome; //anexo o nome do arquivo ao local que ele será escrito
 		BufferedWriter buffWrite = new BufferedWriter(new FileWriter(local)); //crio um novo objeto para escrita de arquivos e passo como parâmetro um novo objeto de escrita do arquivo no local especificado
 		buffWrite.append(texto); //anexo essa string no arquivo de texto
 		buffWrite.close(); //fecho o arquivo aberto
@@ -143,26 +144,26 @@ public class AdministradorController {
 		boolean ecaractere = true;
 		boolean terminouMd5 = false;
 		boolean terminouArq = false;
-		dicionario= new Fila();
+		dicionario = new Fila();
 		Celula celulaCaractere;
 		MeuIterador iterador=dicionario.iterador();
-		String binariodic="";
-		String caracteredic="";
-		String md5Antigo="";
-		String binarioCompactado="";
-		String arquivoDescompactado="";
+		String binariodic = "";
+		String caracteredic = "";
+		String md5Antigo = "";
+		String binarioCompactado = "";
+		String arquivoDescompactado = "";
 
 		for (int j = 0; j < arquivo.length(); j++) { //Repetição: Início = Segunda letra da String; Condição = Até o fim da String
 			if(terminouDic == false){
 				if(ecaractere == true){
 					caracteredic = caracteredic + arquivo.charAt(j);
-					if(arquivo.charAt(j) == " "){
+					if(Character.toString(arquivo.charAt(j)) == " "){
 						ecaractere = false;
 					}
 				}else{
-					if(arquivo.charAt(j) != " " && arquivo.charAt(j) != "\n"){
+					if(Character.toString(arquivo.charAt(j)) != " " && Character.toString(arquivo.charAt(j)) != "\n"){
 						binariodic=binariodic + arquivo.charAt(j);
-					}else if(arquivo.charAt(j) == " "){
+					}else if(Character.toString(arquivo.charAt(j)) == " "){
 						dicionario.inserir(j, caracteredic);
 						iterador.reiniciar();
 						while(iterador.temProximo()){
@@ -178,7 +179,7 @@ public class AdministradorController {
 					}
 				}
 			}else if(terminouMd5 == false){
-				if(arquivo.charAt(j) != "\n"){
+				if(Character.toString(arquivo.charAt(j)) != "\n"){
 					md5Antigo= md5Antigo + arquivo.charAt(j);
 				}else{
 					terminouMd5=true;
