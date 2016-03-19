@@ -69,6 +69,8 @@ public class Arvore {
 			verificador=true;
 			binario = "";
 			BinarioDoCaractere binarioCarectere = new BinarioDoCaractere();
+			binarioCarectere.setBinario(binario);
+			binarioCarectere.setVerificador(verificador);
 			binario=pegarCaractere(caractere, raiz, binarioCarectere);//binario recebe o binario criado pelo metodo que percorre a arvore
 			aux.setBinario(binario);//binario é colocado dentro da celula auxiliar
 		}
