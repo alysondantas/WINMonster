@@ -37,9 +37,9 @@ public class CompactarAction implements ActionListener {
 				e1.printStackTrace();
 			}
 		}
-		else {
+		/*else {
 			JOptionPane.showMessageDialog(null, "Erro");
-		}
+		}*/
 	}
 
 }

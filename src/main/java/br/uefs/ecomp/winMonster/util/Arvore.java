@@ -81,8 +81,6 @@ public class Arvore {
 			//para esquerda
 			binario=binario+"0";
 			if(celula.getAntEsq()==null && celula.getProxDir()==null){//interrompe a recursividade e coloca o caractere no dicionario
-				System.out.println(celula.getCaractere());
-				System.out.println(celula.getBinario());
 				if(celula.getCaractere().equals(caractere)){
 					verificador=false;
 					return binario;//retorna o binario completo
