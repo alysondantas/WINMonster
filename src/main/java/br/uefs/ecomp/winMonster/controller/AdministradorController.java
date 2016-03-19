@@ -139,7 +139,7 @@ public class AdministradorController {
 		escreverArquivo(arquivoNovo, local, "Arquivocompactado.monster");
 	}
 
-	public void descompacta(String local) throws IOException, DescompactarStringNulaException{
+	public void descompacta(String local,String localDescompactar) throws IOException, DescompactarStringNulaException{
 		String arquivo=lerArquivo(local);//recebe o arquivo a ser descompactado pelo seu local
 		boolean terminouDic = false;
 		boolean ecaractere = true;
@@ -205,7 +205,7 @@ public class AdministradorController {
 				}
 			} //repete o ciclo
 		}
-		//falta escrever o novo arquivo que esta dentro do arquivoDescompactado
+		escreverArquivo(arquivoDescompactado, localDescompactar, "Arquivodescompactado.txt");
 	}
 
 }
