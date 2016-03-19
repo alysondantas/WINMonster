@@ -66,6 +66,7 @@ public class Arvore {
 			}
 			caractere=aux.getCaractere();//caractere recebe o caractere que esta dentro do auxiliar
 			verificador=true;
+			binario = "";
 			binario=pegarCaractere(caractere, raiz, binario,verificador);//binario recebe o binario criado pelo metodo que percorre a arvore
 			aux.setBinario(binario);//binario é colocado dentro da celula auxiliar
 		}
@@ -97,8 +98,6 @@ public class Arvore {
 			//para direita se não for esquerda
 			binario=binario+"1";
 			if(celula.getAntEsq()==null && celula.getProxDir()==null){//interrompe a recursividade e coloca o caractere no dicionario
-				System.out.println(celula.getCaractere());
-				System.out.println(celula.getBinario());
 				if(celula.getCaractere().equals(caractere)){
 					verificador=false;
 					return binario;//retorna o binario completo

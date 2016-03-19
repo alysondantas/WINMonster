@@ -24,8 +24,8 @@ public class AdministradorController {
 	Fila dicionario = new Fila();
 	String arquivoOriginal="";
 
-	public Fila getFilaPrioridade(){
-		return fila;
+	public Fila getDicionario(){
+		return dicionario;
 	}
 
 
