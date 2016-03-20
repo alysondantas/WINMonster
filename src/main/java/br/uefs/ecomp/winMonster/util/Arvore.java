@@ -1,12 +1,17 @@
 package br.uefs.ecomp.winMonster.util;
 
 import br.uefs.ecomp.winMonster.model.*;
+
+import java.io.IOException;
+
 import br.uefs.ecomp.winMonster.exceptions.CaractereInexistenteException;
 
 public class Arvore {
 
 	Celula raiz; //elemento inicial da árvore
 	int tamanho; //número de elementos da árvore
+	String binariototal="";
+	boolean validador=true;
 
 	public Arvore (){ //construtor padrão para a árvore que inicializa sua raíz como nulo e seu tamanho como zero
 		this.raiz = null;
@@ -86,7 +91,6 @@ public class Arvore {
 			return binarioCarectere;
 		} else{
 			//para esquerda
-			binario=binario+"0";
 			if(celula.getAntEsq()==null && celula.getProxDir()==null){//interrompe a recursividade e coloca o caractere no dicionario
 				if(celula.getCaractere().equals(caractere)){
 					verificador=false;
@@ -96,18 +100,22 @@ public class Arvore {
 					return binarioCarectere;
 				}
 			}
-			binarioCarectere.setBinario(binario);
-			binarioCarectere.setVerificador(verificador);
-			BinarioDoCaractere binarioesq= new BinarioDoCaractere();
-			binarioesq.setVerificador(verificador);
-			binarioesq=pegarCaractere(caractere,celula.getAntEsq(),binarioCarectere);
-			String esq=binarioesq.getBinario();
-			binario = binario.substring(0, binario.length()-1);
 			if(verificador == false) { //saída da função, caso o elemento já tenha sido encontrado
 				return binarioCarectere; //retorna o binário correto
 			}
+			binario=binario+"0";
+			binarioCarectere.setBinario(binario);
+			binarioCarectere.setVerificador(verificador);
+			binarioCarectere=pegarCaractere(caractere,celula.getAntEsq(),binarioCarectere);
+			binario=binarioCarectere.getBinario();
+			verificador=binarioCarectere.isVerificador();
+			if(verificador == false) { //saída da função, caso o elemento já tenha sido encontrado
+				return binarioCarectere; //retorna o binário correto
+			}
+			binario = binario.substring(0, binario.length()-1);
+			binarioCarectere.setBinario(binario);
+			
 			//para direita se não for esquerda
-			binario=binario+"1";
 			if(celula.getAntEsq()==null && celula.getProxDir()==null){//interrompe a recursividade e coloca o caractere no dicionario
 				if(celula.getCaractere().equals(caractere)){
 					verificador=false;
@@ -117,21 +125,64 @@ public class Arvore {
 					return binarioCarectere;
 				}
 			}
+			binario=binario+"1";
 			binarioCarectere.setBinario(binario);
 			binarioCarectere.setVerificador(verificador);
-			BinarioDoCaractere binariodir= new BinarioDoCaractere();
-			binariodir.setVerificador(verificador);
-			binariodir=pegarCaractere(caractere,celula.getProxDir(),binarioCarectere);
-			String dir=binariodir.getBinario();
-			binario = binario.substring(0, binario.length()-1);
-			if(esq==null){
-				return binariodir;
-			}else{
-				return binarioesq;
+			binarioCarectere=pegarCaractere(caractere,celula.getProxDir(),binarioCarectere);
+			binario=binarioCarectere.getBinario();
+			verificador=binarioCarectere.isVerificador();
+			if(verificador == false) { //saída da função, caso o elemento já tenha sido encontrado
+				return binarioCarectere; //retorna o binário correto
 			}
+			binario = binario.substring(0, binario.length()-1);
+			binarioCarectere.setBinario(binario);
+			
+			return binarioCarectere;
 		}
 	}
-
+	/*public void construirDicionario2(Fila dicionario) throws CaractereInexistenteException, IOException{//metodo para criar o dicionario na estrutura copia da fila original
+		MeuIterador iterador=(MeuIterador) dicionario.iterador(); //crio um iterador pra percorrer a estrutura dicionario
+		Celula aux;//auxiliar do tipo celula pra recuperar o objeto que esta no iterador
+		String caractere="";//caractere que esta na celula
+		String binario="";//novo binario do caractere
+		boolean verificador=true;
+		while(iterador.temProximo()){//enquanto existir proximo
+			aux=(Celula) iterador.obterProximo();//aux recebe o atual e iterador passa pro proximo
+			if(aux.getObjeto() instanceof String){
+				binariototal="";
+				validador=true;
+				caractere=(String) aux.getObjeto();
+				aux.setCaractere(caractere);
+			}
+			pegarCaractere2(raiz,caractere);//binario recebe o binario criado pelo metodo que percorre a arvore
+			aux.setBinario(binariototal);//binario é colocado dentro da celula auxiliar
+		}
+	}
+	
+	public void pegarCaractere2(Celula celula, String caractere) throws IOException, CaractereInexistenteException{
+		if(celula != null){
+			if(celula.getAntEsq() == null && celula.getProxDir() == null){
+				if(caractere.equals(celula.getCaractere())){
+					validador=false;
+				}
+				return;
+			}
+			if(validador==true){
+				binariototal = binariototal + "0";
+				pegarCaractere2(celula.getAntEsq(),caractere);
+				binariototal = binariototal.substring(0, binariototal.length()-1);
+				
+				binariototal = binariototal + "1";
+				pegarCaractere2(celula.getProxDir(),caractere);
+				binariototal = binariototal.substring(0, binariototal.length()-1);
+			}else{
+				return;
+			}
+			
+		}else{
+			throw new CaractereInexistenteException();
+		}
+	}*/
 
 
 }

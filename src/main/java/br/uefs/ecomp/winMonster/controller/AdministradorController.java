@@ -108,7 +108,7 @@ public class AdministradorController {
 		return novomd5;
 	}
 
-	public String criaArquivo() throws CaractereInexistenteException{
+	public String criaArquivo() throws CaractereInexistenteException, IOException{
 		arvoreHuffman = arvoreHuffman.inserirHuffman(fila);
 		arvoreHuffman.construirDicionario(dicionario);
 		Celula celulaCaractere;
@@ -129,12 +129,12 @@ public class AdministradorController {
 				}
 			}
 		} //repete o ciclo
-		iterador.reiniciar();
+		iterador=dicionario.iterador();
 		while(iterador.temProximo()){
 			celulaCaractere = (Celula) iterador.obterProximo();
 			caractere = celulaCaractere.getCaractere();
 			binariodic = celulaCaractere.getBinario();
-			dic = caractere + " " + binariodic;
+			dic = dic + caractere + " " + binariodic;
 		}
 		arquivoNovo = dic + "\n" + md + "\n" + novoBinario;
 		return arquivoNovo;
