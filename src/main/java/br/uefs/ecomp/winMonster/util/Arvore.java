@@ -11,6 +11,7 @@ public class Arvore {
 	Celula raiz; //elemento inicial da árvore
 	int tamanho; //número de elementos da árvore
 	String binariototal="";
+	String dicionario="";
 	boolean validador=true;
 
 	public Arvore (){ //construtor padrão para a árvore que inicializa sua raíz como nulo e seu tamanho como zero
@@ -140,49 +141,40 @@ public class Arvore {
 			return binarioCarectere;
 		}
 	}
-	/*public void construirDicionario2(Fila dicionario) throws CaractereInexistenteException, IOException{//metodo para criar o dicionario na estrutura copia da fila original
+	public String construirDicionario2(Fila dicionario) throws CaractereInexistenteException, IOException{//metodo para criar o dicionario na estrutura copia da fila original
 		MeuIterador iterador=(MeuIterador) dicionario.iterador(); //crio um iterador pra percorrer a estrutura dicionario
 		Celula aux;//auxiliar do tipo celula pra recuperar o objeto que esta no iterador
 		String caractere="";//caractere que esta na celula
-		String binario="";//novo binario do caractere
-		boolean verificador=true;
 		while(iterador.temProximo()){//enquanto existir proximo
 			aux=(Celula) iterador.obterProximo();//aux recebe o atual e iterador passa pro proximo
 			if(aux.getObjeto() instanceof String){
-				binariototal="";
-				validador=true;
 				caractere=(String) aux.getObjeto();
 				aux.setCaractere(caractere);
 			}
-			pegarCaractere2(raiz,caractere);//binario recebe o binario criado pelo metodo que percorre a arvore
-			aux.setBinario(binariototal);//binario é colocado dentro da celula auxiliar
-		}
+			pegarCaractere2(raiz);//binario recebe o binario criado pelo metodo que percorre a arvore
+			}
+		return this.dicionario;
 	}
 	
-	public void pegarCaractere2(Celula celula, String caractere) throws IOException, CaractereInexistenteException{
+	public void pegarCaractere2(Celula celula) throws IOException, CaractereInexistenteException{
 		if(celula != null){
 			if(celula.getAntEsq() == null && celula.getProxDir() == null){
-				if(caractere.equals(celula.getCaractere())){
-					validador=false;
-				}
+				dicionario = dicionario + celula.getCaractere() + " " + binariototal + " ";
 				return;
 			}
-			if(validador==true){
 				binariototal = binariototal + "0";
-				pegarCaractere2(celula.getAntEsq(),caractere);
+				pegarCaractere2(celula.getAntEsq());
 				binariototal = binariototal.substring(0, binariototal.length()-1);
 				
 				binariototal = binariototal + "1";
-				pegarCaractere2(celula.getProxDir(),caractere);
+				pegarCaractere2(celula.getProxDir());
 				binariototal = binariototal.substring(0, binariototal.length()-1);
-			}else{
-				return;
-			}
+			
 			
 		}else{
 			throw new CaractereInexistenteException();
 		}
-	}*/
+	}
 
 
 }
