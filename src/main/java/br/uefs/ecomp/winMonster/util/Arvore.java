@@ -170,7 +170,6 @@ public class Arvore {
 				pegarCaractere2(celula.getProxDir());
 				binariototal = binariototal.substring(0, binariototal.length()-1);
 			
-			
 		}else{
 			throw new CaractereInexistenteException();
 		}

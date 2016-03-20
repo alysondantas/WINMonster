@@ -134,7 +134,7 @@ public class AdministradorController {
 			celulaCaractere = (Celula) iterador.obterProximo();
 			caractere = celulaCaractere.getCaractere();
 			binariodic = celulaCaractere.getBinario();
-			dic = dic + caractere + " " + binariodic;
+			dic = dic + caractere + " " + binariodic + " ";
 		}
 		arquivoNovo = dic + "\n" + md + "\n" + novoBinario;
 		return arquivoNovo;
