@@ -138,14 +138,15 @@ public class AdministradorController {
 		arquivoNovo = dic + "\n" + "\n" + md + "\n" + "\n" + novoBinario;
 		return arquivoNovo;
 	}
-
+	
+	
 	public void descompacta(String local) throws IOException, DescompactarStringNulaException{
 		String arquivo=lerArquivo(local);//recebe o arquivo a ser descompactado pelo seu local
 		boolean terminouDic = false;
 		boolean ecaractere = true;
 		boolean terminouMd5 = false;
 		boolean terminouArq = false;
-		dicionario = new Fila();
+		dicionario.limpar();
 		Celula celulaCaractere;
 		MeuIterador iterador=dicionario.iterador();
 		String binariodic = "";
