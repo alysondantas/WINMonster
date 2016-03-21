@@ -9,29 +9,29 @@ import br.uefs.ecomp.winMonster.controller.AdministradorController;
 
 public class CompactarAction implements ActionListener {
 
-	JTextField textField;
 	AdministradorController controller;
 	
 	public CompactarAction(AdministradorController controller) {
-		this.controller = controller;
+		this.controller = controller; //iguala a instância do controller da classe à instância recebida
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		JFileChooser fc = new JFileChooser();
-		fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
-		fc.setDialogTitle(" Abrir Arquivo ");
-		int resposta = fc.showOpenDialog(null);
-		if (resposta == JFileChooser.APPROVE_OPTION) {
-			String texto = controller.compactarArquivo(fc.getSelectedFile().getAbsolutePath());
-			JOptionPane.showMessageDialog(null, texto);
-			String nomeArq = fc.getSelectedFile().getName();
-			JOptionPane.showMessageDialog(null, nomeArq);
-			String local = fc.getSelectedFile().getPath().replace(nomeArq, "");
-			JOptionPane.showMessageDialog(null, local);
-			try {
-				controller.escreverArquivo(texto, local, nomeArq + ".monster");
+		JFileChooser fc = new JFileChooser(); //cria um novo selecionador de arquivos
+		fc.setFileSelectionMode(JFileChooser.FILES_ONLY); //configura o selecionador para só receber arquivos
+		fc.setDialogTitle(" Abrir Arquivo "); //define o título da janela de seleção
+		int resposta = fc.showOpenDialog(null); //abre a janela de seleção e guarda a ação do usuário em resposta
+		if (resposta == JFileChooser.APPROVE_OPTION) { //caso o usuário tenha selecionado um arquivo
+			String texto = controller.compactarArquivo(fc.getSelectedFile().getAbsolutePath()); //chama o método compactarArquivo do controller, passa o local do arquivo selecionado para ele e salva o texto do arquivo compactado na String texto
+			JOptionPane.showMessageDialog(null, texto); //teste para exibir o texto recebido
+			String nomeArq = fc.getSelectedFile().getName(); //salva o nome do arquivo que está na localização do arquivo selecionado na String nomeArq
+			JOptionPane.showMessageDialog(null, nomeArq); //teste para exibir o nome do arquivo
+			String local = fc.getSelectedFile().getPath().replace(nomeArq, ""); //salva o local do arquivo selecionado removendo o nome do arquivo na String local
+			JOptionPane.showMessageDialog(null, local); //teste para exibir o local do arquivo
+			try { 
+				controller.escreverArquivo(texto, local, nomeArq + ".monster"); //chama o método de escreverArquivo no controller passando o texto compactado com dicionário e md5, o local do arquivo e o novo nome concatenado com a extensão ".monster"
 			} catch (IOException e1) {
+				JOptionPane.showMessageDialog(null, "IOException");
 				e1.printStackTrace();
 			}
 		}

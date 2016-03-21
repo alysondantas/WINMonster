@@ -22,6 +22,7 @@ public class GUI extends JFrame implements ActionListener {
 		super("WinMONSTER");
 		this.controller = controller;
 		
+		//remover essa parte do programa no futuro
 		try { //remover depois
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 		} catch (UnsupportedLookAndFeelException ex) {
@@ -34,21 +35,26 @@ public class GUI extends JFrame implements ActionListener {
 			ex.printStackTrace();
 		}
 		
+		//Configurações da janela do programa
 		this.setLayout(null);
 		this.setSize(300, 300);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		//inicialização dos componentes da janela
 		button1 = new JButton("Compactar");
 		button2 = new JButton("Descompactar");
 		button3 = new JButton("Verificar md5");
 		splash = new Splash();
 		
+		//configuração da localização dos componentes
 		button1.setBounds(80, 30, 130, 60);
 		button2.setBounds(80, 90, 130, 60);
 		button3.setBounds(80, 150, 130, 60);
 		
+		//implementação das ações dos botões
 		button1.addActionListener(new CompactarAction(controller));
+		//botão 2 e botão 3 não implementados
 		button2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				JOptionPane.showMessageDialog(null, "Ainda não implementado! :P");
@@ -60,15 +66,19 @@ public class GUI extends JFrame implements ActionListener {
 			}
 		});
 		
+		//exibição da Splash
 		splash.showSplash();
 		
+		//organização dos componentes da janela
 		add(button1);
 		add(button2);
 		add(button3);
 		
+		//fazer a janela aparecer para o usuário
 		this.setVisible(true);
 	}
 
+	//ação que eu deixei só para testes futuros. Vou retirar antes de enviar o projeto final
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == button1) {
 			//códigos de teste futuros aqui

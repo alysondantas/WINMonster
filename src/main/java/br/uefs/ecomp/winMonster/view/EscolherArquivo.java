@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+//classe só para testes. Apagar antes de enviar
 public class EscolherArquivo {
 	public String buscar() {
 		JFileChooser fc = new JFileChooser();
