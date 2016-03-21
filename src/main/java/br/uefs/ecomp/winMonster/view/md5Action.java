@@ -7,23 +7,18 @@ import javax.swing.*;
 
 import br.uefs.ecomp.winMonster.controller.AdministradorController;
 
-public class CompactarAction implements ActionListener {
+public class md5Action implements ActionListener{
 
-	JTextField textField;
-	AdministradorController controller;
-	
-	public CompactarAction(AdministradorController controller) {
-		this.controller = controller;
-	}
+	AdministradorController controller = new AdministradorController();
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JFileChooser fc = new JFileChooser();
 		fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
-		fc.setDialogTitle(" Abrir Arquivo ");
+		fc.setDialogTitle(" Abrir Arquivo Original ");
 		int resposta = fc.showOpenDialog(null);
 		if (resposta == JFileChooser.APPROVE_OPTION) {
-			String texto = controller.compactarArquivo(textField.getText());
+			String texto = controller.compactarArquivo(fc.getSelectedFile().getAbsolutePath());
 			JOptionPane.showMessageDialog(null, texto);
 			String nomeArq = fc.getSelectedFile().getName();
 			JOptionPane.showMessageDialog(null, nomeArq);
