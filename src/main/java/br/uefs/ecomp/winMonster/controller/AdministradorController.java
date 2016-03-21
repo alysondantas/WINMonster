@@ -105,7 +105,6 @@ public class AdministradorController {
 	}
 
 	public String criaArquivo() throws CaractereInexistenteException, IOException{
-		imprimirFila(fila);
 		arvoreHuffman = new Arvore();
 		arvoreHuffman = arvoreHuffman.inserirHuffman(fila);
 		arvoreHuffman.construirDicionario(dicionario);
@@ -154,7 +153,7 @@ public class AdministradorController {
 		//recorto o pedaço que eu acabei de salvar em "binario" da String do arquivo original
 		arquivo = arquivo.substring(0, arquivo.lastIndexOf("\n\n"));
 		//separo novamente a partir da última ocorrência de "\n\n" até o fim da string e salvo na String md5
-		md5 = arquivo.substring(arquivo.lastIndexOf("\n\n") + 2, arquivo.length());
+		//md5 = arquivo.substring(arquivo.lastIndexOf("\n\n") + 2, arquivo.length());
 		//recorto o pedaço que eu salvei em md5 da string do arquivo original
 		arquivo = arquivo.substring(0, arquivo.lastIndexOf("\n\n"));
 		//o restante que sobrou da string original é só o dicionário
@@ -181,24 +180,25 @@ public class AdministradorController {
 		}
 		
 		////////////TRADUÇÃO DO BINÁRIO RECEBIDO///////////////
-		String aux = binario.substring(0, 1);
-		String traducao = "";
-		it = dicionario.iterador();
-		while(it.temProximo()) {
-			Celula caux = (Celula)it.obterProximo();
-			String binaux = caux.getBinario();
-			if(caux.getChave() == 0) {
-				for(int i = 1; aux != binaux && i < binario.length(); i++) {
+		String traducao = ""; //crio uma string para armazenar a tradução e inicalizo ela como vazia
+		it = dicionario.iterador(); //faço it iterar a fila dicionário
+		
+		while(!binario.isEmpty()) { //enquanto o binário não estiver completamente traduzido
+			String aux = binario.substring(0, 1); //crio uma string auxiliar e inicalizo ela com o primeiro caractere da String binario
+			while(it.temProximo()) {  //início do ciclo de iteração
+				Celula caux = (Celula)it.obterProximo();
+				String binaux = caux.getBinario(); //salvo o binário presente em cada uma das células em binaux
+				for(int i = 1; aux != binaux && i < binario.length(); i++) { //crio um ciclo de repetições para ir aumentando a substring de binario de um em um elemento e comparando ele com o binário da célula iterada enquanto essa substring não for igual ao binário da célula. 
 					aux = binario.substring(0, i);
 				}
-				if (aux == binaux) {
-					traducao = traducao + (String)caux.getObjeto();
-					caux.setChave(1);
+				if (aux == binaux) { //após o fim do ciclo de repetições, caso tenha encontrado uma substring que seja igual ao binário da célula
+					traducao = traducao + (String)caux.getObjeto(); //coloco a letra relacionada com o binário encontrada na tradução
+					binario = binario.substring(0, aux.length());
 				}
-			}
+			} //fim do ciclo de iteração
 		}
 		
-		return md5;
+		return traducao;
 		}
 	
 	public String compactarArquivo(String local){
@@ -214,6 +214,14 @@ public class AdministradorController {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public String recuperarMd5(String local) throws IOException {
+		String md5 = "";
+		String arquivo = lerArquivo(local);
+		arquivo = arquivo.substring(0, arquivo.lastIndexOf("\n\n"));
+		md5 = arquivo.substring(arquivo.lastIndexOf("\n\n") + 2, arquivo.length());
+		return md5;
 	}
 
 }

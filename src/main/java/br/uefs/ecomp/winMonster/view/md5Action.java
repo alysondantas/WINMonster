@@ -13,19 +13,29 @@ public class md5Action implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		String md5Ant = "";
+		String md5Nov = "";
 		JFileChooser fc = new JFileChooser();
 		fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
 		fc.setDialogTitle(" Abrir Arquivo Original ");
+		JOptionPane.showMessageDialog(null, "Escolha o arquivo .monster compactado");
 		int resposta = fc.showOpenDialog(null);
 		if (resposta == JFileChooser.APPROVE_OPTION) {
-			String texto = controller.compactarArquivo(fc.getSelectedFile().getAbsolutePath());
-			JOptionPane.showMessageDialog(null, texto);
-			String nomeArq = fc.getSelectedFile().getName();
-			JOptionPane.showMessageDialog(null, nomeArq);
-			String local = fc.getSelectedFile().getPath().replace(nomeArq, "");
-			JOptionPane.showMessageDialog(null, local);
 			try {
-				controller.escreverArquivo(texto, local, nomeArq + ".monster");
+				md5Ant = controller.recuperarMd5(fc.getSelectedFile().getAbsolutePath());
+				JOptionPane.showMessageDialog(null, "Agora escolha o arquivo descompactado");
+				int resp2 = fc.showOpenDialog(null);
+				if(resp2 == JFileChooser.APPROVE_OPTION)
+				{
+						String texto = controller.lerArquivo(fc.getSelectedFile().getAbsolutePath());
+						md5Nov = controller.md5(texto);
+						if(md5Ant == md5Nov) {
+							JOptionPane.showMessageDialog(null, "Os MD5 são iguais");
+						}
+						else {
+							JOptionPane.showMessageDialog(null, "Os MD5 são diferentes");
+						}
+				}
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}

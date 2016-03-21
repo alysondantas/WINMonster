@@ -55,16 +55,8 @@ public class GUI extends JFrame implements ActionListener {
 		//implementação das ações dos botões
 		button1.addActionListener(new CompactarAction(controller));
 		//botão 2 e botão 3 não implementados
-		button2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				JOptionPane.showMessageDialog(null, "Ainda não implementado! :P");
-			}
-		});
-		button3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				JOptionPane.showMessageDialog(null, "Ainda não implementado! :P");
-			}
-		});
+		button2.addActionListener(new DescompactarAction(controller));
+		button3.addActionListener(new md5Action());
 		
 		//exibição da Splash
 		splash.showSplash();
