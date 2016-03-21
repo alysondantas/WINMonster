@@ -135,7 +135,7 @@ public class AdministradorController {
 			binariodic = celulaCaractere.getBinario();
 			dic = dic + caractere + " " + binariodic + " ";
 		}
-		arquivoNovo = dic + "\n" + md + "\n" + novoBinario;
+		arquivoNovo = dic + "\n" + "\n" + md + "\n" + "\n" + novoBinario;
 		return arquivoNovo;
 	}
 
