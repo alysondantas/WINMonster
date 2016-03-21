@@ -139,74 +139,49 @@ public class AdministradorController {
 		return arquivoNovo;
 	}
 
-	public void descompacta(String local) throws IOException, DescompactarStringNulaException{
+	public String descompacta(String local) throws IOException, DescompactarStringNulaException{
 		String arquivo=lerArquivo(local);//recebe o arquivo a ser descompactado pelo seu local
-		boolean terminouDic = false;
-		boolean ecaractere = true;
-		boolean terminouMd5 = false;
-		boolean terminouArq = false;
 		dicionario = new Fila();
-		Celula celulaCaractere;
 		MeuIterador iterador=dicionario.iterador();
-		String binariodic = "";
-		String caracteredic = "";
-		String md5Antigo = "";
-		String binarioCompactado = "";
-		String arquivoDescompactado = "";
+		String dic = "";
+		String binario = "";
+		String md5= "";
 
-		for (int j = 0; j < arquivo.length(); j++) { //Repetição: Início = Segunda letra da String; Condição = Até o fim da String
-			if(terminouDic == false){
-				if(ecaractere == true){
-					caracteredic = caracteredic + arquivo.charAt(j);
-					if(Character.toString(arquivo.charAt(j)) == " "){
-						ecaractere = false;
-					}
-				}else{
-					if(Character.toString(arquivo.charAt(j)) != " " && Character.toString(arquivo.charAt(j)) != "\n"){
-						binariodic=binariodic + arquivo.charAt(j);
-					}else if(Character.toString(arquivo.charAt(j)) == " "){
-						dicionario.inserir(j, caracteredic);
-						iterador.reiniciar();
-						while(iterador.temProximo()){
-							celulaCaractere=(Celula) iterador.obterProximo();
-							if(celulaCaractere.getChave()==j){
-								celulaCaractere.setBinario(binariodic);
-								celulaCaractere.setCaractere(caracteredic);
-							}
-						}
-						ecaractere = true;
-					}else{
-						terminouDic = true;
-					}
-				}
-			}else if(terminouMd5 == false){
-				if(Character.toString(arquivo.charAt(j)) != "\n"){
-					md5Antigo= md5Antigo + arquivo.charAt(j);
-				}else{
-					terminouMd5=true;
-				}
-			}else{
-				binarioCompactado = binarioCompactado + arquivo.charAt(j);
-			}
-		} //repete o ciclo
-
-		if(binarioCompactado == null || dicionario == null || md5Antigo == null){
-			throw new DescompactarStringNulaException();
-		}else{
-			iterador.reiniciar();
-			for (int j = 0; j < binarioCompactado.length(); j++) { //Repetição: Início = Segunda letra da String; Condição = Até o fim da String
-				while(iterador.temProximo()){
-					celulaCaractere = (Celula) iterador.obterProximo();
-					caracteredic = celulaCaractere.getCaractere();
-					binariodic = celulaCaractere.getBinario();
-					if (caracteredic.charAt(0) == binarioCompactado.charAt(j)) { //caso a letra do dicionario seja igual a letra atual
-						arquivoDescompactado=arquivoDescompactado + binariodic;//binario concatena com o binario do dicionario
-					}
-				}
-			} //repete o ciclo
+		////////////SEPARAÇÃO DA STRING DO ARQUIVO ORIGINAL//////////////////
+		
+		//separo a partir da última ocorrência de "\n\n" até o fim da string e salvo na String binario
+		binario = arquivo.substring(arquivo.lastIndexOf("\n\n") + 2, arquivo.length());
+		//recorto o pedaço que eu acabei de salvar em "binario" da String do arquivo original
+		arquivo = arquivo.substring(0, arquivo.lastIndexOf("\n\n"));
+		//separo novamente a partir da última ocorrência de "\n\n" até o fim da string e salvo na String md5
+		md5 = arquivo.substring(arquivo.lastIndexOf("\n\n") + 2, arquivo.length());
+		//recorto o pedaço que eu salvei em md5 da string do arquivo original
+		arquivo = arquivo.substring(0, arquivo.lastIndexOf("\n\n"));
+		//o restante que sobrou da string original é só o dicionário
+		dic = arquivo;
+		
+		/////////////SEPARAÇÃO DO DICIONÁRIO////////////////
+		
+		//enquanto a String do dicionário não estiver vazia
+		while(!dic.isEmpty()) {
+			//Salvo o primeiro caractere da String numa String auxiliar chamada String caractere
+			String caractere = dic.substring(0, 1); 
+			//recorto o que eu acabei de salvar da String do dicionario + o próximo " "
+			dic = dic.substring(2, dic.length());
+			//Salvo em uma String binariodic tudo o que vier desde o começo de "dicionario" até o próximo " ", ou seja, o próximo binário
+			String binariodic = dic.substring(0,dic.indexOf(" "));
+			//recorto o que eu acabei de salvar da String dicionário + o próximo " "
+			dic = dic.substring(0, dic.indexOf(" ") + 1);
+			//Crio uma nova célula de frequência 1 com o caractere que eu salvei anteriormente como conteúdo
+			Celula cel = new Celula(1, caractere);
+			//digo que o binário dessa nova célula é o binariodic
+			cel.setBinario(binariodic);
+			//insiro na fila de dicionário a nova célula criada
+			dicionario.inserir(1, cel);
 		}
-		//falta escrever o novo arquivo que esta dentro do arquivoDescompactado
-	}
+		
+		return md5;
+		}
 	
 	public String compactarArquivo(String local){
 		fila.limpar();
