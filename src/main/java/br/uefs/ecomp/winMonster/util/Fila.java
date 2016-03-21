@@ -76,9 +76,9 @@ public class Fila implements IFila{
                 		return;
                 	}
                 }
-                while(aux.getChave() >= no.getChave()) { //enquanto a chave do elemento for menor do que a do elemento a ser inserido
+                while(aux.getChave() > no.getChave()) { //enquanto a chave do elemento for menor do que a do elemento a ser inserido
                 	aux = aux.getAntEsq(); //avança uma posição da lista
-                	if (aux == this.primeiro && aux.getChave() >= no.getChave()) { //caso tenha chegado ao início da lista, insere no início
+                	if (aux == this.primeiro && aux.getChave() > no.getChave()) { //caso tenha chegado ao início da lista, insere no início
                 		this.primeiro.setAntEsq(no); //aponta o anterior do primeiro da lista para o novo nó
                 		no.setProxDir(this.primeiro); //aponta o próximo do novo nó para o primeiro da lista 
                 		this.primeiro = no; //passa a posição de primeiro para o novo nó
