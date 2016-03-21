@@ -142,7 +142,7 @@ public class AdministradorController {
 	public String descompacta(String local) throws IOException, DescompactarStringNulaException{
 		String arquivo=lerArquivo(local);//recebe o arquivo a ser descompactado pelo seu local
 		dicionario = new Fila();
-		MeuIterador iterador=dicionario.iterador();
+		MeuIterador it;
 		String dic = "";
 		String binario = "";
 		String md5= "";
@@ -173,11 +173,29 @@ public class AdministradorController {
 			//recorto o que eu acabei de salvar da String dicionário + o próximo " "
 			dic = dic.substring(0, dic.indexOf(" ") + 1);
 			//Crio uma nova célula de frequência 1 com o caractere que eu salvei anteriormente como conteúdo
-			Celula cel = new Celula(1, caractere);
+			Celula cel = new Celula(0, caractere);
 			//digo que o binário dessa nova célula é o binariodic
 			cel.setBinario(binariodic);
 			//insiro na fila de dicionário a nova célula criada
 			dicionario.inserir(1, cel);
+		}
+		
+		////////////TRADUÇÃO DO BINÁRIO RECEBIDO///////////////
+		String aux = binario.substring(0, 1);
+		String traducao = "";
+		it = dicionario.iterador();
+		while(it.temProximo()) {
+			Celula caux = (Celula)it.obterProximo();
+			String binaux = caux.getBinario();
+			if(caux.getChave() == 0) {
+				for(int i = 1; aux != binaux && i < binario.length(); i++) {
+					aux = binario.substring(0, i);
+				}
+				if (aux == binaux) {
+					traducao = traducao + (String)caux.getObjeto();
+					caux.setChave(1);
+				}
+			}
 		}
 		
 		return md5;
