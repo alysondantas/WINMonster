@@ -23,7 +23,7 @@ public class CompactarAction implements ActionListener {
 		fc.setDialogTitle(" Abrir Arquivo ");
 		int resposta = fc.showOpenDialog(null);
 		if (resposta == JFileChooser.APPROVE_OPTION) {
-			String texto = controller.compactarArquivo(textField.getText());
+			String texto = controller.compactarArquivo(fc.getSelectedFile().getAbsolutePath());
 			JOptionPane.showMessageDialog(null, texto);
 			String nomeArq = fc.getSelectedFile().getName();
 			JOptionPane.showMessageDialog(null, nomeArq);
