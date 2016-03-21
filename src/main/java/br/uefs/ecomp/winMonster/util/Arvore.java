@@ -79,61 +79,61 @@ public class Arvore {
 	}
 
 	public BinarioDoCaractere pegarCaractere(String caractere, Celula celula, BinarioDoCaractere binarioCarectere) throws CaractereInexistenteException{
-		String binario = binarioCarectere.getBinario();
-		boolean verificador=binarioCarectere.isVerificador();
-		if(celula==null){//interrompe a recursividade e coloca o caractere no dicionario
+		String binario = binarioCarectere.getBinario();//string binario recebe o binario que esta dentro do binarioCaractere
+		boolean verificador=binarioCarectere.isVerificador();//verificador recebe o verificador passado dentro do binarioCaractere
+		if(celula==null){//interrompe a recursividade e lança exceção se vinher uma celula nula.
 			throw new CaractereInexistenteException();
-		}else if(verificador==false){
-			return binarioCarectere;
+		}else if(verificador==false){//se o verificador for false interrompe a recursão e retorna o binario formado
+			return binarioCarectere;//retorna o binario completo
 		} else{
 			//para esquerda
 			if(celula.getAntEsq()==null && celula.getProxDir()==null){//interrompe a recursividade e coloca o caractere no dicionario
-				if(celula.getCaractere().equals(caractere)){
-					verificador=false;
-					binarioCarectere.setVerificador(verificador);
+				if(celula.getCaractere().equals(caractere)){//se o caractere da celula for igual ao caractere passado
+					verificador=false;//verificador recebe false
+					binarioCarectere.setVerificador(verificador);//verificador do binario é alterado
 					return binarioCarectere;//retorna o binario completo
 				}else{
-					return binarioCarectere;
+					return binarioCarectere;//retorna o binario completo
 				}
 			}
 			if(verificador == false) { //saída da função, caso o elemento já tenha sido encontrado
 				return binarioCarectere; //retorna o binário correto
 			}
-			binario=binario+"0";
-			binarioCarectere.setBinario(binario);
-			binarioCarectere.setVerificador(verificador);
-			binarioCarectere=pegarCaractere(caractere,celula.getAntEsq(),binarioCarectere);
-			binario=binarioCarectere.getBinario();
-			verificador=binarioCarectere.isVerificador();
+			binario = binario + "0";//binario recebe mais um 0
+			binarioCarectere.setBinario(binario);// binario é colocado dentro do binarioCaractere
+			binarioCarectere.setVerificador(verificador);//verificador é colocado dentro do binarioCaractere
+			binarioCarectere = pegarCaractere(caractere,celula.getAntEsq(),binarioCarectere);//binarioCaractere recebe outro apos chamar o metodo recursivo passando o caractere, a celula da esquerda da atual e o binario do caractere atual
+			binario = binarioCarectere.getBinario();//binario recebe o binario retornado dentro do binarioCaractere
+			verificador = binarioCarectere.isVerificador();//verificador recebe o verificador retornado dentro do binarioCaractere
 			if(verificador == false) { //saída da função, caso o elemento já tenha sido encontrado
 				return binarioCarectere; //retorna o binário correto
 			}
-			binario = binario.substring(0, binario.length()-1);
-			binarioCarectere.setBinario(binario);
+			binario = binario.substring(0, binario.length()-1);//remove um elemento do binario
+			binarioCarectere.setBinario(binario);//binario do binarioCaractere é atualizado
 			
 			//para direita se não for esquerda
-			if(celula.getAntEsq()==null && celula.getProxDir()==null){//interrompe a recursividade e coloca o caractere no dicionario
-				if(celula.getCaractere().equals(caractere)){
-					verificador=false;
-					binarioCarectere.setVerificador(verificador);
+			if(celula.getAntEsq()== null && celula.getProxDir()== null){//interrompe a recursividade e coloca o caractere no dicionario
+				if(celula.getCaractere().equals(caractere)){//se o caractere da celula for igual ao caractere passado
+					verificador = false;//verificador recebe false
+					binarioCarectere.setVerificador(verificador);//verificador do binario é alterado
 					return binarioCarectere;//retorna o binario completo
 				}else{
-					return binarioCarectere;
+					return binarioCarectere;//retorna o binario incompleto
 				}
 			}
-			binario=binario+"1";
-			binarioCarectere.setBinario(binario);
-			binarioCarectere.setVerificador(verificador);
-			binarioCarectere=pegarCaractere(caractere,celula.getProxDir(),binarioCarectere);
-			binario=binarioCarectere.getBinario();
-			verificador=binarioCarectere.isVerificador();
+			binario=binario+"1";//binario recebe mais um 1
+			binarioCarectere.setBinario(binario);// binario é colocado dentro do binarioCaractere
+			binarioCarectere.setVerificador(verificador);//verificador é colocado dentro do binarioCaractere
+			binarioCarectere = pegarCaractere(caractere,celula.getProxDir(),binarioCarectere);//binarioCaractere recebe outro apos chamar o metodo recursivo passando o caractere, a celula da esquerda da atual e o binario do caractere atual
+			binario = binarioCarectere.getBinario();//binario recebe o binario retornado dentro do binarioCaractere
+			verificador = binarioCarectere.isVerificador();//verificador recebe o verificador retornado dentro do binarioCaractere
 			if(verificador == false) { //saída da função, caso o elemento já tenha sido encontrado
 				return binarioCarectere; //retorna o binário correto
 			}
-			binario = binario.substring(0, binario.length()-1);
-			binarioCarectere.setBinario(binario);
+			binario = binario.substring(0, binario.length()-1);//remove um elemento do binario
+			binarioCarectere.setBinario(binario);//binario do binarioCaractere é atualizado
 			
-			return binarioCarectere;
+			return binarioCarectere;//retorna o binarioCaractere pro metodo recusivo que chamou
 		}
 	}
 
