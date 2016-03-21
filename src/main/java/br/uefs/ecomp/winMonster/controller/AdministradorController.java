@@ -109,6 +109,7 @@ public class AdministradorController {
 	}
 
 	public String criaArquivo() throws CaractereInexistenteException, IOException{
+		imprimirFila(fila);
 		arvoreHuffman = arvoreHuffman.inserirHuffman(fila);
 		arvoreHuffman.construirDicionario(dicionario);
 		Celula celulaCaractere;
@@ -118,8 +119,9 @@ public class AdministradorController {
 		String md = md5(arquivoOriginal);
 		String dic = "";
 		String arquivoNovo = "";
-		MeuIterador iterador=dicionario.iterador();
+		MeuIterador iterador;
 		for (int j = 0; j < arquivoOriginal.length(); j++) { //Repetição: Início = Segunda letra da String; Condição = Até o fim da String
+			iterador=dicionario.iterador();
 			while(iterador.temProximo()){
 				celulaCaractere = (Celula) iterador.obterProximo();
 				caractere = celulaCaractere.getCaractere();
