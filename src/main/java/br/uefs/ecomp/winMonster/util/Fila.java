@@ -102,6 +102,7 @@ public class Fila implements IFila{
                 	}
                 	else {
                 		no.setProxDir(aux.getProxDir()); //aponta o próximo do novo nó para o próximo do auxiliar
+                		aux.getProxDir().setAntEsq(no);
                     	aux.setProxDir(no); //aponta o próximo do auxiliar agora para o novo nó
                     	no.setAntEsq(aux); //aponta o anterior do novo nó para o auxiliar
                 	}
