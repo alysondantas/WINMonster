@@ -48,7 +48,7 @@ public class GUI extends JFrame implements ActionListener {
 		button1.setBounds(80, 30, 130, 60);
 		button2.setBounds(80, 90, 130, 60);
 		button3.setBounds(80, 150, 130, 60);
-		button1.addActionListener(new CompactarAction(nome, controller));
+		button1.addActionListener(new CompactarAction(nome));
 		button2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				JOptionPane.showMessageDialog(null, "Ainda não implementado! :P");
