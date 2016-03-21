@@ -12,15 +12,15 @@ public class Splash extends JWindow {
         content.setBackground(Color.white);
         
         // Configura a posição e o tamanho da janela
-        int width = 500;
-        int height =400;
+        int largura = 500;
+        int altura = 400;
         Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-        int x = (screen.width-width)/2;
-        int y = (screen.height-height)/2;
-        setBounds(x,y,width,height);
+        int x = (screen.width-largura)/2;
+        int y = (screen.height-altura)/2;
+        setBounds(x,y,largura,altura);
         
         // Constrói o splash screen
-        JLabel label = new JLabel(new ImageIcon("C:\\Users\\Megazord\\Documents\\GitHub\\WINMonster\\src\\main\\java\\br\\uefs\\ecomp\\winMonster\\imgs\\Splash.png"));
+        JLabel label = new JLabel(new ImageIcon("src\\main\\java\\br\\uefs\\ecomp\\winMonster\\imgs\\Splash.png"));
         content.add(label, BorderLayout.CENTER);
         /*Color oraRed = new Color(156, 20, 20,  255);
         content.setBorder(BorderFactory.createLineBorder(oraRed, 10));  */      
