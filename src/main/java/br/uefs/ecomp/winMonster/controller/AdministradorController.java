@@ -158,6 +158,8 @@ public class AdministradorController {
 		arquivo = arquivo.substring(0, arquivo.lastIndexOf("\n\n"));
 		//o restante que sobrou da string original é só o dicionário
 		dic = arquivo;
+		JOptionPane.showMessageDialog(null, dic);
+		JOptionPane.showMessageDialog(null, binario);
 		
 		/////////////SEPARAÇÃO DO DICIONÁRIO////////////////
 		
