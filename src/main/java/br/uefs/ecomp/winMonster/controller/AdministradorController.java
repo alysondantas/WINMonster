@@ -106,6 +106,7 @@ public class AdministradorController {
 
 	public String criaArquivo() throws CaractereInexistenteException, IOException{
 		imprimirFila(fila);
+		arvoreHuffman = new Arvore();
 		arvoreHuffman = arvoreHuffman.inserirHuffman(fila);
 		arvoreHuffman.construirDicionario(dicionario);
 		Celula celulaCaractere;
@@ -209,6 +210,7 @@ public class AdministradorController {
 	
 	public String compactarArquivo(String local){
 		fila.limpar();
+		dicionario.limpar();
 		try {
 			gerarPrioridade(lerArquivo(local));
 			String arq = criaArquivo();

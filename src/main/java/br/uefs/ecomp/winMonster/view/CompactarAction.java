@@ -10,10 +10,11 @@ import br.uefs.ecomp.winMonster.controller.AdministradorController;
 public class CompactarAction implements ActionListener {
 
 	JTextField textField;
-	AdministradorController controller = new AdministradorController();
+	AdministradorController controller;
 	
-	public CompactarAction(JTextField textField) {
+	public CompactarAction(JTextField textField, AdministradorController controller) {
 		this.textField = textField;
+		this.controller = controller;
 	}
 	
 	@Override
