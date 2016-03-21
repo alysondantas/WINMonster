@@ -14,8 +14,17 @@ import br.uefs.ecomp.winMonster.util.Fila;
 
 public class main {
 	public static void main (String[] args) {
+		//Tire o comentário do teste que quiser usar e comente o outro
+		
+		
+		//TESTES PARA A GUI
+		
 		AdministradorController controller = new AdministradorController();
 		GUI gui = new GUI(controller);
+		
+		
+		//TESTES PARA CONSOLE
+		
 		/*AdministradorController controller = new AdministradorController();
 		try {
 			String str = controller.lerArquivo("C:\\temp.txt");
@@ -37,6 +46,9 @@ public class main {
 			JOptionPane.showMessageDialog(null, "Erro 2");
 			e.printStackTrace();
 		}
+		
 		*/
+		
+		
 	}
 }
