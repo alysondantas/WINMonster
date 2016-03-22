@@ -78,4 +78,28 @@ public class ArvoreHuffmanTest {
 		assertEquals(6, dicionario.obterTamanho());
 		
 	}
+	
+	@Test
+	public void testInserirHuffmanFilanula() {
+		fila=null;
+		dicionario=null;
+		
+		try{
+			arv.inserirHuffman(fila);
+		}catch(FilaVaziaException cause){
+			fail();
+		}
+		
+		try{
+			arv.construirDicionario(dicionario);
+		}catch(CaractereInexistenteException cause){
+			fail();
+		}catch(CelulaNulaException cause){
+			fail();
+		}
+		
+		assertEquals(0, fila.obterTamanho());
+		assertEquals(0, dicionario.obterTamanho());
+		
+	}
 }
