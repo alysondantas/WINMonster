@@ -22,7 +22,7 @@ public class main {
 		//TESTES PARA A GUI
 		
 		AdministradorController controller = new AdministradorController();
-//		GUI gui = new GUI(controller);
+		GUI gui = new GUI(controller);
 		
 		
 		//TESTES PARA CONSOLE
@@ -53,7 +53,7 @@ public class main {
 		
 //		JFileChooser fc = new JFileChooser();
 //		fc.showOpenDialog(null);
-		controller.descompacta("C:\\Users\\Megazord\\Desktop\\Anime\\temp.txt.monster");
+//		controller.descompacta("C:\\Users\\Megazord\\Desktop\\Anime\\temp.txt.monster");
 		
 	}
 }

@@ -164,8 +164,7 @@ public class AdministradorController {
 		return arquivoNovo;
 	}
 
-	public String descompacta(String local) throws IOException, DescompactarStringNulaException{
-		String arquivo=lerArquivo(local);//recebe o arquivo a ser descompactado pelo seu local
+	public String descompacta(String arquivo) throws IOException, DescompactarStringNulaException{
 		dicionario = new Fila();
 		MeuIterador it;
 		String dic = "";
