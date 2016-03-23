@@ -2,6 +2,10 @@ package br.uefs.ecomp.winMonster.controller;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -47,6 +51,26 @@ public class AdministradorController {
 		BufferedWriter buffWrite = new BufferedWriter(new FileWriter(local)); //crio um novo objeto para escrita de arquivos e passo como parâmetro um novo objeto de escrita do arquivo no local especificado
 		buffWrite.append(texto); //anexo essa string no arquivo de texto
 		buffWrite.close(); //fecho o arquivo aberto
+	}
+	
+	public void escreverBits(String texto, String local) throws IOException {
+		int i;
+		String binario = texto.substring(texto.lastIndexOf("\n\n") + 2, texto.length());
+		boolean [] b = new boolean[binario.length()];
+		for (i = 0; i < binario.length(); i++) {
+			if (binario.charAt(i) == 0) {
+				b[i] = false;
+			}
+			else {
+				b[i] = true;
+			}
+		}
+		FileOutputStream fos = new FileOutputStream(local);
+		DataOutputStream dos = new DataOutputStream(fos);
+		for (i=0; i< binario.length(); i++) {
+			dos.writeBoolean(b[i]);
+		}
+		dos.close();
 	}
 
 	public Fila gerarPrioridade(String linha) throws IOException { //método para gerar uma fila de prioridade a partir de uma String recebida
@@ -123,7 +147,7 @@ public class AdministradorController {
 				caractere = celulaCaractere.getCaractere();
 				binariodic = celulaCaractere.getBinario();
 				if (caractere.charAt(0) == arquivoOriginal.charAt(j)) { //caso a letra do dicionario seja igual a letra atual
-					novoBinario=novoBinario + binariodic;//binario concatena com o binario do dicionario
+					novoBinario = novoBinario + binariodic;//binario concatena com o binario do dicionario
 				}
 			}
 		} //repete o ciclo
@@ -131,6 +155,8 @@ public class AdministradorController {
 		while(iterador.temProximo()){
 			celulaCaractere = (Celula) iterador.obterProximo();
 			caractere = celulaCaractere.getCaractere();
+			if(caractere.equals("\n"))
+				caractere = "\\n";
 			binariodic = celulaCaractere.getBinario();
 			dic = dic + caractere + " " + binariodic + " ";
 		}
@@ -149,7 +175,7 @@ public class AdministradorController {
 		////////////SEPARAÇÃO DA STRING DO ARQUIVO ORIGINAL//////////////////
 		
 		//separo a partir da última ocorrência de "\n\n" até o fim da string e salvo na String binario
-		binario = arquivo.substring(arquivo.lastIndexOf("\n\n") + 2, arquivo.length());
+		binario = arquivo.substring(arquivo.lastIndexOf("\n\n") + 2, arquivo.length() - 1);
 		//recorto o pedaço que eu acabei de salvar em "binario" da String do arquivo original
 		arquivo = arquivo.substring(0, arquivo.lastIndexOf("\n\n"));
 		//separo novamente a partir da última ocorrência de "\n\n" até o fim da string e salvo na String md5
@@ -158,21 +184,26 @@ public class AdministradorController {
 		arquivo = arquivo.substring(0, arquivo.lastIndexOf("\n\n"));
 		//o restante que sobrou da string original é só o dicionário
 		dic = arquivo;
-		JOptionPane.showMessageDialog(null, dic);
-		JOptionPane.showMessageDialog(null, binario);
+//		JOptionPane.showMessageDialog(null, dic);
+//		JOptionPane.showMessageDialog(null, binario);
 		
 		/////////////SEPARAÇÃO DO DICIONÁRIO////////////////
 		
 		//enquanto a String do dicionário não estiver vazia
+
 		while(!dic.isEmpty()) {
 			//Salvo o primeiro caractere da String numa String auxiliar chamada String caractere
-			String caractere = dic.substring(0, 1); 
+			String caractere = dic.substring(0, 1);
+			if(caractere.equals("\\")) {
+				caractere = dic.substring(0, 2);
+				dic = dic.substring(3, dic.length());
+			} else
 			//recorto o que eu acabei de salvar da String do dicionario + o próximo " "
-			dic = dic.substring(2, dic.length());
+				dic = dic.substring(2, dic.length());
 			//Salvo em uma String binariodic tudo o que vier desde o começo de "dicionario" até o próximo " ", ou seja, o próximo binário
 			String binariodic = dic.substring(0,dic.indexOf(" "));
 			//recorto o que eu acabei de salvar da String dicionário + o próximo " "
-			dic = dic.substring(0, dic.indexOf(" ") + 1);
+			dic = dic.substring(dic.indexOf(" ") + 1, dic.length());
 			//Crio uma nova célula de frequência 1 com o caractere que eu salvei anteriormente como conteúdo
 			Celula cel = new Celula(0, caractere);
 			//digo que o binário dessa nova célula é o binariodic
@@ -189,13 +220,19 @@ public class AdministradorController {
 			String aux = binario.substring(0, 1); //crio uma string auxiliar e inicalizo ela com o primeiro caractere da String binario
 			while(it.temProximo()) {  //início do ciclo de iteração
 				Celula caux = (Celula)it.obterProximo();
+				caux = (Celula)caux.getObjeto();
 				String binaux = caux.getBinario(); //salvo o binário presente em cada uma das células em binaux
-				for(int i = 1; aux != binaux && i < binario.length(); i++) { //crio um ciclo de repetições para ir aumentando a substring de binario de um em um elemento e comparando ele com o binário da célula iterada enquanto essa substring não for igual ao binário da célula. 
+				for(int i = 1; !aux.equals(binaux) && i <= binario.length(); i++) { //crio um ciclo de repetições para ir aumentando a substring de binario de um em um elemento e comparando ele com o binário da célula iterada enquanto essa substring não for igual ao binário da célula. 
 					aux = binario.substring(0, i);
 				}
-				if (aux == binaux) { //após o fim do ciclo de repetições, caso tenha encontrado uma substring que seja igual ao binário da célula
-					traducao = traducao + (String)caux.getObjeto(); //coloco a letra relacionada com o binário encontrada na tradução
-					binario = binario.substring(0, aux.length());
+				if (aux.equals(binaux)) { //após o fim do ciclo de repetições, caso tenha encontrado uma substring que seja igual ao binário da célula
+					String str = (String)caux.getObjeto();
+					traducao = traducao + str; //coloco a letra relacionada com o binário encontrada na tradução
+					binario = binario.substring(binaux.length(), binario.length());
+					if(!binario.isEmpty()){
+					aux = binario.substring(0, 1); //crio uma string auxiliar e inicalizo ela com o primeiro caractere da String binario
+					it = dicionario.iterador();
+					}
 				}
 			} //fim do ciclo de iteração
 		}

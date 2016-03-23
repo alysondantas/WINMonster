@@ -30,6 +30,7 @@ public class CompactarAction implements ActionListener {
 			JOptionPane.showMessageDialog(null, local); //teste para exibir o local do arquivo
 			try { 
 				controller.escreverArquivo(texto, local, nomeArq + ".monster"); //chama o método de escreverArquivo no controller passando o texto compactado com dicionário e md5, o local do arquivo e o novo nome concatenado com a extensão ".monster"
+//				controller.escreverBits(texto, local + nomeArq + ".monster");
 			} catch (IOException e1) {
 				JOptionPane.showMessageDialog(null, "IOException");
 				e1.printStackTrace();

@@ -5,22 +5,24 @@ import br.uefs.ecomp.winMonster.view.GUI;
 
 import java.io.IOException;
 
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 import br.uefs.ecomp.winMonster.controller.*;
 import br.uefs.ecomp.winMonster.exceptions.CaractereInexistenteException;
+import br.uefs.ecomp.winMonster.exceptions.DescompactarStringNulaException;
 import br.uefs.ecomp.winMonster.util.Arvore;
 import br.uefs.ecomp.winMonster.util.Fila;
 
 public class main {
-	public static void main (String[] args) {
+	public static void main (String[] args) throws IOException, DescompactarStringNulaException {
 		//Tire o comentário do teste que quiser usar e comente o outro
 		
 		
 		//TESTES PARA A GUI
 		
 		AdministradorController controller = new AdministradorController();
-		GUI gui = new GUI(controller);
+//		GUI gui = new GUI(controller);
 		
 		
 		//TESTES PARA CONSOLE
@@ -49,6 +51,9 @@ public class main {
 		
 		*/
 		
+//		JFileChooser fc = new JFileChooser();
+//		fc.showOpenDialog(null);
+		controller.descompacta("C:\\Users\\Megazord\\Desktop\\Anime\\temp.txt.monster");
 		
 	}
 }
