@@ -29,7 +29,7 @@ public class md5Action implements ActionListener{
 				{
 						String texto = controller.lerArquivo(fc.getSelectedFile().getAbsolutePath());
 						md5Nov = controller.md5(texto);
-						if(md5Ant == md5Nov) {
+						if(md5Ant.equals(md5Nov)) {
 							JOptionPane.showMessageDialog(null, "Os MD5 são iguais");
 						}
 						else {
@@ -40,9 +40,6 @@ public class md5Action implements ActionListener{
 				e1.printStackTrace();
 			}
 		}
-		/*else {
-			JOptionPane.showMessageDialog(null, "Erro");
-		}*/
 	}
 
 }

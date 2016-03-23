@@ -53,7 +53,7 @@ public class main {
 		
 //		JFileChooser fc = new JFileChooser();
 //		fc.showOpenDialog(null);
-//		controller.descompacta("C:\\Users\\Megazord\\Desktop\\Anime\\temp.txt.monster");
+//		controller.descompacta("g 010   011 z 100 l 101 u 00 a 11 \n\nd8e788318a46ff18a89deb24290bcfa3\n\n1101000110111110000101");
 		
 	}
 }

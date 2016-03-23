@@ -25,6 +25,7 @@ public class DescompactarAction implements ActionListener{
 		if (resposta == JFileChooser.APPROVE_OPTION) { //caso o usuário tenha selecionado um arquivo
 			try {
 				String arquivo = controller.lerArquivo(fc.getSelectedFile().getAbsolutePath());
+				JOptionPane.showMessageDialog(null, arquivo);
 				String traducao = controller.descompacta(arquivo);
 				JOptionPane.showMessageDialog(null, traducao); //teste para exibir o texto recebido
 				String nomeArq = fc.getSelectedFile().getName(); //salva o nome do arquivo que está na localização do arquivo selecionado na String nomeArq

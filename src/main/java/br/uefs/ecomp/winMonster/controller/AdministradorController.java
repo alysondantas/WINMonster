@@ -13,8 +13,6 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import javax.swing.JOptionPane;
-
 import br.uefs.ecomp.winMonster.util.*;
 import br.uefs.ecomp.winMonster.model.*;
 import br.uefs.ecomp.winMonster.exceptions.*;
@@ -38,8 +36,9 @@ public class AdministradorController {
 
 		while(linha != null) { //enquanto não chegar no fim do arquivo
 			c = c + linha; //salvo o a letra da string na posição atual
-			c = c + "\n"; //acrescento uma quebra de linha em "c" a cada fim de linha em "linha"
 			linha = buffRead.readLine(); //salvo a linha atual do arquivo na string
+			if(linha!=null)
+				c = c + "\n"; //acrescento uma quebra de linha em "c" a cada fim de linha em "linha"
 		} arq.close(); //fecho o arquivo para a leitura
 
 		arquivoOriginal=c;//Uma varaivel local recebe a string com todo o conteudo do arquivo
@@ -174,7 +173,7 @@ public class AdministradorController {
 		////////////SEPARAÇÃO DA STRING DO ARQUIVO ORIGINAL//////////////////
 		
 		//separo a partir da última ocorrência de "\n\n" até o fim da string e salvo na String binario
-		binario = arquivo.substring(arquivo.lastIndexOf("\n\n") + 2, arquivo.length() - 1);
+		binario = arquivo.substring(arquivo.lastIndexOf("\n\n") + 2, arquivo.length());
 		//recorto o pedaço que eu acabei de salvar em "binario" da String do arquivo original
 		arquivo = arquivo.substring(0, arquivo.lastIndexOf("\n\n"));
 		//separo novamente a partir da última ocorrência de "\n\n" até o fim da string e salvo na String md5
@@ -183,8 +182,6 @@ public class AdministradorController {
 		arquivo = arquivo.substring(0, arquivo.lastIndexOf("\n\n"));
 		//o restante que sobrou da string original é só o dicionário
 		dic = arquivo;
-//		JOptionPane.showMessageDialog(null, dic);
-//		JOptionPane.showMessageDialog(null, binario);
 		
 		/////////////SEPARAÇÃO DO DICIONÁRIO////////////////
 		
@@ -226,7 +223,12 @@ public class AdministradorController {
 				}
 				if (aux.equals(binaux)) { //após o fim do ciclo de repetições, caso tenha encontrado uma substring que seja igual ao binário da célula
 					String str = (String)caux.getObjeto();
-					traducao = traducao + str; //coloco a letra relacionada com o binário encontrada na tradução
+					if(str.equals("\\n")) {
+						traducao = traducao + "\n";
+					}
+					else {
+						traducao = traducao + str; //coloco a letra relacionada com o binário encontrada na tradução
+					}
 					binario = binario.substring(binaux.length(), binario.length());
 					if(!binario.isEmpty()){
 					aux = binario.substring(0, 1); //crio uma string auxiliar e inicalizo ela com o primeiro caractere da String binario
