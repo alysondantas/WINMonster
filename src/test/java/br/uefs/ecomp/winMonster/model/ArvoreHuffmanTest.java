@@ -86,14 +86,16 @@ public class ArvoreHuffmanTest {
 		
 		try{
 			arv.inserirHuffman(fila);
-		}catch(FilaVaziaException cause){
 			fail();
+		}catch(FilaVaziaException cause){
+			assertTrue(true);
 		}
 		
 		try{
 			arv.construirDicionario(dicionario);
-		}catch(CaractereInexistenteException cause){
 			fail();
+		}catch(CaractereInexistenteException cause){
+			assertTrue(true);
 		}catch(CelulaNulaException cause){
 			fail();
 		}

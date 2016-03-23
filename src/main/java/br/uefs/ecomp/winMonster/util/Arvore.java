@@ -51,10 +51,14 @@ public class Arvore {
 			arv.colocaRaiz((Celula)inicio.getObjeto());//pega a arvore do primeiro elemento da fila
 			return arv;//retorna a arvore pronta
 		}
+//		throw new FilaVaziaException();
 		return null;//se der algo errado retorna null
 	}
 
 	public void construirDicionario(Fila dicionario) throws CaractereInexistenteException{//metodo para criar o dicionario na estrutura copia da fila original
+		if(dicionario == null){
+//			throw new FilaVaziaException();
+		}
 		MeuIterador iterador=(MeuIterador) dicionario.iterador(); //crio um iterador pra percorrer a estrutura dicionario
 		Celula aux;//auxiliar do tipo celula pra recuperar o objeto que esta no iterador
 		String caractere;//caractere que esta na celula
@@ -83,6 +87,7 @@ public class Arvore {
 		boolean verificador=binarioCarectere.isVerificador();//verificador recebe o verificador passado dentro do binarioCaractere
 		if(celula==null){//interrompe a recursividade e lança exceção se vinher uma celula nula.
 			throw new CaractereInexistenteException();
+//			throw new CelulaNulaException();
 		}else if(verificador==false){//se o verificador for false interrompe a recursão e retorna o binario formado
 			return binarioCarectere;//retorna o binario completo
 		} else{
