@@ -30,6 +30,7 @@ public class ArvoreHuffmanTest {
 			fail();
 		}
 		
+		
 		try{
 			arv.construirDicionario(dicionario);
 		}catch(CaractereInexistenteException cause){
