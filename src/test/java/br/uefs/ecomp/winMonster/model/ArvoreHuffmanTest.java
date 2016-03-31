@@ -21,10 +21,13 @@ public class ArvoreHuffmanTest {
 	public void testInserirHuffmanSucesso() {
 		fila = new Fila();
 		dicionario = new Fila();
-		criarObjetos.inserirFilaPrioridade(dicionario);
 		criarObjetos.inserirFilaPrioridade(fila);
+		criarObjetos.inserirFilaPrioridade(dicionario);
 		
 		arv = new Arvore();
+		
+		assertEquals(5, fila.obterTamanho());
+		assertEquals(5, dicionario.obterTamanho());
 		
 		try{
 			arv=arv.inserirHuffman(fila);
@@ -43,7 +46,7 @@ public class ArvoreHuffmanTest {
 			fail();
 		}
 		
-		String binario="1221";
+		String binario="";
 		String caractere="a";
 		Celula aux=null;
 		Celula aux2=null;
@@ -51,8 +54,8 @@ public class ArvoreHuffmanTest {
 		while(iterador.temProximo()){
 			aux = (Celula) iterador.obterProximo();
 			aux2 = (Celula) aux.getObjeto();
-			if(aux.getCaractere().equals(caractere)){
-				binario=aux.getBinario();
+			if(aux2.getCaractere().equals(caractere)){
+				binario=aux2.getBinario();
 			}
 		}
 		assertEquals("11", binario);
@@ -81,7 +84,7 @@ public class ArvoreHuffmanTest {
 		}
 		assertEquals("101", aux.getBinario());
 		
-		assertEquals(5, fila.obterTamanho());
+		assertEquals(1, fila.obterTamanho());
 		assertEquals(5, dicionario.obterTamanho());
 		
 	}
