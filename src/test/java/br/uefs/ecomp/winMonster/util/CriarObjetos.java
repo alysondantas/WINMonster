@@ -4,9 +4,9 @@ import br.uefs.ecomp.winMonster.model.*;
 import br.uefs.ecomp.winMonster.util.*;
 
 public class CriarObjetos {
-	String str="agua azul";
+	String str="aguaazul";
 	
-	public Fila inserirFilaPrioridade(Fila fila){
+	public void inserirFilaPrioridade(Fila fila){
 		String str1="a";
 		Celula celula = new Celula();
 		celula.setChave(3);
@@ -15,40 +15,32 @@ public class CriarObjetos {
 		fila.inserir(3, celula);
 		
 		str1="g";
-		celula = new Celula();
-		celula.setChave(1);
-		celula.setObjeto(str1);
-		celula.setCaractere(str1);
-		fila.inserir(1, celula);
+		Celula celulag = new Celula();
+		celulag.setChave(1);
+		celulag.setObjeto(str1);
+		celulag.setCaractere(str1);
+		fila.inserir(1, celulag);
 		
 		str1="u";
-		celula = new Celula();
-		celula.setChave(2);
-		celula.setObjeto(str1);
-		celula.setCaractere(str1);
-		fila.inserir(2, celula);
+		Celula celulau = new Celula();
+		celulau.setChave(2);
+		celulau.setObjeto(str1);
+		celulau.setCaractere(str1);
+		fila.inserir(2, celulau);
 		
 		str1="z";
-		celula = new Celula();
-		celula.setChave(1);
-		celula.setObjeto(str1);
-		celula.setCaractere(str1);
-		fila.inserir(1, celula);
+		Celula celulaz = new Celula();
+		celulaz.setChave(1);
+		celulaz.setObjeto(str1);
+		celulaz.setCaractere(str1);
+		fila.inserir(1, celulaz);
 		
 		str1="l";
-		celula = new Celula();
-		celula.setChave(1);
-		celula.setObjeto(str1);
-		celula.setCaractere(str1);
-		fila.inserir(1, celula);
+		Celula celulal = new Celula();
+		celulal.setChave(1);
+		celulal.setObjeto(str1);
+		celulal.setCaractere(str1);
+		fila.inserir(1, celulal);
 		
-		str1="\n";
-		celula = new Celula();
-		celula.setChave(1);
-		celula.setObjeto(str1);
-		celula.setCaractere(str1);
-		fila.inserir(1, celula);
-		
-		return null;
 	}
 }
