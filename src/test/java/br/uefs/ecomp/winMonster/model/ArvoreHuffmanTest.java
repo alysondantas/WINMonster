@@ -21,15 +21,17 @@ public class ArvoreHuffmanTest {
 	public void testInserirHuffmanSucesso() {
 		fila = new Fila();
 		dicionario = new Fila();
-		criarObjetos.inserirFilaPrioridade(fila);
 		criarObjetos.inserirFilaPrioridade(dicionario);
+		criarObjetos.inserirFilaPrioridade(fila);
+		
 		arv = new Arvore();
 		
 		try{
-			arv.inserirHuffman(fila);
+			arv=arv.inserirHuffman(fila);
 		}catch(FilaVaziaException cause){
 			fail();
 		}
+		
 		
 		try{
 			arv.construirDicionario(dicionario);
@@ -38,22 +40,22 @@ public class ArvoreHuffmanTest {
 		}catch(CaractereInexistenteException cause){
 			fail();
 		}catch(CelulaNulaException cause){
-			assertTrue(true);
+			fail();
 		}
 		
-		String binario="";
+		String binario="1221";
 		String caractere="a";
 		Celula aux=null;
 		Celula aux2=null;
 		MeuIterador iterador=dicionario.iterador();
 		while(iterador.temProximo()){
-			aux=(Celula) iterador.obterProximo();
+			aux = (Celula) iterador.obterProximo();
 			aux2 = (Celula) aux.getObjeto();
-			if(aux2.getCaractere().equals(caractere)){
-				binario=aux2.getBinario();
+			if(aux.getCaractere().equals(caractere)){
+				binario=aux.getBinario();
 			}
 		}
-		assertEquals("11", aux.getBinario());
+		assertEquals("11", binario);
 		
 		binario="";
 		caractere="u";
