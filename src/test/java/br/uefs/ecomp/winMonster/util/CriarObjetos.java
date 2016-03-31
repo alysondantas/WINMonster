@@ -1,8 +1,5 @@
 package br.uefs.ecomp.winMonster.util;
 
-import br.uefs.ecomp.winMonster.model.*;
-import br.uefs.ecomp.winMonster.util.*;
-
 public class CriarObjetos {
 	String str="aguaazul";
 	

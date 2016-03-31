@@ -1,16 +1,11 @@
 package br.uefs.ecomp.winMonster.model;
 
-import br.uefs.ecomp.winMonster.model.*;
 import br.uefs.ecomp.winMonster.util.*;
-import br.uefs.ecomp.winMonster.controller.*;
 import br.uefs.ecomp.winMonster.exceptions.*;
-
 import static org.junit.Assert.*;
-
 import org.junit.Test;
 
 public class ArvoreHuffmanTest {
-	private AdministradorController controller;
 	private Fila dicionario;
 	private Fila fila;
 	private Arvore arv = new Arvore();
@@ -49,7 +44,6 @@ public class ArvoreHuffmanTest {
 		String binario="";
 		String caractere="a";
 		Celula aux=null;
-		Celula aux2=null;
 		MeuIterador iterador=dicionario.iterador();
 		while(iterador.temProximo()){
 			aux = (Celula) iterador.obterProximo();
