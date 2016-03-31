@@ -43,4 +43,22 @@ public class CriarObjetos {
 		fila.inserir(1, celulal);
 		
 	}
+	
+	public void inserirDicionario(Fila fila){
+		String str1="a";
+		fila.inserir(3, str1);
+		
+		str1="g";
+		fila.inserir(1, str1);
+		
+		str1="u";
+		fila.inserir(2, str1);
+		
+		str1="z";
+		fila.inserir(1, str1);
+		
+		str1="l";
+		fila.inserir(1, str1);
+		
+	}
 }

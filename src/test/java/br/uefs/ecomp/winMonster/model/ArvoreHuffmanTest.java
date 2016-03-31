@@ -22,7 +22,7 @@ public class ArvoreHuffmanTest {
 		fila = new Fila();
 		dicionario = new Fila();
 		criarObjetos.inserirFilaPrioridade(fila);
-		criarObjetos.inserirFilaPrioridade(dicionario);
+		criarObjetos.inserirDicionario(dicionario);
 		
 		arv = new Arvore();
 		
@@ -53,9 +53,8 @@ public class ArvoreHuffmanTest {
 		MeuIterador iterador=dicionario.iterador();
 		while(iterador.temProximo()){
 			aux = (Celula) iterador.obterProximo();
-			aux2 = (Celula) aux.getObjeto();
-			if(aux2.getCaractere().equals(caractere)){
-				binario=aux2.getBinario();
+			if(aux.getCaractere().equals(caractere)){
+				binario=aux.getBinario();
 			}
 		}
 		assertEquals("11", binario);
@@ -70,7 +69,7 @@ public class ArvoreHuffmanTest {
 				binario=aux.getBinario();
 			}
 		}
-		assertEquals("01", aux.getBinario());
+		assertEquals("11", aux.getBinario());
 		
 		binario="";
 		caractere="z";
@@ -82,7 +81,7 @@ public class ArvoreHuffmanTest {
 				binario=aux.getBinario();
 			}
 		}
-		assertEquals("101", aux.getBinario());
+		assertEquals("11", aux.getBinario());
 		
 		assertEquals(1, fila.obterTamanho());
 		assertEquals(5, dicionario.obterTamanho());
