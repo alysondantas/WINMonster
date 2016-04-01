@@ -118,17 +118,18 @@ public class AdministradorController {
 	}
 
 	public String md5(String string) throws CriarMD5NuloException{//verificação de integridade atravez de md5
-		String novomd5 = "";
-		if(string == null){
+		String novomd5 = "";//inicializa a variavel para receber o novo md5
+		if(string == null){//se a string passada for nula é um erro
 			throw new CriarMD5NuloException();//caso a string do md5 seja nulo
 		}
-		MessageDigest md = null;
+		MessageDigest md = null; // variavel que recebe a criptografia hash com 128 bits para o md5
 		try {
-			md = MessageDigest.getInstance("MD5");
-		} catch (NoSuchAlgorithmException e) {
+			md = MessageDigest.getInstance("MD5"); // md recebe uma instancia do algoritimo do MD (MessageDigest)
+		} catch (NoSuchAlgorithmException e) {//se houver erro no algoritomo
 			e.printStackTrace();
 		}
-		BigInteger hash = new BigInteger(1, md.digest(string.getBytes()));
+		BigInteger hash;
+		hash = new BigInteger(1, md.digest(string.getBytes()));
 		novomd5 = hash.toString(16);	
 		if(novomd5 == ""){
 			throw new CriarMD5NuloException();//caso a string do md5 seja "" significa que o md5 foi escrito errado
