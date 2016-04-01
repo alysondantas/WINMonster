@@ -10,8 +10,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigInteger;
+import java.nio.channels.ShutdownChannelGroupException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
+import javax.swing.JOptionPane;
 
 import br.uefs.ecomp.winMonster.util.*;
 import br.uefs.ecomp.winMonster.model.*;
@@ -114,7 +117,7 @@ public class AdministradorController {
 		}
 	}
 
-	public String md5(String string){//pra ser bem sicero.. não sei explicar isso ainda não
+	public String md5(String string) throws CriarMD5NuloException{//verificação de integridade atravez de md5
 		String novomd5 = "";
 		MessageDigest md = null;
 		try {
@@ -123,11 +126,14 @@ public class AdministradorController {
 			e.printStackTrace();
 		}
 		BigInteger hash = new BigInteger(1, md.digest(string.getBytes()));
-		novomd5 = hash.toString(16);			
+		novomd5 = hash.toString(16);	
+		if(novomd5 == ""){
+			throw new CriarMD5NuloException();//caso a string do md5 seja "" significa que o md5 foi escrito errado
+		}
 		return novomd5;
 	}
 
-	public String criaArquivo() throws CaractereInexistenteException, IOException{
+	public String criaArquivo() throws CaractereInexistenteException, IOException, FilaVaziaException, CelulaNulaException, CriarMD5NuloException{
 		arvoreHuffman = new Arvore();
 		arvoreHuffman = arvoreHuffman.inserirHuffman(fila);
 		arvoreHuffman.construirDicionario(dicionario);
@@ -241,7 +247,7 @@ public class AdministradorController {
 		return traducao;
 		}
 	
-	public String compactarArquivo(String local){
+	public String compactarArquivo(String local) throws FilaVaziaException, CelulaNulaException, CriarMD5NuloException{
 		fila.limpar();
 		dicionario.limpar();
 		try {

@@ -2,7 +2,7 @@ package br.uefs.ecomp.winMonster.util;
 
 import br.uefs.ecomp.winMonster.model.*;
 
-import br.uefs.ecomp.winMonster.exceptions.CaractereInexistenteException;
+import br.uefs.ecomp.winMonster.exceptions.*;
 
 public class Arvore {
 
@@ -30,7 +30,10 @@ public class Arvore {
 		this.raiz = raiz1;//mudando a raiz para a nova
 	}
 
-	public Arvore inserirHuffman(Fila filaprioridade){//metodo para remover os dois elementos da fila e colocar em uma arvore
+	public Arvore inserirHuffman(Fila filaprioridade) throws FilaVaziaException{//metodo para remover os dois elementos da fila e colocar em uma arvore
+		if(filaprioridade == null){
+			throw new FilaVaziaException();//se a fila for nula retorna a exceção
+		}
 		if(!filaprioridade.estaVazia()){
 			if(filaprioridade.obterTamanho() > 1){//se existir elemento proximo continua
 				int frequencia = 0;//frequencia que esta na celula
@@ -50,14 +53,15 @@ public class Arvore {
 			Arvore arv = new Arvore();//cria a arvore final de huffman
 			arv.colocaRaiz((Celula)inicio.getObjeto());//pega a arvore do primeiro elemento da fila
 			return arv;//retorna a arvore pronta
+		}else{
+			throw new FilaVaziaException();//se a fila estiver vazia retorno a exceção
 		}
-//		throw new FilaVaziaException();
-		return null;//se der algo errado retorna null
+		
 	}
 
-	public void construirDicionario(Fila dicionario) throws CaractereInexistenteException{//metodo para criar o dicionario na estrutura copia da fila original
-		if(dicionario == null){
-//			throw new FilaVaziaException();
+	public void construirDicionario(Fila dicionario) throws FilaVaziaException, CaractereInexistenteException, CelulaNulaException{//metodo para criar o dicionario na estrutura copia da fila original
+		if(dicionario == null || dicionario.obterTamanho() < 1){
+			throw new FilaVaziaException();
 		}
 		MeuIterador iterador=(MeuIterador) dicionario.iterador(); //crio um iterador pra percorrer a estrutura dicionario
 		Celula aux;//auxiliar do tipo celula pra recuperar o objeto que esta no iterador
@@ -68,6 +72,9 @@ public class Arvore {
 			aux=(Celula) iterador.obterProximo();//aux recebe o atual e iterador passa pro proximo
 			if(aux.getObjeto() instanceof String){//se o objeto que esta dentro da celula for uma string
 				caractere=(String) aux.getObjeto();//caractere recebe o caractere que esta dentro do objeto da celula
+				if(caractere.equals("")){
+					throw new CaractereInexistenteException();
+				}
 				aux.setCaractere(caractere);//o caractere é colocado dentro da celula no atributo caractere
 			}
 			caractere = aux.getCaractere();//caractere recebe o caractere que esta dentro do auxiliar
@@ -76,18 +83,20 @@ public class Arvore {
 			BinarioDoCaractere binarioCarectere = new BinarioDoCaractere();//novo objeto do tipo binariocaractere é criado
 			binarioCarectere.setBinario(binario);//ele recebe o binario reiniciado
 			binarioCarectere.setVerificador(verificador);//recebe o verificador com true
+			if(raiz == null){
+				throw new CelulaNulaException();
+			}
 			binarioCarectere = pegarCaractere(caractere, raiz, binarioCarectere);//binario recebe o binario criado pelo metodo que percorre a arvore
 			binario = binarioCarectere.getBinario();//binario construido do caractere é recebido
 			aux.setBinario(binario);//binario é colocado dentro da celula auxiliar
 		}
 	}
 
-	public BinarioDoCaractere pegarCaractere(String caractere, Celula celula, BinarioDoCaractere binarioCarectere) throws CaractereInexistenteException{
+	public BinarioDoCaractere pegarCaractere(String caractere, Celula celula, BinarioDoCaractere binarioCarectere) throws CaractereInexistenteException, CelulaNulaException{
 		String binario = binarioCarectere.getBinario();//string binario recebe o binario que esta dentro do binarioCaractere
 		boolean verificador=binarioCarectere.isVerificador();//verificador recebe o verificador passado dentro do binarioCaractere
 		if(celula==null){//interrompe a recursividade e lança exceção se vinher uma celula nula.
 			throw new CaractereInexistenteException();
-//			throw new CelulaNulaException();
 		}else if(verificador==false){//se o verificador for false interrompe a recursão e retorna o binario formado
 			return binarioCarectere;//retorna o binario completo
 		} else{
