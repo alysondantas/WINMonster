@@ -53,4 +53,18 @@ public class LeituraArquivoTest {
 		assertEquals("agua azul com chileno velho e arquivo com string meio grande aqui... Vai que não funciona quando o arquivo tem mais de 10 palvras, numeros como 12345 e outros caracteres como %$#*&¨@!? vai que né?", c);
 		
 	}
+	
+	@Test
+	public void testLerArquivoVazio() {
+		String local = "src\\test\\java\\br\\uefs\\ecomp\\winMonster\\util\\teste4.txt";
+		String c = null;
+		try {
+			c=controller.lerArquivo(local);
+		} catch (IOException e) {
+			assertTrue(true);
+		}
+		
+		assertEquals("", c);
+		
+	}
 }

@@ -119,6 +119,9 @@ public class AdministradorController {
 
 	public String md5(String string) throws CriarMD5NuloException{//verificação de integridade atravez de md5
 		String novomd5 = "";
+		if(string == null){
+			throw new CriarMD5NuloException();//caso a string do md5 seja nulo
+		}
 		MessageDigest md = null;
 		try {
 			md = MessageDigest.getInstance("MD5");
