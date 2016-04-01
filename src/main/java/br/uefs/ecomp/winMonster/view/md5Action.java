@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.swing.*;
 
 import br.uefs.ecomp.winMonster.controller.AdministradorController;
+import br.uefs.ecomp.winMonster.exceptions.CriarMD5NuloException;
 
 public class md5Action implements ActionListener{
 
@@ -28,12 +29,17 @@ public class md5Action implements ActionListener{
 				if(resp2 == JFileChooser.APPROVE_OPTION)
 				{
 						String texto = controller.lerArquivo(fc.getSelectedFile().getAbsolutePath());
-						md5Nov = controller.md5(texto);
-						if(md5Ant.equals(md5Nov)) {
-							JOptionPane.showMessageDialog(null, "Os MD5 são iguais");
-						}
-						else {
-							JOptionPane.showMessageDialog(null, "Os MD5 são diferentes");
+						try {
+							md5Nov = controller.md5(texto);
+							if(md5Ant.equals(md5Nov)) {
+								JOptionPane.showMessageDialog(null, "Os MD5 são iguais");
+							}
+							else {
+								JOptionPane.showMessageDialog(null, "Os MD5 são diferentes");
+							}
+						} catch (CriarMD5NuloException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
 						}
 				}
 			} catch (IOException e1) {
