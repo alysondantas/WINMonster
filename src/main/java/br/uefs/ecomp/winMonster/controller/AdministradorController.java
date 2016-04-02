@@ -40,9 +40,17 @@ public class AdministradorController {
 		while(linha != null) { //enquanto não chegar no fim do arquivo
 			c = c + linha; //salvo o a letra da string na posição atual
 			linha = buffRead.readLine(); //salvo a linha atual do arquivo na string
+			if(linha == null) {
+				JOptionPane.showMessageDialog(null, "Linha nula");
+			} else if(linha == "") {
+				JOptionPane.showMessageDialog(null, "Linha vazia");
+			} else {
+				JOptionPane.showMessageDialog(null, linha);
+			}
 			if(linha!=null)
 				c = c + "\n"; //acrescento uma quebra de linha em "c" a cada fim de linha em "linha"
 		} arq.close(); //fecho o arquivo para a leitura
+		buffRead.close();
 
 		arquivoOriginal=c;//Uma varaivel local recebe a string com todo o conteudo do arquivo
 		return c; //retorna a String com todo o conteúdo do arquivo de texto
@@ -251,6 +259,7 @@ public class AdministradorController {
 					}
 				}
 			} //fim do ciclo de iteração
+			JOptionPane.showMessageDialog(null, "Funcionou descompactação");
 		}
 		
 		return traducao;
