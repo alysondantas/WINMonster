@@ -36,10 +36,11 @@ public class GUI extends JFrame implements ActionListener {
 		}
 		
 		//Configurações da janela do programa
-		this.setLayout(null);
-		this.setSize(300, 300);
-		this.setLocationRelativeTo(null);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setLayout(null); //sem Layout pré-definido
+		this.setSize(300, 300); //janela 300 x 300
+		this.setLocationRelativeTo(null); //deixa a janela no centro na tela
+		this.setResizable(false); //não pode ser redimensionada
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //ao fechar a janela, fecha o programa
 		
 		//inicialização dos componentes da janela
 		button1 = new JButton("Compactar");
@@ -47,7 +48,7 @@ public class GUI extends JFrame implements ActionListener {
 		button3 = new JButton("Verificar md5");
 		splash = new Splash();
 		
-		//configuração da localização dos componentes
+		//configuração da localização e tamanho dos componentes
 		button1.setBounds(80, 30, 130, 60);
 		button2.setBounds(80, 90, 130, 60);
 		button3.setBounds(80, 150, 130, 60);

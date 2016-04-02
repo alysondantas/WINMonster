@@ -23,8 +23,8 @@ import br.uefs.ecomp.winMonster.exceptions.*;
 public class AdministradorController {
 	Arvore arvoreHuffman= new Arvore();
 	Fila fila = new Fila(); //crio uma fila para salvar a prioridade
-	Fila dicionario = new Fila();
-	String arquivoOriginal="";
+	Fila dicionario = new Fila(); //fila para salvar o dicionário
+	String arquivoOriginal=""; //String para salvar o conteúdo do arquivo original antes da compactação
 
 	public Fila getDicionario(){
 		return dicionario;
@@ -55,7 +55,10 @@ public class AdministradorController {
 		buffWrite.close(); //fecho o arquivo aberto
 	}
 	
-	public void escreverBits(String texto, String local) throws IOException {
+	
+	//APAGAR ESSE MÉTODO DEPOIS
+	
+	/* public void escreverBits(String texto, String local) throws IOException {
 		int i;
 		String binario = texto.substring(texto.lastIndexOf("\n\n") + 2, texto.length());
 		boolean [] b = new boolean[binario.length()];
@@ -73,7 +76,7 @@ public class AdministradorController {
 			dos.writeBoolean(b[i]);
 		}
 		dos.close();
-	}
+	} */
 
 	public Fila gerarPrioridade(String linha) throws IOException { //método para gerar uma fila de prioridade a partir de uma String recebida
 		boolean copiaNula = false; //variável para verificar se é necesário criar uma fila cópia. Caso ela continue como false, vai ser gerada uma fila cópia igual a fila a ser retornada
@@ -99,8 +102,10 @@ public class AdministradorController {
 		} //repete o ciclo
 		return fila; //retorno a fila com cada letra da string separada em células com suas respectivas chaves
 	}
+	
+	//APAGAR ESSE MÉTODO DEPOIS
 
-	public void imprimirFila(Fila fila) {
+	/* public void imprimirFila(Fila fila) {
 		MeuIterador it = fila.iterador();
 		Celula primeiro = fila.getPrimeiro();
 		Celula ultimo = fila.getUltimo();
@@ -115,7 +120,7 @@ public class AdministradorController {
 			System.out.println("Caractere " + aux2.getCaractere());
 			System.out.println("Frequência " + aux.getChave());
 		}
-	}
+	} */
 
 	public String md5(String string) throws CriarMD5NuloException{//verificação de integridade atravez de md5
 		String novomd5 = "";//inicializa a variavel para receber o novo md5
@@ -176,9 +181,9 @@ public class AdministradorController {
 	public String descompacta(String arquivo) throws IOException, DescompactarStringNulaException{
 		dicionario = new Fila();
 		MeuIterador it;
-		String dic = "";
-		String binario = "";
-		String md5= "";
+		String dic = ""; //String para salvar o dicionário
+		String binario = ""; //String para salvar a BitString
+		String md5= ""; //String para salvar o md5
 
 		////////////SEPARAÇÃO DA STRING DO ARQUIVO ORIGINAL//////////////////
 		
@@ -233,16 +238,16 @@ public class AdministradorController {
 				}
 				if (aux.equals(binaux)) { //após o fim do ciclo de repetições, caso tenha encontrado uma substring que seja igual ao binário da célula
 					String str = (String)caux.getObjeto();
-					if(str.equals("\\n")) {
+					if(str.equals("\\n")) { //tratamento para caso tenha um \n como objeto da célula
 						traducao = traducao + "\n";
 					}
 					else {
 						traducao = traducao + str; //coloco a letra relacionada com o binário encontrada na tradução
 					}
-					binario = binario.substring(binaux.length(), binario.length());
-					if(!binario.isEmpty()){
-					aux = binario.substring(0, 1); //crio uma string auxiliar e inicalizo ela com o primeiro caractere da String binario
-					it = dicionario.iterador();
+					binario = binario.substring(binaux.length(), binario.length()); //retira a parte traduzida do binário
+					if(!binario.isEmpty()){ //caso o binário não esteja vazio ainda, prepara ele para um novo ciclo
+					aux = binario.substring(0, 1); //igualo a String aux com o primeiro caractere da String binario
+					it = dicionario.iterador(); //volta o iterador para o início do dicionario
 					}
 				}
 			} //fim do ciclo de iteração
@@ -252,8 +257,8 @@ public class AdministradorController {
 		}
 	
 	public String compactarArquivo(String local) throws FilaVaziaException, CelulaNulaException, CriarMD5NuloException{
-		fila.limpar();
-		dicionario.limpar();
+		fila.limpar(); //limpa a fila do controller
+		dicionario.limpar(); //limpa o dicionario do controller
 		try {
 			gerarPrioridade(lerArquivo(local));
 			String arq = criaArquivo();
@@ -266,12 +271,12 @@ public class AdministradorController {
 		return null;
 	}
 	
-	public String recuperarMd5(String local) throws IOException {
-		String md5 = "";
-		String arquivo = lerArquivo(local);
-		arquivo = arquivo.substring(0, arquivo.lastIndexOf("\n\n"));
-		md5 = arquivo.substring(arquivo.lastIndexOf("\n\n") + 2, arquivo.length());
-		return md5;
+	public String recuperarMd5(String local) throws IOException { //método para recuperar o md5 de dentro de um arquivo compactado
+		String md5 = ""; //inicializo a String para salvar o md5 como vazia
+		String arquivo = lerArquivo(local); //le o conteudo do arquivo no local especificado por parâmetro do método
+		arquivo = arquivo.substring(0, arquivo.lastIndexOf("\n\n")); //remove o a BitString do arquivo
+		md5 = arquivo.substring(arquivo.lastIndexOf("\n\n") + 2, arquivo.length()); //remove o md5 e salva ele na String
+		return md5; //retorna o md5 salvo
 	}
 
 }

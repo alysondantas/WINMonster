@@ -27,7 +27,7 @@ public class CompactarAction implements ActionListener {
 		if (resposta == JFileChooser.APPROVE_OPTION) { //caso o usuário tenha selecionado um arquivo
 			String texto;
 			try {
-				texto = controller.compactarArquivo(fc.getSelectedFile().getAbsolutePath());
+				texto = controller.compactarArquivo(fc.getSelectedFile().getAbsolutePath());  //chama o método compactarArquivo do controller, passa o local do arquivo selecionado para ele e salva o texto do arquivo compactado na String texto
 				JOptionPane.showMessageDialog(null, texto); //teste para exibir o texto recebido
 				String nomeArq = fc.getSelectedFile().getName(); //salva o nome do arquivo que está na localização do arquivo selecionado na String nomeArq
 				JOptionPane.showMessageDialog(null, nomeArq); //teste para exibir o nome do arquivo
@@ -43,7 +43,7 @@ public class CompactarAction implements ActionListener {
 			} catch (FilaVaziaException | CelulaNulaException | CriarMD5NuloException e2) {
 				// TODO Auto-generated catch block
 				e2.printStackTrace();
-			} //chama o método compactarArquivo do controller, passa o local do arquivo selecionado para ele e salva o texto do arquivo compactado na String texto
+			}
 		}
 	}
 
