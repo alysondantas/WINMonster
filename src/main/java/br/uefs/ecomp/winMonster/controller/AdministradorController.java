@@ -256,19 +256,13 @@ public class AdministradorController {
 		return traducao;
 		}
 	
-	public String compactarArquivo(String local) throws FilaVaziaException, CelulaNulaException, CriarMD5NuloException{
+	public String compactarArquivo(String local) throws FilaVaziaException, CelulaNulaException, CriarMD5NuloException, IOException, CaractereInexistenteException{
 		fila.limpar(); //limpa a fila do controller
 		dicionario.limpar(); //limpa o dicionario do controller
-		try {
 			gerarPrioridade(lerArquivo(local));
 			String arq = criaArquivo();
 			return arq;
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (CaractereInexistenteException e) {
-			e.printStackTrace();
-		}
-		return null;
+
 	}
 	
 	public String recuperarMd5(String local) throws IOException { //método para recuperar o md5 de dentro de um arquivo compactado

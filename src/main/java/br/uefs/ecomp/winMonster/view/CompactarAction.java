@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.swing.*;
 
 import br.uefs.ecomp.winMonster.controller.AdministradorController;
+import br.uefs.ecomp.winMonster.exceptions.CaractereInexistenteException;
 import br.uefs.ecomp.winMonster.exceptions.CelulaNulaException;
 import br.uefs.ecomp.winMonster.exceptions.CriarMD5NuloException;
 import br.uefs.ecomp.winMonster.exceptions.FilaVaziaException;
@@ -41,7 +42,10 @@ public class CompactarAction implements ActionListener {
 					e1.printStackTrace();
 				}
 			} catch (FilaVaziaException | CelulaNulaException | CriarMD5NuloException e2) {
-				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			} catch (IOException e2) {
+				e2.printStackTrace();
+			} catch (CaractereInexistenteException e2) {
 				e2.printStackTrace();
 			}
 		}
