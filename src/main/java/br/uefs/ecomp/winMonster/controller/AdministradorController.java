@@ -13,6 +13,7 @@ import java.math.BigInteger;
 import java.nio.channels.ShutdownChannelGroupException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.regex.Pattern;
 
 import javax.swing.JOptionPane;
 
@@ -37,6 +38,14 @@ public class AdministradorController {
 		String linha = buffRead.readLine(); //crio uma string auxiliar e já armazeno a primeira linha do arquivo
 		String c = ""; //crio uma string auxiliar para armazenar o conteúdo da string
 
+		if(linha == null) {
+			JOptionPane.showMessageDialog(null, "Linha nula");
+		} else if(linha == "") {
+			JOptionPane.showMessageDialog(null, "Linha vazia");
+		} else {
+			JOptionPane.showMessageDialog(null, linha);
+		}
+		
 		while(linha != null) { //enquanto não chegar no fim do arquivo
 			c = c + linha; //salvo o a letra da string na posição atual
 			linha = buffRead.readLine(); //salvo a linha atual do arquivo na string
@@ -53,6 +62,7 @@ public class AdministradorController {
 		buffRead.close();
 
 		arquivoOriginal=c;//Uma varaivel local recebe a string com todo o conteudo do arquivo
+		System.out.println(c);
 		return c; //retorna a String com todo o conteúdo do arquivo de texto
 	}
 
@@ -102,11 +112,15 @@ public class AdministradorController {
 			}
 			Celula auxCel = new Celula();
 			auxCel.setCaractere(linha.substring(0,1));
+			System.out.println(linha.charAt(0) + " " + cont + "\n" + linha);
 			fila.inserir(cont, auxCel); //crio uma string somente com a primeira letra de linha e insiro ela na fila, passando também o número de vezes que a letra se repete como chave
 			if(copiaNula == false) //caso a cópia não seja nula, preencha a fila cópia
 				dicionario.inserir(cont, linha.substring(0,1)); //preencho a cópia com o mesmo conteúdo da fila original
 			aux = Character.toString(linha.charAt(0)); //atribui agora a primeira letra da string ao valor de aux
-			linha = linha.replaceAll(aux, ""); //remove todas as ocorrências da primeira letra na string
+			/*if (aux.equals(".")) {
+				linha = linha.replaceAll("[.]", "");
+			} else */
+			linha = linha.replaceAll(Pattern.quote(aux), ""); //remove todas as ocorrências da primeira letra na string
 		} //repete o ciclo
 		return fila; //retorno a fila com cada letra da string separada em células com suas respectivas chaves
 	}

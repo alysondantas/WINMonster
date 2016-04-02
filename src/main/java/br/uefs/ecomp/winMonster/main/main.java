@@ -22,8 +22,8 @@ public class main {
 		//TESTES PARA A GUI
 		
 		AdministradorController controller = new AdministradorController();
-		GUI gui = new GUI(controller);
-		
+//		GUI gui = new GUI(controller);
+		controller.gerarPrioridade("a.C.maka++bbx");
 		
 		//TESTES PARA CONSOLE
 		
