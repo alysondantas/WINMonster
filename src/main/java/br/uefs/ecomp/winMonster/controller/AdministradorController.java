@@ -48,7 +48,6 @@ public class AdministradorController {
 		buffRead.close();
 
 		arquivoOriginal=c;//Uma varaivel local recebe a string com todo o conteudo do arquivo
-		System.out.println(c);
 		return c; //retorna a String com todo o conteúdo do arquivo de texto
 	}
 
@@ -98,7 +97,7 @@ public class AdministradorController {
 			}
 			Celula auxCel = new Celula();
 			auxCel.setCaractere(linha.substring(0,1));
-			JOptionPane.showMessageDialog(null,linha.charAt(0) + " " + cont + "\n" + linha);
+//			JOptionPane.showMessageDialog(null,linha.charAt(0) + " " + cont + "\n" + linha);
 			fila.inserir(cont, auxCel); //crio uma string somente com a primeira letra de linha e insiro ela na fila, passando também o número de vezes que a letra se repete como chave
 			if(copiaNula == false) //caso a cópia não seja nula, preencha a fila cópia
 				dicionario.inserir(cont, linha.substring(0,1)); //preencho a cópia com o mesmo conteúdo da fila original
@@ -179,6 +178,9 @@ public class AdministradorController {
 			binariodic = celulaCaractere.getBinario();
 			dic = dic + caractere + " " + binariodic + " ";
 		}
+		
+		novoBinario = converterBits(novoBinario);
+		
 		arquivoNovo = dic + "\n" + "\n" + md + "\n" + "\n" + novoBinario;
 		return arquivoNovo;
 	}
@@ -188,16 +190,33 @@ public class AdministradorController {
 		MeuIterador it;
 		String dic = ""; //String para salvar o dicionário
 		String binario = ""; //String para salvar a BitString
+		String resto = "";
 		String md5= ""; //String para salvar o md5
 
 		////////////SEPARAÇÃO DA STRING DO ARQUIVO ORIGINAL//////////////////
 		
-		//separo a partir da última ocorrência de "\n\n" até o fim da string e salvo na String binario
+		//separo a partir da última ocorrência de "\n\n" até o fim da string e salvo na String resto
+		int qtd = arquivo.length() - arquivo.replace("\n\n", "").length();
+		qtd = qtd/2;
+		if(qtd == 3) {
+		resto = arquivo.substring(arquivo.lastIndexOf("\n\n") + 2, arquivo.length());
+		JOptionPane.showMessageDialog(null, resto);
+		//recorto o pedaço que eu acabei de salvar em "resto" da String do arquivo original
+		arquivo = arquivo.substring(0, arquivo.lastIndexOf("\n\n"));
+		}
+		//separo novamente a partir da última ocorrência de "\n\n" até o fim da string e salvo na String binario
 		binario = arquivo.substring(arquivo.lastIndexOf("\n\n") + 2, arquivo.length());
+		JOptionPane.showMessageDialog(null, binario);
+		//converto o texto criptografado em uma BitString
+		binario = converterTexto(binario);
+		//acrescento o resto da BitString salvo no arquivo no binario
+		if(resto != "") 
+			binario = binario + resto;
+		JOptionPane.showMessageDialog(null, binario);
 		//recorto o pedaço que eu acabei de salvar em "binario" da String do arquivo original
 		arquivo = arquivo.substring(0, arquivo.lastIndexOf("\n\n"));
 		//separo novamente a partir da última ocorrência de "\n\n" até o fim da string e salvo na String md5
-		//md5 = arquivo.substring(arquivo.lastIndexOf("\n\n") + 2, arquivo.length());
+		md5 = arquivo.substring(arquivo.lastIndexOf("\n\n") + 2, arquivo.length());
 		//recorto o pedaço que eu salvei em md5 da string do arquivo original
 		arquivo = arquivo.substring(0, arquivo.lastIndexOf("\n\n"));
 		//o restante que sobrou da string original é só o dicionário
@@ -264,7 +283,7 @@ public class AdministradorController {
 					}
 				}
 			} //fim do ciclo de iteração
-			JOptionPane.showMessageDialog(null, "Funcionou descompactação");
+			JOptionPane.showMessageDialog(null, binario);
 		}
 		
 		return traducao;
@@ -286,4 +305,37 @@ public class AdministradorController {
 		return md5; //retorna o md5 salvo
 	}
 
+	public String converterBits(String bits) {
+		String conversao = "";
+		while(bits.length() >= 8) {
+			String byteAux = bits.substring(0, 8) ;
+			int intAux = Integer.parseInt(byteAux, 2);
+			char charAux = (char)intAux;
+			conversao = conversao + charAux;
+			bits = bits.substring(8, bits.length());
+		}
+		if(bits.length()>=0) {
+			conversao = conversao + "\n\n" + bits;
+		}
+		
+		return conversao;
+	}
+	
+	public String converterTexto(String texto) {
+		String conversao = "";
+		while(!texto.isEmpty()) {
+			char charAux = texto.charAt(0);
+			int intAux = (int)charAux;
+			String byteAux = Integer.toBinaryString(intAux);
+//			int tamanho = byteAux.length();
+			/*while(tamanho < 8) {
+				byteAux = "0" + byteAux;
+				tamanho++;
+			}*/
+			conversao = conversao + byteAux;
+			texto = texto.replaceFirst(Pattern.quote(Character.toString(texto.charAt(0))), "");
+		}
+		
+		return conversao;
+	}
 }
