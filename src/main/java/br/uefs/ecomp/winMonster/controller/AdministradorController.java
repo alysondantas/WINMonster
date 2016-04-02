@@ -37,28 +37,14 @@ public class AdministradorController {
 		BufferedReader buffRead = new BufferedReader(arq); //crio um novo objeto BuffReader e passo para ele a leitura do local em arq
 		String linha = buffRead.readLine(); //crio uma string auxiliar e já armazeno a primeira linha do arquivo
 		String c = ""; //crio uma string auxiliar para armazenar o conteúdo da string
-
-		if(linha == null) {
-			JOptionPane.showMessageDialog(null, "Linha nula");
-		} else if(linha == "") {
-			JOptionPane.showMessageDialog(null, "Linha vazia");
-		} else {
-			JOptionPane.showMessageDialog(null, linha);
-		}
 		
 		while(linha != null) { //enquanto não chegar no fim do arquivo
 			c = c + linha; //salvo o a letra da string na posição atual
 			linha = buffRead.readLine(); //salvo a linha atual do arquivo na string
-			if(linha == null) {
-				JOptionPane.showMessageDialog(null, "Linha nula");
-			} else if(linha == "") {
-				JOptionPane.showMessageDialog(null, "Linha vazia");
-			} else {
-				JOptionPane.showMessageDialog(null, linha);
-			}
 			if(linha!=null)
 				c = c + "\n"; //acrescento uma quebra de linha em "c" a cada fim de linha em "linha"
-		} arq.close(); //fecho o arquivo para a leitura
+		}
+		arq.close(); //fecho o arquivo para a leitura
 		buffRead.close();
 
 		arquivoOriginal=c;//Uma varaivel local recebe a string com todo o conteudo do arquivo
@@ -112,14 +98,11 @@ public class AdministradorController {
 			}
 			Celula auxCel = new Celula();
 			auxCel.setCaractere(linha.substring(0,1));
-			System.out.println(linha.charAt(0) + " " + cont + "\n" + linha);
+			JOptionPane.showMessageDialog(null,linha.charAt(0) + " " + cont + "\n" + linha);
 			fila.inserir(cont, auxCel); //crio uma string somente com a primeira letra de linha e insiro ela na fila, passando também o número de vezes que a letra se repete como chave
 			if(copiaNula == false) //caso a cópia não seja nula, preencha a fila cópia
 				dicionario.inserir(cont, linha.substring(0,1)); //preencho a cópia com o mesmo conteúdo da fila original
 			aux = Character.toString(linha.charAt(0)); //atribui agora a primeira letra da string ao valor de aux
-			/*if (aux.equals(".")) {
-				linha = linha.replaceAll("[.]", "");
-			} else */
 			linha = linha.replaceAll(Pattern.quote(aux), ""); //remove todas as ocorrências da primeira letra na string
 		} //repete o ciclo
 		return fila; //retorno a fila com cada letra da string separada em células com suas respectivas chaves
@@ -220,6 +203,9 @@ public class AdministradorController {
 		//o restante que sobrou da string original é só o dicionário
 		dic = arquivo;
 		
+		JOptionPane.showMessageDialog(null, "Passou a separação");
+
+		
 		/////////////SEPARAÇÃO DO DICIONÁRIO////////////////
 		
 		//enquanto a String do dicionário não estiver vazia
@@ -245,6 +231,8 @@ public class AdministradorController {
 			dicionario.inserir(1, cel);
 		}
 		
+		JOptionPane.showMessageDialog(null, "Passou a criação do dicionário");
+		
 		////////////TRADUÇÃO DO BINÁRIO RECEBIDO///////////////
 		String traducao = ""; //crio uma string para armazenar a tradução e inicalizo ela como vazia
 		it = dicionario.iterador(); //faço it iterar a fila dicionário
@@ -260,16 +248,19 @@ public class AdministradorController {
 				}
 				if (aux.equals(binaux)) { //após o fim do ciclo de repetições, caso tenha encontrado uma substring que seja igual ao binário da célula
 					String str = (String)caux.getObjeto();
+					
 					if(str.equals("\\n")) { //tratamento para caso tenha um \n como objeto da célula
 						traducao = traducao + "\n";
 					}
 					else {
 						traducao = traducao + str; //coloco a letra relacionada com o binário encontrada na tradução
 					}
+					
 					binario = binario.substring(binaux.length(), binario.length()); //retira a parte traduzida do binário
+					
 					if(!binario.isEmpty()){ //caso o binário não esteja vazio ainda, prepara ele para um novo ciclo
-					aux = binario.substring(0, 1); //igualo a String aux com o primeiro caractere da String binario
-					it = dicionario.iterador(); //volta o iterador para o início do dicionario
+						aux = binario.substring(0, 1); //igualo a String aux com o primeiro caractere da String binario
+						it = dicionario.iterador(); //volta o iterador para o início do dicionario
 					}
 				}
 			} //fim do ciclo de iteração
