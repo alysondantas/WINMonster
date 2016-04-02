@@ -256,13 +256,12 @@ public class AdministradorController {
 		return traducao;
 		}
 	
-	public String compactarArquivo(String local) throws FilaVaziaException, CelulaNulaException, CriarMD5NuloException, IOException, CaractereInexistenteException{
+	public String compactarArquivo(String local) throws FilaVaziaException, CelulaNulaException, CriarMD5NuloException, IOException, CaractereInexistenteException{ //método para gerar uma String com o conteúdo para a gravação do arquivo
 		fila.limpar(); //limpa a fila do controller
 		dicionario.limpar(); //limpa o dicionario do controller
-			gerarPrioridade(lerArquivo(local));
-			String arq = criaArquivo();
-			return arq;
-
+		gerarPrioridade(lerArquivo(local)); //gera a fila com as letras e suas frequências do conteudo lido pelo arquivo no local especificado no parâmetro
+		String arq = criaArquivo(); //prepara o conteudo do arquivo para a gravação com dicionario, md5 e binário e salva na String arq
+		return arq; //retorna o conteúdo pronto para a gravação
 	}
 	
 	public String recuperarMd5(String local) throws IOException { //método para recuperar o md5 de dentro de um arquivo compactado
