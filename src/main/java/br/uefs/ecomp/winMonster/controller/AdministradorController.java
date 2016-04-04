@@ -9,6 +9,7 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.*;
 import java.math.BigInteger;
 import java.nio.channels.ShutdownChannelGroupException;
 import java.security.MessageDigest;
@@ -33,7 +34,7 @@ public class AdministradorController {
 
 
 	public String lerArquivo(String local) throws IOException { //método que lê um arquivo de texto e converte todo o seu conteúdo para uma String
-		FileReader arq = new FileReader(local); //inicializo arq como a leitura de arquivos no local especificado
+		Reader arq = new InputStreamReader(new FileInputStream(local), "UTF-8"); //inicializo arq como a leitura de arquivos no local especificado
 		BufferedReader buffRead = new BufferedReader(arq); //crio um novo objeto BuffReader e passo para ele a leitura do local em arq
 		String linha = buffRead.readLine(); //crio uma string auxiliar e já armazeno a primeira linha do arquivo
 		String c = ""; //crio uma string auxiliar para armazenar o conteúdo da string
@@ -44,8 +45,7 @@ public class AdministradorController {
 			if(linha!=null)
 				c = c + "\n"; //acrescento uma quebra de linha em "c" a cada fim de linha em "linha"
 		}
-		arq.close(); //fecho o arquivo para a leitura
-		buffRead.close();
+		buffRead.close(); //fecho a leitura do arquivo
 
 		arquivoOriginal=c;//Uma varaivel local recebe a string com todo o conteudo do arquivo
 		return c; //retorna a String com todo o conteúdo do arquivo de texto
@@ -53,7 +53,7 @@ public class AdministradorController {
 
 	public void escreverArquivo(String texto, String local, String nome) throws IOException { //método deixado aqui só para inspiração. Não vai ser usado do jeito que está descrito no momento
 		local = local + nome; //anexo o nome do arquivo ao local que ele será escrito
-		BufferedWriter buffWrite = new BufferedWriter(new FileWriter(local)); //crio um novo objeto para escrita de arquivos e passo como parâmetro um novo objeto de escrita do arquivo no local especificado
+		BufferedWriter buffWrite = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(local), "UTF-8")); //crio um novo objeto para escrita de arquivos e passo como parâmetro um novo objeto de escrita do arquivo no local especificado
 		buffWrite.append(texto); //anexo essa string no arquivo de texto
 		buffWrite.close(); //fecho o arquivo aberto
 	}
@@ -179,6 +179,8 @@ public class AdministradorController {
 			dic = dic + caractere + " " + binariodic + " ";
 		}
 		
+		System.out.println(novoBinario);
+		
 		novoBinario = converterBits(novoBinario);
 		
 		arquivoNovo = dic + "\n" + "\n" + md + "\n" + "\n" + novoBinario;
@@ -196,22 +198,20 @@ public class AdministradorController {
 		////////////SEPARAÇÃO DA STRING DO ARQUIVO ORIGINAL//////////////////
 		
 		//separo a partir da última ocorrência de "\n\n" até o fim da string e salvo na String resto
-		int qtd = arquivo.length() - arquivo.replace("\n\n", "").length();
-		qtd = qtd/2;
-		if(qtd == 3) {
 		resto = arquivo.substring(arquivo.lastIndexOf("\n\n") + 2, arquivo.length());
 		JOptionPane.showMessageDialog(null, resto);
+		System.out.println(resto);
 		//recorto o pedaço que eu acabei de salvar em "resto" da String do arquivo original
 		arquivo = arquivo.substring(0, arquivo.lastIndexOf("\n\n"));
-		}
 		//separo novamente a partir da última ocorrência de "\n\n" até o fim da string e salvo na String binario
 		binario = arquivo.substring(arquivo.lastIndexOf("\n\n") + 2, arquivo.length());
 		JOptionPane.showMessageDialog(null, binario);
 		//converto o texto criptografado em uma BitString
 		binario = converterTexto(binario);
+		System.out.println(binario);
 		//acrescento o resto da BitString salvo no arquivo no binario
-		if(resto != "") 
-			binario = binario + resto;
+		binario = binario + resto;
+		System.out.println(binario);
 		JOptionPane.showMessageDialog(null, binario);
 		//recorto o pedaço que eu acabei de salvar em "binario" da String do arquivo original
 		arquivo = arquivo.substring(0, arquivo.lastIndexOf("\n\n"));
@@ -307,16 +307,19 @@ public class AdministradorController {
 
 	public String converterBits(String bits) {
 		String conversao = "";
-		while(bits.length() >= 8) {
-			String byteAux = bits.substring(0, 8) ;
+		while(bits.length() >= 7) {
+			String byteAux = bits.substring(0, 7);
+			byteAux = "1" + byteAux;
 			int intAux = Integer.parseInt(byteAux, 2);
-			char charAux = (char)intAux;
+			char[] aux = Character.toChars(intAux);
+			String charAux = Character.toString(aux[0]);
+			System.out.println(charAux+ " " + intAux);
 			conversao = conversao + charAux;
-			bits = bits.substring(8, bits.length());
+			bits = bits.substring(7, bits.length());
 		}
-		if(bits.length()>=0) {
+//		if(bits.length()>=0)
 			conversao = conversao + "\n\n" + bits;
-		}
+		
 		
 		return conversao;
 	}
@@ -324,16 +327,18 @@ public class AdministradorController {
 	public String converterTexto(String texto) {
 		String conversao = "";
 		while(!texto.isEmpty()) {
-			char charAux = texto.charAt(0);
-			int intAux = (int)charAux;
+			String charAux = texto.substring(0, 1);
+			int intAux = charAux.codePointAt(0);
 			String byteAux = Integer.toBinaryString(intAux);
+			byteAux = byteAux.substring(1, byteAux.length());
 //			int tamanho = byteAux.length();
-			/*while(tamanho < 8) {
-				byteAux = "0" + byteAux;
-				tamanho++;
-			}*/
+//			while(tamanho < 8) {
+//				byteAux = "0" + byteAux;
+//				tamanho++;
+//			}
 			conversao = conversao + byteAux;
-			texto = texto.replaceFirst(Pattern.quote(Character.toString(texto.charAt(0))), "");
+//			texto = texto.replaceFirst(Pattern.quote(Character.toString(texto.charAt(0))), "");
+			texto = texto.substring(1, texto.length());
 		}
 		
 		return conversao;
