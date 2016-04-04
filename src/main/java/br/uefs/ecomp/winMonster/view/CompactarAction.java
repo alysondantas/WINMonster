@@ -33,16 +33,7 @@ public class CompactarAction implements ActionListener {
 				String nomeArq = fc.getSelectedFile().getName(); //salva o nome do arquivo que está na localização do arquivo selecionado na String nomeArq
 				JOptionPane.showMessageDialog(null, nomeArq); //teste para exibir o nome do arquivo
 				String local = fc.getSelectedFile().getPath().replace(nomeArq, ""); //salva o local do arquivo selecionado removendo o nome do arquivo na String local
-				JOptionPane.showMessageDialog(null, local); //teste para exibir o local do arquivo
-				
-				
-//				String bitstring = texto.substring(texto.lastIndexOf("\n\n") + 2, texto.length());
-//				JOptionPane.showMessageDialog(null, bitstring);
-//				bitstring = controller.converterBits(bitstring);
-//				texto = texto.substring(0, texto.lastIndexOf("\n\n") + 2);
-//				texto = texto + bitstring;
-				
-				
+				JOptionPane.showMessageDialog(null, local); //teste para exibir o local do arquivo		
 				try { 
 					controller.escreverArquivo(texto, local, nomeArq + ".monster"); //chama o método de escreverArquivo no controller passando o texto compactado com dicionário e md5, o local do arquivo e o novo nome concatenado com a extensão ".monster"
 //					controller.escreverBits(texto, local + nomeArq + ".monster");

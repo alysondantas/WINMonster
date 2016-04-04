@@ -57,29 +57,6 @@ public class AdministradorController {
 		buffWrite.append(texto); //anexo essa string no arquivo de texto
 		buffWrite.close(); //fecho o arquivo aberto
 	}
-	
-	
-	//APAGAR ESSE MÉTODO DEPOIS
-	
-	/* public void escreverBits(String texto, String local) throws IOException {
-		int i;
-		String binario = texto.substring(texto.lastIndexOf("\n\n") + 2, texto.length());
-		boolean [] b = new boolean[binario.length()];
-		for (i = 0; i < binario.length(); i++) {
-			if (binario.charAt(i) == 0) {
-				b[i] = false;
-			}
-			else {
-				b[i] = true;
-			}
-		}
-		FileOutputStream fos = new FileOutputStream(local);
-		DataOutputStream dos = new DataOutputStream(fos);
-		for (i=0; i< binario.length(); i++) {
-			dos.writeBoolean(b[i]);
-		}
-		dos.close();
-	} */
 
 	public Fila gerarPrioridade(String linha) throws IOException { //método para gerar uma fila de prioridade a partir de uma String recebida
 		boolean copiaNula = false; //variável para verificar se é necesário criar uma fila cópia. Caso ela continue como false, vai ser gerada uma fila cópia igual a fila a ser retornada
@@ -106,25 +83,6 @@ public class AdministradorController {
 		} //repete o ciclo
 		return fila; //retorno a fila com cada letra da string separada em células com suas respectivas chaves
 	}
-	
-	//APAGAR ESSE MÉTODO DEPOIS
-
-	/* public void imprimirFila(Fila fila) {
-		MeuIterador it = fila.iterador();
-		Celula primeiro = fila.getPrimeiro();
-		Celula ultimo = fila.getUltimo();
-		Celula aux3 = (Celula)primeiro.getObjeto();
-		System.out.println("Primeiro " + aux3.getCaractere());
-		aux3 = (Celula)ultimo.getObjeto();
-		System.out.println("Ultimo " + aux3.getCaractere());
-		System.out.println("Tamanho " + fila.obterTamanho() + "\n");
-		while(it.temProximo()) {
-			Celula aux = (Celula)it.obterProximo();
-			Celula aux2 = (Celula)aux.getObjeto();
-			System.out.println("Caractere " + aux2.getCaractere());
-			System.out.println("Frequência " + aux.getChave());
-		}
-	} */
 
 	public String md5(String string) throws CriarMD5NuloException{//verificação de integridade atravez de md5
 		String novomd5 = "";//inicializa a variavel para receber o novo md5
@@ -326,7 +284,6 @@ public class AdministradorController {
 			conversao = conversao + charAux;
 			bits = bits.substring(7, bits.length());
 		}
-//		if(bits.length()>=0)
 			conversao = conversao + "\n\n" + bits;
 		
 		
@@ -340,13 +297,7 @@ public class AdministradorController {
 			int intAux = charAux.codePointAt(0);
 			String byteAux = Integer.toBinaryString(intAux);
 			byteAux = byteAux.substring(1, byteAux.length());
-//			int tamanho = byteAux.length();
-//			while(tamanho < 8) {
-//				byteAux = "0" + byteAux;
-//				tamanho++;
-//			}
 			conversao = conversao + byteAux;
-//			texto = texto.replaceFirst(Pattern.quote(Character.toString(texto.charAt(0))), "");
 			texto = texto.substring(1, texto.length());
 		}
 		
