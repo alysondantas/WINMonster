@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.swing.*;
 
 import br.uefs.ecomp.winMonster.controller.AdministradorController;
+import br.uefs.ecomp.winMonster.exceptions.CriarMD5NuloException;
 import br.uefs.ecomp.winMonster.exceptions.DescompactarStringNulaException;
 
 public class DescompactarAction implements ActionListener{
@@ -33,11 +34,18 @@ public class DescompactarAction implements ActionListener{
 				nomeArq = nomeArq.substring(0, nomeArq.lastIndexOf(".monster")); //tira o ".monster" do nome do arquivo
 				JOptionPane.showMessageDialog(null, nomeArq); //teste para exibir o nome do arquivo
 				JOptionPane.showMessageDialog(null, local); //teste para exibir o local do arquivo
+				if (controller.verifMd5(controller.md5(traducao), controller.recuperarMd5(fc.getSelectedFile().getAbsolutePath())) == true) { //verificação de integridade ao fim da descompactação, comparando o md5 gerado através do texto traduzido com o já armazenado no arquivo compactado
+					JOptionPane.showMessageDialog(null, "Descompactação efeituada com sucesso!\n\nNão houve perda de integridade no arquivo"); //caso os md5 sejam iguais
+				} else {
+					JOptionPane.showMessageDialog(null, "Descompactação falhou!\n\nHouve perda de integridade no arquivo"); //caso os md5 sejam diferentes
+				}
 				controller.escreverArquivo(traducao, local, nomeArq); //chama o método de escreverArquivo no controller passando o texto compactado com dicionário e md5, o local do arquivo e o novo nome concatenado com a extensão ".monster"
 			} catch (IOException e2) {
 				e2.printStackTrace();
 			} catch (DescompactarStringNulaException e2) {
 				e2.printStackTrace();
+			} catch (CriarMD5NuloException e1) {
+				e1.printStackTrace();
 			}
 		}
 	}

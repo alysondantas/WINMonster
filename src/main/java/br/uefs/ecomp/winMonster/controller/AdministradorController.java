@@ -145,6 +145,13 @@ public class AdministradorController {
 		}
 		return novomd5;
 	}
+	
+	public boolean verifMd5(String md5a, String md5b) {
+		if (md5a.equals(md5b))
+			return true;
+		else
+			return false;		
+	}
 
 	public String criaArquivo() throws CaractereInexistenteException, IOException, FilaVaziaException, CelulaNulaException, CriarMD5NuloException{
 		arvoreHuffman = new Arvore();
@@ -301,7 +308,8 @@ public class AdministradorController {
 	public String recuperarMd5(String local) throws IOException { //método para recuperar o md5 de dentro de um arquivo compactado
 		String md5 = ""; //inicializo a String para salvar o md5 como vazia
 		String arquivo = lerArquivo(local); //le o conteudo do arquivo no local especificado por parâmetro do método
-		arquivo = arquivo.substring(0, arquivo.lastIndexOf("\n\n")); //remove o a BitString do arquivo
+		arquivo = arquivo.substring(0, arquivo.lastIndexOf("\n\n")); //remove o resto do arquivo
+		arquivo = arquivo.substring(0, arquivo.lastIndexOf("\n\n")); //remove a BitString compactada do arquivo
 		md5 = arquivo.substring(arquivo.lastIndexOf("\n\n") + 2, arquivo.length()); //remove o md5 e salva ele na String
 		return md5; //retorna o md5 salvo
 	}
