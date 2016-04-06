@@ -1,8 +1,34 @@
 package br.uefs.ecomp.winMonster.util;
 
+/*******************************************************************************
+
+Autor: Alyson Felipe Oliveira Dantas e Bruno Menezes de Lima
+
+Componente Curricular: MI - Algoritmos II
+
+Concluido em: 06/04/2016
+
+Declaro que este código foi elaborado por esta dupla e não contém nenhum
+
+trecho de código de outro colega ou de outro autor, tais como provindos de livros e
+
+apostilas, e páginas ou documentos eletrônicos da Internet. Qualquer trecho de código
+
+de outra autoria que não a minha está destacado com uma citação para o autor e a fonte
+
+do código, e estou ciente que estes trechos não serão considerados para fins de avaliação.
+
+ ******************************************************************************************/
+
 import br.uefs.ecomp.winMonster.model.*;
 
 import br.uefs.ecomp.winMonster.exceptions.*;
+
+/**
+ * 
+ * @author Alyson Dantas e Bruno Menezes
+ *Classe Arvore que trabalha como Arvore de Huffman
+ */
 
 public class Arvore {
 
@@ -14,22 +40,45 @@ public class Arvore {
 		this.tamanho = 0;
 	}
 
+	/**
+	 * Metodo para verificar se a arvore é vazia
+	 * @return
+	 */
 	public boolean estaVazia() {
 		return raiz == null;//retorna true se a primeira celula for nula
 	}
+
+	/**
+	 * Metodo para obter tamanho da arvore
+	 * @return
+	 */
 	public int obterTamanho() {
 		return tamanho;//quando sair do laço retorna o tamanho da lista
 	}
 
-
+	/**
+	 * Metodo para retornar a raiz da arvore
+	 * @return raiz
+	 */
 	public Celula retornaRaiz(){//metodo para retornar a raiz
 		return raiz;//retorno da raiz
 	}
 
+	/**
+	 * Metodo para atribuir uma nova raiz a arvore
+	 * @param raiz 
+	 * @return
+	 */
 	public void colocaRaiz(Celula raiz1){//metodo set para raiz
 		this.raiz = raiz1;//mudando a raiz para a nova
 	}
 
+	/**
+	 * Metodo para remover da fila e criar as concatenado arvores ate so sobrar um unica arvore
+	 * @param filaprioridade
+	 * @return
+	 * @throws FilaVaziaException
+	 */
 	public Arvore inserirHuffman(Fila filaprioridade) throws FilaVaziaException{//metodo para remover os dois elementos da fila e colocar em uma arvore
 		if(filaprioridade == null){
 			throw new FilaVaziaException();//se a fila for nula retorna a exceção
@@ -56,9 +105,16 @@ public class Arvore {
 		}else{
 			throw new FilaVaziaException();//se a fila estiver vazia retorno a exceção
 		}
-		
+
 	}
 
+	/**
+	 * Metodo para construir um dicionario dos caracteres que estão no dicionario e na Arvore de Huffman
+	 * @param dicionario
+	 * @throws FilaVaziaException
+	 * @throws CaractereInexistenteException
+	 * @throws CelulaNulaException
+	 */
 	public void construirDicionario(Fila dicionario) throws FilaVaziaException, CaractereInexistenteException, CelulaNulaException{//metodo para criar o dicionario na estrutura copia da fila original
 		if(dicionario == null || dicionario.obterTamanho() < 1){
 			throw new FilaVaziaException();
@@ -92,6 +148,15 @@ public class Arvore {
 		}
 	}
 
+	/**
+	 * Metodo para pegar um caractere em especifico navegar pela arvore e guardar o caminho que sera o seu futuro binario
+	 * @param caractere
+	 * @param celula
+	 * @param binarioCarectere
+	 * @return
+	 * @throws CaractereInexistenteException
+	 * @throws CelulaNulaException
+	 */
 	public BinarioDoCaractere pegarCaractere(String caractere, Celula celula, BinarioDoCaractere binarioCarectere) throws CaractereInexistenteException, CelulaNulaException{
 		String binario = binarioCarectere.getBinario();//string binario recebe o binario que esta dentro do binarioCaractere
 		boolean verificador=binarioCarectere.isVerificador();//verificador recebe o verificador passado dentro do binarioCaractere
@@ -124,7 +189,7 @@ public class Arvore {
 			}
 			binario = binario.substring(0, binario.length()-1);//remove um elemento do binario
 			binarioCarectere.setBinario(binario);//binario do binarioCaractere é atualizado
-			
+
 			//para direita se não for esquerda
 			if(celula.getAntEsq()== null && celula.getProxDir()== null){//interrompe a recursividade e coloca o caractere no dicionario
 				if(celula.getCaractere().equals(caractere)){//se o caractere da celula for igual ao caractere passado
@@ -146,7 +211,7 @@ public class Arvore {
 			}
 			binario = binario.substring(0, binario.length()-1);//remove um elemento do binario
 			binarioCarectere.setBinario(binario);//binario do binarioCaractere é atualizado
-			
+
 			return binarioCarectere;//retorna o binarioCaractere pro metodo recusivo que chamou
 		}
 	}

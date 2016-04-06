@@ -1,180 +1,203 @@
-    
-    /**
-     * Componente Curricular: Módulo Integrado de Programação
-     * Autor: Bruno Menezes de Lima e Bernardo Oliveira Rosa
-     * Data:  07/03/2016
-     *
-     * Declaro que este código foi elaborado por nós de forma individual e
-     * não contém nenhum trecho de código de outro colega ou de outro autor,
-     * tais como provindos de livros e apostilas, e páginas ou documentos
-     * eletrônicos da Internet. Qualquer trecho de código de outra autoria que
-     * uma citação para o  não a minha está destacado com  autor e a fonte do
-     * código, e estou ciente que estes trechos não serão considerados para fins
-     * de avaliação. Alguns trechos do código podem coincidir com de outros
-     * colegas pois estes foram discutidos em sessões tutorias.
-     */
+
+/**
+ * Componente Curricular: Módulo Integrado de Programação
+ * Autor: Bruno Menezes de Lima e Alyson Felipe Oliveira Dantas
+ * Data:  06/04/2016
+ *
+ * Declaro que este código foi elaborado por nós de forma individual e
+ * não contém nenhum trecho de código de outro colega ou de outro autor,
+ * tais como provindos de livros e apostilas, e páginas ou documentos
+ * eletrônicos da Internet. Qualquer trecho de código de outra autoria que
+ * uma citação para o  não a minha está destacado com  autor e a fonte do
+ * código, e estou ciente que estes trechos não serão considerados para fins
+ * de avaliação. Alguns trechos do código podem coincidir com de outros
+ * colegas pois estes foram discutidos em sessões tutorias.
+ */
 
 package br.uefs.ecomp.winMonster.util;
 
 public class Fila implements IFila{
 
-    private Celula primeiro; //primeira posição da fila
-    private Celula ultimo; //último elemento da fila
-    private int tamanho = 0 ; //contador de elementos
+	private Celula primeiro; //primeira posição da fila
+	private Celula ultimo; //último elemento da fila
+	private int tamanho = 0 ; //contador de elementos
 
-        public Fila() {
-            this.primeiro = null;           //Inicializa o primeiro elemento como nulo
-            this.ultimo = this.primeiro;    //e iguala o último ao primeiro
-            this.tamanho = 0;        //além de inicializar o contador como 0    
-        }
-        
-        @Override
-        public boolean estaVazia() { //método para informar se a fila está vazia
-            if (this.primeiro == null) { //se o primeiro elemento for nulo
-                return true;
-            }
-            return false;
-        }
+	/**
+	 * Construtor da classe Fila
+	 */
+	public Fila() {
+		this.primeiro = null;           //Inicializa o primeiro elemento como nulo
+		this.ultimo = this.primeiro;    //e iguala o último ao primeiro
+		this.tamanho = 0;        //além de inicializar o contador como 0    
+	}
 
-        @Override
-        public int obterTamanho() { //método para obter o número de elementos inseridos na fila
-            return tamanho;
-        }
+	@Override
+	public boolean estaVazia() { //método para informar se a fila está vazia
+		if (this.primeiro == null) { //se o primeiro elemento for nulo
+			return true;
+		}
+		return false;
+	}
 
-        @Override
-        public void inserirFinal(Object o) { //método para inserir elementos na fila
-            Celula no = new Celula(this.ultimo, null, o); //Cria um novo nó usando o último da lista como anterior, nulo como próximo e com o objeto o como conteúdo
-            if (!estaVazia()) {
-                this.ultimo.setProxDir(no); //diz que o próximo do último da lista é o novo nó
-                this.ultimo = no; //aponta a última posição para esse novo nó
-                tamanho++;
-            } else {
-                this.primeiro = no; //aponta o primeiro da fila para o novo nó
-                this.ultimo = this.primeiro; //como só tem 1 elemento, o último se torna o primeiro
-                tamanho++;
-            }
-        }
-        
-        public void inserir(int chave, Object o) { //método para inserir elementos na fila
-            Celula no = new Celula(chave, o); //Cria um novo nó usando o último da lista como anterior, nulo como próximo e com o objeto o como conteúdo
-            if (!estaVazia()) {
-                Celula aux = this.ultimo; //cria um auxiliar para percorrer a fila inicializado como o último
-                if(tamanho == 1) {
-                	if(aux.getChave() > no.getChave()) {
-                		no.setProxDir(aux);
-                		aux.setAntEsq(no);
-                		this.primeiro = no;
-                		tamanho ++;
-                		return;
-                	}
-                	else {
-                		aux.setProxDir(no);
-                		no.setAntEsq(aux);
-                		this.primeiro = aux;
-                		this.ultimo = no;
-                		tamanho ++;
-                		return;
-                	}
-                }
-                while(aux.getChave() > no.getChave()) { //enquanto a chave do elemento for menor do que a do elemento a ser inserido
-                	aux = aux.getAntEsq(); //avança uma posição da lista
-                	if (aux == this.primeiro && aux.getChave() > no.getChave()) { //caso tenha chegado ao início da lista, insere no início
-                		this.primeiro.setAntEsq(no); //aponta o anterior do primeiro da lista para o novo nó
-                		no.setProxDir(this.primeiro); //aponta o próximo do novo nó para o primeiro da lista 
-                		this.primeiro = no; //passa a posição de primeiro para o novo nó
-                		tamanho ++;
-                		return;
-                	}
-                	else if (aux == this.primeiro) {
-                		aux.getProxDir().setAntEsq(no);
-                		no.setProxDir(aux.getProxDir());
-                		no.setAntEsq(aux);
-                		aux.setProxDir(no);
-                		tamanho ++;
-                		return;
-                	}
-                } //ao encontrar a posição correta do auxiliar
-                	if(aux == this.ultimo) {
-                		this.ultimo = no;
-                		no.setProxDir(null); //aponta o próximo do novo nó para o próximo do auxiliar
-                    	aux.setProxDir(no); //aponta o próximo do auxiliar agora para o novo nó
-                    	no.setAntEsq(aux); //aponta o anterior do novo nó para o auxiliar
-                	}
-                	else {
-                		no.setProxDir(aux.getProxDir()); //aponta o próximo do novo nó para o próximo do auxiliar
-                		aux.getProxDir().setAntEsq(no);
-                    	aux.setProxDir(no); //aponta o próximo do auxiliar agora para o novo nó
-                    	no.setAntEsq(aux); //aponta o anterior do novo nó para o auxiliar
-                	}
-                	tamanho ++;
-                	return;
-                
-            } else { //caso a fila esteja vazia
-                this.primeiro = no; //aponta o primeiro da fila para o novo nó
-                this.ultimo = this.primeiro; //como só tem 1 elemento, o último se torna o primeiro
-                tamanho++;
-            }
-        }
+	@Override
+	public int obterTamanho() { //método para obter o número de elementos inseridos na fila
+		return tamanho;
+	}
 
-        @Override
-        public Object removerInicio() { //método para remover elementos da fila
-            if (tamanho == 1) { //se só existir um elemento na fila
-                Celula aux = this.primeiro; //cria uma cópia do elemento a ser removido pra retorno
-                this.primeiro = this.primeiro.getProxDir(); //o primeiro agora aponta pra o próximo do primeiro elemento
-                tamanho--;
-                return aux; //retorna a cópia do elemento removido
-            } else if (!estaVazia()) { 
-                Celula aux = this.primeiro; //cópia do elemento a ser removido
-                this.primeiro = this.primeiro.getProxDir();     //a cabeça da fila se torna o próximo elemento
-                this.primeiro.setAntEsq(null); //direciona o anterior da nova cabeça pra nulo
-                tamanho--;
-                return aux; //retorna a cópia
-            } else {
-                return null;
-            }
-        }
+	@Override
+	public void inserirFinal(Object o) { //método para inserir elementos na fila
+		Celula no = new Celula(this.ultimo, null, o); //Cria um novo nó usando o último da lista como anterior, nulo como próximo e com o objeto o como conteúdo
+		if (!estaVazia()) {
+			this.ultimo.setProxDir(no); //diz que o próximo do último da lista é o novo nó
+			this.ultimo = no; //aponta a última posição para esse novo nó
+			tamanho++;
+		} else {
+			this.primeiro = no; //aponta o primeiro da fila para o novo nó
+			this.ultimo = this.primeiro; //como só tem 1 elemento, o último se torna o primeiro
+			tamanho++;
+		}
+	}
 
-        @Override
-        public Object recuperarInicio() { //método para retornar o elemento na frente da fila
-            return this.primeiro;
-        }
-        
-        public void limpar() {
-        	this.primeiro = null;
-        	this.ultimo = null;
-        	tamanho = 0;
-        }
-        
-        public Celula recuperarFinal() {
-        	return this.ultimo;
-        }
+	/**
+	 *  Metodo para inserir na fila de maneira ordenada
+	 * @param chave
+	 * @param o
+	 */
+	public void inserir(int chave, Object o) { //método para inserir elementos na fila
+		Celula no = new Celula(chave, o); //Cria um novo nó usando o último da lista como anterior, nulo como próximo e com o objeto o como conteúdo
+		if (!estaVazia()) {
+			Celula aux = this.ultimo; //cria um auxiliar para percorrer a fila inicializado como o último
+			if(tamanho == 1) {
+				if(aux.getChave() > no.getChave()) {
+					no.setProxDir(aux);
+					aux.setAntEsq(no);
+					this.primeiro = no;
+					tamanho ++;
+					return;
+				}
+				else {
+					aux.setProxDir(no);
+					no.setAntEsq(aux);
+					this.primeiro = aux;
+					this.ultimo = no;
+					tamanho ++;
+					return;
+				}
+			}
+			while(aux.getChave() > no.getChave()) { //enquanto a chave do elemento for menor do que a do elemento a ser inserido
+				aux = aux.getAntEsq(); //avança uma posição da lista
+				if (aux == this.primeiro && aux.getChave() > no.getChave()) { //caso tenha chegado ao início da lista, insere no início
+					this.primeiro.setAntEsq(no); //aponta o anterior do primeiro da lista para o novo nó
+					no.setProxDir(this.primeiro); //aponta o próximo do novo nó para o primeiro da lista 
+					this.primeiro = no; //passa a posição de primeiro para o novo nó
+					tamanho ++;
+					return;
+				}
+				else if (aux == this.primeiro) {
+					aux.getProxDir().setAntEsq(no);
+					no.setProxDir(aux.getProxDir());
+					no.setAntEsq(aux);
+					aux.setProxDir(no);
+					tamanho ++;
+					return;
+				}
+			} //ao encontrar a posição correta do auxiliar
+			if(aux == this.ultimo) {
+				this.ultimo = no;
+				no.setProxDir(null); //aponta o próximo do novo nó para o próximo do auxiliar
+				aux.setProxDir(no); //aponta o próximo do auxiliar agora para o novo nó
+				no.setAntEsq(aux); //aponta o anterior do novo nó para o auxiliar
+			}
+			else {
+				no.setProxDir(aux.getProxDir()); //aponta o próximo do novo nó para o próximo do auxiliar
+				aux.getProxDir().setAntEsq(no);
+				aux.setProxDir(no); //aponta o próximo do auxiliar agora para o novo nó
+				no.setAntEsq(aux); //aponta o anterior do novo nó para o auxiliar
+			}
+			tamanho ++;
+			return;
 
-        @Override
-        public MeuIterador iterador() { //método para criar um iterador com o início da fila
-            return new MeuIterador(this.primeiro); //retorna um iterador com a cabeça da fila
+		} else { //caso a fila esteja vazia
+			this.primeiro = no; //aponta o primeiro da fila para o novo nó
+			this.ultimo = this.primeiro; //como só tem 1 elemento, o último se torna o primeiro
+			tamanho++;
+		}
+	}
 
-        }
+	@Override
+	public Object removerInicio() { //método para remover elementos da fila
+		if (tamanho == 1) { //se só existir um elemento na fila
+			Celula aux = this.primeiro; //cria uma cópia do elemento a ser removido pra retorno
+			this.primeiro = this.primeiro.getProxDir(); //o primeiro agora aponta pra o próximo do primeiro elemento
+			tamanho--;
+			return aux; //retorna a cópia do elemento removido
+		} else if (!estaVazia()) { 
+			Celula aux = this.primeiro; //cópia do elemento a ser removido
+			this.primeiro = this.primeiro.getProxDir();     //a cabeça da fila se torna o próximo elemento
+			this.primeiro.setAntEsq(null); //direciona o anterior da nova cabeça pra nulo
+			tamanho--;
+			return aux; //retorna a cópia
+		} else {
+			return null;
+		}
+	}
 
-        public Celula getPrimeiro() {
-        	return this.primeiro;
-        }
-        
-        public Celula getUltimo() {
-        	return this.ultimo;
-        }
-    }
-    
+	@Override
+	public Object recuperarInicio() { //método para retornar o elemento na frente da fila
+		return this.primeiro;
+	}
 
-    
-    ///////////////////////////////////////// Classe antiga //////////////////////////////////////////////
-    
-    
-    
-    /*public Fila(){
+	/**
+	 * Metodo para limpar a fila
+	 */
+	public void limpar() {
+		this.primeiro = null;
+		this.ultimo = null;
+		tamanho = 0;
+	}
+
+	/**
+	 * Metodo para recuperar a ultima celula
+	 * @return ultimo
+	 */
+	public Celula recuperarFinal() {
+		return this.ultimo;
+	}
+
+	@Override
+	public MeuIterador iterador() { //método para criar um iterador com o início da fila
+		return new MeuIterador(this.primeiro); //retorna um iterador com a cabeça da fila
+
+	}
+
+	/**
+	 * Metodo para recuperar a primeira celula
+	 * @return
+	 */
+	public Celula getPrimeiro() {
+		return this.primeiro;
+	}
+
+	/**
+	 * Metodo para recuperar a ultima celula
+	 * @return ultimo
+	 */
+	public Celula getUltimo() {
+		return this.ultimo;
+	}
+}
+
+
+
+///////////////////////////////////////// Classe antiga //////////////////////////////////////////////
+
+
+
+/*public Fila(){
 		primeiro = null; //inicializa o primeiro e o último como nulos
 		ultimo = null;
 	}
-    
+
     @Override
     public boolean estaVazia() { //método para verificar se a lista está vazia
     	if(primeiro == null){ //caso a primeira posição esteja vazia
@@ -230,5 +253,5 @@ public class Fila implements IFila{
         MeuIterador iterador = new MeuIterador(primeiro); //cria um novo iterador passando o primeiro elemento da fila como parâmetro
         return iterador; //retorna o iterador criado
     }
-    
+
 }*/

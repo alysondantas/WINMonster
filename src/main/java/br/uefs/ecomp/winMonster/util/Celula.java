@@ -2,13 +2,13 @@ package br.uefs.ecomp.winMonster.util;
 
 /*******************************************************************************
 
-Autor: Alyson Felipe Oliveira Dantas
+Autor: Alyson Felipe Oliveira Dantas e Bruno Menezes de Lima
 
 Componente Curricular: MI - Algoritmos II
 
-Concluido em: 12/12/2015
+Concluido em: 06/04/2016
 
-Declaro que este código foi elaborado por mim de forma individual e não contém nenhum
+Declaro que este código foi elaborado por esta dupla e não contém nenhum
 
 trecho de código de outro colega ou de outro autor, tais como provindos de livros e
 
@@ -18,10 +18,11 @@ de outra autoria que não a minha está destacado com uma citação para o autor e a
 
 do código, e estou ciente que estes trechos não serão considerados para fins de avaliação.
 
-******************************************************************************************/
+ ******************************************************************************************/
+
 /**
  * 
- * @author Alyson
+ * @author Alyson Dantas e Bruno Menezes
  * Classe para a celula generica
  */
 
@@ -32,26 +33,37 @@ public class Celula {//Classe para um celula generica
 	private Celula antEsq; //Referência para a célula antEsq
 	private Object conteudo;//Objeto generico que vai estar dentro da celula
 	private String caractere="";//Objeto generico que vai estar dentro da celula
-	private String binario="";
+	private String binario="";//String que vai guardar o novo binario
+
 	/**
 	 * Metodo construtor da classe obrigando que venha um objeto quando criar celula
-	 * @param o
+	 * @param antEsq
+	 * @param proxDir
+	 * @param conteudo
 	 */
-	
 	public Celula(Celula antEsq, Celula proxDir, Object conteudo) {
 		this.chave = 0;
-        this.proxDir = proxDir;
-        this.antEsq = antEsq;
-        this.conteudo = conteudo;
-    }
-	
+		this.proxDir = proxDir;
+		this.antEsq = antEsq;
+		this.conteudo = conteudo;
+	}
+
+	/**
+	 * Metodo construtor da classe obrigando que venha um objeto e uma chave quando criar celula
+	 * @param chave
+	 * @param conteudo
+	 */
 	public Celula(int chave, Object conteudo) {
 		this.chave = chave;
 		this.proxDir = null;
 		this.antEsq = null;
 		this.conteudo = conteudo;
 	}
-	
+
+	/**
+	 * Metodo construtor da classe obrigando que venha um caractere quando criar celula
+	 * @param caractere
+	 */
 	public Celula(String caractere) {
 		this.chave = 0;
 		this.proxDir = null;
@@ -59,38 +71,71 @@ public class Celula {//Classe para um celula generica
 		this.caractere = caractere;
 	}
 
-    public Celula() { //construtor auxiliar que inicializa o conteúdo como nulo
-        this.conteudo = null;
-    }
+	/**
+	 * Metodo construtor da classe livre ao criar celula
+	 */
+	public Celula() { //construtor auxiliar que inicializa o conteúdo como nulo
+		this.conteudo = null;
+	}
 
-    public Celula getProxDir() {
-        return proxDir;
-    }
+	/**
+	 * @return a proxima ou a direita
+	 */
+	public Celula getProxDir() {
+		return proxDir;
+	}
 
-    public void setProxDir(Celula proxDir) {
-        this.proxDir = proxDir;
-    }
+	/**
+	 * Modifica a referencia para proxima ou a direita
+	 * @param proxDir
+	 */
+	public void setProxDir(Celula proxDir) {
+		this.proxDir = proxDir;
+	}
 
-    public Celula getAntEsq() {
-        return antEsq;
-    }
+	/**
+	 * @return anterior ou esquerda
+	 */
+	public Celula getAntEsq() {
+		return antEsq;
+	}
 
-    public void setAntEsq(Celula antEsq) {
-        this.antEsq = antEsq;
-    }
+	/**
+	 * Modifica a referencia para anterior ou a direita
+	 * @param antEsq
+	 */
+	public void setAntEsq(Celula antEsq) {
+		this.antEsq = antEsq;
+	}
 
-    public Object getObjeto() {
-        return conteudo;
-    }
+	/**
+	 * 
+	 * @return o conteudo
+	 */
+	public Object getObjeto() {
+		return conteudo;
+	}
 
-    public void setObjeto(Object conteudo) {
-        this.conteudo = conteudo;
-    }
+	/**
+	 *  Modifica o objeto
+	 * @param conteudo
+	 */
+	public void setObjeto(Object conteudo) {
+		this.conteudo = conteudo;
+	}
 
+	/**
+	 * 
+	 * @return a chave
+	 */
 	public int getChave() {
 		return chave;
 	}
 
+	/**
+	 *  Modifica a chave
+	 * @param chave
+	 */
 	public void setChave(int chave) {
 		this.chave = chave;
 	}
@@ -122,8 +167,8 @@ public class Celula {//Classe para um celula generica
 	public void setBinario(String binario) {
 		this.binario = binario;
 	}
-    
-    
+
+
 
 } 
 
@@ -133,7 +178,7 @@ public class Celula {//Classe para um celula generica
 
 
 
-	/*public Celula(Object o){
+/*public Celula(Object o){
 		this.objeto=o;//objeto recebe object que foi passado
 	}
 	//Construtores do encapsulamento
