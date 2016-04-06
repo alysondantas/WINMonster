@@ -22,8 +22,8 @@ public class GUI extends JFrame implements ActionListener {
 		super("WinMONSTER");
 		this.controller = controller;
 		
-		//remover essa parte do programa no futuro
-		try { //remover depois
+		//Configura o Look and Feel do programa com o padrão do sistema
+		try { 
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (UnsupportedLookAndFeelException ex) {
 			ex.printStackTrace();
