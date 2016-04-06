@@ -2,16 +2,12 @@ package br.uefs.ecomp.winMonster.controller;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.FileNotFoundException;
+
 import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
+
 import java.io.IOException;
 import java.io.*;
 import java.math.BigInteger;
-import java.nio.channels.ShutdownChannelGroupException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.regex.Pattern;
@@ -19,7 +15,6 @@ import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 import br.uefs.ecomp.winMonster.util.*;
-import br.uefs.ecomp.winMonster.model.*;
 import br.uefs.ecomp.winMonster.exceptions.*;
 
 public class AdministradorController {
@@ -27,15 +22,9 @@ public class AdministradorController {
 	Fila fila = new Fila(); //crio uma fila para salvar a prioridade
 	Fila dicionario = new Fila(); //fila para salvar o dicionário
 	String arquivoOriginal=""; //String para salvar o conteúdo do arquivo original antes da compactação
-	int porcent = 0;
-	int myMax = 0;
-	
+
 	public Fila getDicionario(){
 		return dicionario;
-	}
-	
-	public int getPorcent() {
-		return porcent;
 	}
 
 
@@ -204,8 +193,8 @@ public class AdministradorController {
 			//Salvo o primeiro caractere da String numa String auxiliar chamada String caractere
 			String caractere = dic.substring(0, 1);
 			if(caractere.equals("\\")) {
-//				caractere = dic.substring(0, 2);
-				dic = dic.substring(2, dic.length());
+				caractere = dic.substring(0, 2);
+				dic = dic.substring(3, dic.length());
 			} else
 			//recorto o que eu acabei de salvar da String do dicionario + o próximo " "
 				dic = dic.substring(2, dic.length());
@@ -226,7 +215,6 @@ public class AdministradorController {
 		////////////TRADUÇÃO DO BINÁRIO RECEBIDO///////////////
 		String traducao = ""; //crio uma string para armazenar a tradução e inicalizo ela como vazia
 		it = dicionario.iterador(); //faço it iterar a fila dicionário
-		myMax = binario.length();
 		
 		while(!binario.isEmpty()) { //enquanto o binário não estiver completamente traduzido
 			String aux = binario.substring(0, 1); //crio uma string auxiliar e inicalizo ela com o primeiro caractere da String binario
@@ -249,8 +237,6 @@ public class AdministradorController {
 					
 					System.out.println(traducao);
 					binario = binario.substring(binaux.length(), binario.length()); //retira a parte traduzida do binário
-					
-					porcent = ((100 * binario.length())/myMax);
 					
 					if(!binario.isEmpty()){ //caso o binário não esteja vazio ainda, prepara ele para um novo ciclo
 						aux = binario.substring(0, 1); //igualo a String aux com o primeiro caractere da String binario
