@@ -24,7 +24,7 @@ public class GUI extends JFrame implements ActionListener {
 		
 		//remover essa parte do programa no futuro
 		try { //remover depois
-			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (UnsupportedLookAndFeelException ex) {
 			ex.printStackTrace();
 		} catch (IllegalAccessException ex) {
