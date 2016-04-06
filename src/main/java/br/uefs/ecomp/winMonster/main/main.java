@@ -22,8 +22,10 @@ public class main {
 		//TESTES PARA A GUI
 		
 		AdministradorController controller = new AdministradorController();
-		GUI gui = new GUI(controller);
-//		String aux = controller.converterTexto("?Ó?Û®Kú?!ØÕÌ^ÿ?wZrl%ýÁªù+¯rô¤ë=6Ì)Üë§MuÕ|??W¸08Öéð ÎóY÷sv«æ?ð|?e}ËÇ?ÝSzWDÈA#IµÌ_Ê¡^^?&ôßwF?/åZË¦!'éËÎ(");
+//		GUI gui = new GUI(controller);
+		String aux = controller.lerArquivo("C:\\Users\\Megazord\\Desktop\\New Text Document (2).txt");
+		System.out.println(aux);
+//		String aux = controller.descompacta("a 100 \\ 101 n 110   111 b 00 \n 01 \n\n25cc03263f1acb2be249f588a618094f\n\nÆ÷\n\n0100");
 		
 		//TESTES PARA CONSOLE
 		
