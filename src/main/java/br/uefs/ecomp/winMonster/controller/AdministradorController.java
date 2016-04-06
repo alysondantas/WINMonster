@@ -104,10 +104,10 @@ public class AdministradorController {
 		return novomd5;
 	}
 	
-	public boolean verifMd5(String md5a, String md5b) {
-		if (md5a.equals(md5b))
+	public boolean verifMd5(String md5a, String md5b) { //método para comparar 2 md5s
+		if (md5a.equals(md5b)) //caso sejam iguais
 			return true;
-		else
+		else //caso sejam diferentes
 			return false;		
 	}
 
@@ -272,35 +272,35 @@ public class AdministradorController {
 		return md5; //retorna o md5 salvo
 	}
 
-	public String converterBits(String bits) {
-		String conversao = "";
-		while(bits.length() >= 7) {
-			String byteAux = bits.substring(0, 7);
-			byteAux = "1" + byteAux;
-			int intAux = Integer.parseInt(byteAux, 2);
-			char[] aux = Character.toChars(intAux);
-			String charAux = Character.toString(aux[0]);
+	public String converterBits(String bits) { //método para compactar a BitString do arquivo de texto em caracteres
+		String conversao = ""; //string para salvar a conversão inicializada como vazia
+		while(bits.length() >= 7) { //enquanto tiver conjuntos de 7 ou mais bits na BitString
+			String byteAux = bits.substring(0, 7); //salva esse conjunto na String byteAux
+			byteAux = "1" + byteAux; //incrementa 1 no começo para garantir que nenhum bit vai ser perdido
+			int intAux = Integer.parseInt(byteAux, 2); //converte o byteAux para inteiro
+			char[] aux = Character.toChars(intAux); //encontra o caractere relacionado com esse inteiro
+			String charAux = Character.toString(aux[0]); //converte o caractere em String
 			System.out.println(charAux+ " " + intAux);
-			conversao = conversao + charAux;
-			bits = bits.substring(7, bits.length());
+			conversao = conversao + charAux; //concatena o caractere com a String conversão
+			bits = bits.substring(7, bits.length()); //remove o conjunto de bits convertido
 		}
-			conversao = conversao + "\n\n" + bits;
+			conversao = conversao + "\n\n" + bits; //ao fim da tradução, acrescenta o resto dos bits que não foram convertidos em uma outra sessão do arquivo
 		
 		
-		return conversao;
+		return conversao; //retorna a BitString compactada
 	}
 	
-	public String converterTexto(String texto) {
-		String conversao = "";
-		while(!texto.isEmpty()) {
-			String charAux = texto.substring(0, 1);
-			int intAux = charAux.codePointAt(0);
-			String byteAux = Integer.toBinaryString(intAux);
-			byteAux = byteAux.substring(1, byteAux.length());
-			conversao = conversao + byteAux;
-			texto = texto.substring(1, texto.length());
+	public String converterTexto(String texto) { //método para converter a BitString compactada de volta para os bits
+		String conversao = ""; //string para salvar a conversão incializada como vazia
+		while(!texto.isEmpty()) { //enquanto ainda tiverem caracteres para serem traduzidos
+			String charAux = texto.substring(0, 1); //captura o primeiro caractere e salva ele na String charAux
+			int intAux = charAux.codePointAt(0); //encontra o inteiro correspondente com o caractere
+			String byteAux = Integer.toBinaryString(intAux); //converte o inteiro em uma string de binários
+			byteAux = byteAux.substring(1, byteAux.length()); //remove o primeiro 1 adicionado no binário no  metodo converterBits para que não fossem perdidos bits
+			conversao = conversao + byteAux; //concatena os binários com a String conversao
+			texto = texto.substring(1, texto.length()); // remove o caractere convertido
 		}
 		
-		return conversao;
+		return conversao; //retorna a BitString descompactada
 	}
 }
