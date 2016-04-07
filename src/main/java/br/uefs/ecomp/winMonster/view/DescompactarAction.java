@@ -29,6 +29,7 @@ public class DescompactarAction implements ActionListener{
 			try {
 				String arquivo = controller.lerArquivo(fc.getSelectedFile().getAbsolutePath()); //salva o conteúdo do arquivo selecionado em String arquivo
 				JOptionPane.showMessageDialog(null, arquivo); //exibe o conteúdo do arquivo
+				JOptionPane.showMessageDialog(null, "Descompactando, por favor aguarde...");
 				String traducao = controller.descompacta(arquivo); //salva o texto descompactado em String traducao
 				JOptionPane.showMessageDialog(null, traducao); //teste para exibir o texto recebido
 				String nomeArq = fc.getSelectedFile().getName(); //salva o nome do arquivo que está na localização do arquivo selecionado na String nomeArq

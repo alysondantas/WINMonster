@@ -6,16 +6,11 @@ import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 
 import java.io.IOException;
-import java.awt.Font;
 import java.io.*;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.regex.Pattern;
-
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
 
 import br.uefs.ecomp.winMonster.util.*;
 import br.uefs.ecomp.winMonster.exceptions.*;
@@ -75,7 +70,6 @@ public class AdministradorController {
 			}
 			Celula auxCel = new Celula();
 			auxCel.setCaractere(linha.substring(0,1));
-//			JOptionPane.showMessageDialog(null,linha.charAt(0) + " " + cont + "\n" + linha);
 			fila.inserir(cont, auxCel); //crio uma string somente com a primeira letra de linha e insiro ela na fila, passando também o número de vezes que a letra se repete como chave
 			if(copiaNula == false) //caso a cópia não seja nula, preencha a fila cópia
 				dicionario.inserir(cont, linha.substring(0,1)); //preencho a cópia com o mesmo conteúdo da fila original
@@ -145,8 +139,6 @@ public class AdministradorController {
 			dic = dic + caractere + " " + binariodic + " ";
 		}
 		
-		System.out.println(novoBinario);
-		
 		novoBinario = converterBits(novoBinario);
 		
 		arquivoNovo = dic + "\n" + "\n" + md + "\n" + "\n" + novoBinario;
@@ -160,36 +152,20 @@ public class AdministradorController {
 		String binario = ""; //String para salvar a BitString
 		String resto = "";
 		String md5= ""; //String para salvar o md5
-		JFrame f = new JFrame("Descompactando...");
-		JTextArea textArea = new JTextArea();
-		
-		f.setLocationRelativeTo(null);
-        JTextArea text = new JTextArea();
-        text.setEditable(false);
-        text.setFont(new Font("Tahoma", Font.PLAIN, 13));
-        f.add(text);
-        f.setSize(500, 200);
-        f.setVisible(true);
 
 		////////////SEPARAÇÃO DA STRING DO ARQUIVO ORIGINAL//////////////////
 		
 		//separo a partir da última ocorrência de "\n\n" até o fim da string e salvo na String resto
 		resto = arquivo.substring(arquivo.lastIndexOf("\n\n") + 2, arquivo.length());
-		JOptionPane.showMessageDialog(null, resto);
-		System.out.println(resto);
 		//recorto o pedaço que eu acabei de salvar em "resto" da String do arquivo original
 		arquivo = arquivo.substring(0, arquivo.lastIndexOf("\n\n"));
 		//separo novamente a partir da última ocorrência de "\n\n" até o fim da string e salvo na String binario
 		binario = arquivo.substring(arquivo.lastIndexOf("\n\n") + 2, arquivo.length());
-		JOptionPane.showMessageDialog(null, binario);
 		//converto o texto criptografado em uma BitString
 		binario = converterTexto(binario);
-		System.out.println(binario);
 		//acrescento o resto da BitString salvo no arquivo no binario
 		if (!resto.equals("2"))
 		binario = binario + resto;
-		System.out.println(binario);
-		JOptionPane.showMessageDialog(null, binario);
 		//recorto o pedaço que eu acabei de salvar em "binario" da String do arquivo original
 		arquivo = arquivo.substring(0, arquivo.lastIndexOf("\n\n"));
 		//separo novamente a partir da última ocorrência de "\n\n" até o fim da string e salvo na String md5
@@ -199,8 +175,6 @@ public class AdministradorController {
 		//o restante que sobrou da string original é só o dicionário
 		dic = arquivo;
 		
-		JOptionPane.showMessageDialog(null, "Passou a separação");
-
 		
 		/////////////SEPARAÇÃO DO DICIONÁRIO////////////////
 		
@@ -227,7 +201,6 @@ public class AdministradorController {
 			dicionario.inserir(1, cel);
 		}
 		
-		JOptionPane.showMessageDialog(null, "Passou a criação do dicionário");
 		
 		////////////TRADUÇÃO DO BINÁRIO RECEBIDO///////////////
 		String traducao = ""; //crio uma string para armazenar a tradução e inicalizo ela como vazia
@@ -240,8 +213,8 @@ public class AdministradorController {
 				caux = (Celula)caux.getObjeto();
 				String binaux = caux.getBinario(); //salvo o binário presente em cada uma das células em binaux
 				for(int i = 1; !aux.equals(binaux) && i <= binaux.length(); i++) { //crio um ciclo de repetições para ir aumentando a substring de binario de um em um elemento e comparando ele com o binário da célula iterada enquanto essa substring não for igual ao binário da célula. 
-					if(aux.length() < binario.length())
-					aux = binario.substring(0, i);
+					if(aux.length() < binario.length()) //condição para impedir que o binário auxiliar fique maior do que o binário total restante
+						aux = binario.substring(0, i); //aumenta o tamanho de aux
 				}
 				if (aux.equals(binaux)) { //após o fim do ciclo de repetições, caso tenha encontrado uma substring que seja igual ao binário da célula
 					String str = (String)caux.getObjeto();
@@ -253,8 +226,6 @@ public class AdministradorController {
 						traducao = traducao + str; //coloco a letra relacionada com o binário encontrada na tradução
 					}
 					
-					textArea.setText(traducao);
-					System.out.println(traducao);
 					binario = binario.substring(binaux.length(), binario.length()); //retira a parte traduzida do binário
 					
 					if(!binario.isEmpty()){ //caso o binário não esteja vazio ainda, prepara ele para um novo ciclo
@@ -262,13 +233,12 @@ public class AdministradorController {
 						it = dicionario.iterador(); //volta o iterador para o início do dicionario
 					}
 				}
-				else {
+				else { //caso não tenha encontrado nenhuma substring igual ao 
 					if(!binario.isEmpty()){ //caso o binário não esteja vazio ainda, prepara ele para um novo ciclo
 						aux = binario.substring(0, 1); //igualo a String aux com o primeiro caractere da String binario
 					}
 				}
 			} //fim do ciclo de iteração
-			JOptionPane.showMessageDialog(null, binario);
 		}
 		
 		return traducao;
@@ -299,14 +269,13 @@ public class AdministradorController {
 			int intAux = Integer.parseInt(byteAux, 2); //converte o byteAux para inteiro
 			char[] aux = Character.toChars(intAux); //encontra o caractere relacionado com esse inteiro
 			String charAux = Character.toString(aux[0]); //converte o caractere em String
-			System.out.println(charAux+ " " + intAux);
 			conversao = conversao + charAux; //concatena o caractere com a String conversão
 			bits = bits.substring(7, bits.length()); //remove o conjunto de bits convertido
 		}
-			if (bits.length() == 0) {
-				conversao = conversao + "\n\n" + 2;
+			if (bits.length() == 0) { //caso não tenha sobrado resto
+				conversao = conversao + "\n\n" + 2; //acrescenta 2 no lugar do resto
 			}
-			else {
+			else { //caso tenha sobrado resto
 				conversao = conversao + "\n\n" + bits; //ao fim da tradução, acrescenta o resto dos bits que não foram convertidos em uma outra sessão do arquivo
 			}
 		
