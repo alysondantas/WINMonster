@@ -35,6 +35,7 @@ public class AdministradorController {
 		String c = ""; //crio uma string auxiliar para armazenar o conteúdo da string
 		
 		while(linha != null) { //enquanto não chegar no fim do arquivo
+			JOptionPane.showMessageDialog(null, linha);
 			c = c + linha; //salvo o a letra da string na posição atual
 			linha = buffRead.readLine(); //salvo a linha atual do arquivo na string
 			if(linha!=null)
@@ -192,7 +193,7 @@ public class AdministradorController {
 		while(!dic.isEmpty()) {
 			//Salvo o primeiro caractere da String numa String auxiliar chamada String caractere
 			String caractere = dic.substring(0, 1);
-			if(caractere.equals("\\")) {
+			if(dic.substring(0,2).equals("\\n")) {
 				caractere = dic.substring(0, 2);
 				dic = dic.substring(3, dic.length());
 			} else
@@ -279,7 +280,7 @@ public class AdministradorController {
 			conversao = conversao + charAux; //concatena o caractere com a String conversão
 			bits = bits.substring(7, bits.length()); //remove o conjunto de bits convertido
 		}
-			conversao = conversao + "\n\n" + bits; //ao fim da tradução, acrescenta o resto dos bits que não foram convertidos em uma outra sessão do arquivo
+			conversao = conversao + "\n\n\n" + bits; //ao fim da tradução, acrescenta o resto dos bits que não foram convertidos em uma outra sessão do arquivo
 		
 		
 		return conversao; //retorna a BitString compactada
