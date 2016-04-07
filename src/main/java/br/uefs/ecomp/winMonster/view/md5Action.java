@@ -1,3 +1,23 @@
+/*******************************************************************************
+
+Autor: Alyson Felipe Oliveira Dantas e Bruno Menezes de Lima
+
+Componente Curricular: MI - Algoritmos II
+
+Concluido em: 06/04/2016
+
+Declaro que este código foi elaborado por esta dupla e não contém nenhum
+
+trecho de código de outro colega ou de outro autor, tais como provindos de livros e
+
+apostilas, e páginas ou documentos eletrônicos da Internet. Qualquer trecho de código
+
+de outra autoria que não a minha está destacado com uma citação para o autor e a fonte
+
+do código, e estou ciente que estes trechos não serão considerados para fins de avaliação.
+
+ ******************************************************************************************/
+
 package br.uefs.ecomp.winMonster.view;
 
 import java.awt.event.*;
@@ -20,13 +40,14 @@ public class md5Action implements ActionListener{
 		JFileChooser fc = new JFileChooser(); //crio um FileChooser para auxiliar na seleção do arquivo
 		fc.setFileSelectionMode(JFileChooser.FILES_ONLY); //por padrão o FileChooser só permitirá a seleção de arquivos
 		fc.setDialogTitle(" Abrir Arquivo Original "); //define o título do FileChooser
-        fc.setFileFilter(new FileNameExtensionFilter("Arquivos .MONSTER", "monster")); //filtro do tipo de arquivos que podem ser abertos
+        fc.setFileFilter(new FileNameExtensionFilter("Arquivos .MONSTER", "monster")); //filtro do tipo de arquivos que podem ser abertos restringindo somente para .monster
 		JOptionPane.showMessageDialog(null, "Escolha o arquivo .monster compactado");
 		int resposta = fc.showOpenDialog(null); //abre o menu de abertura de arquivo e salva a resposta do usuário em int resposta
 		if (resposta == JFileChooser.APPROVE_OPTION) { //caso o usuário selecione um arquivo
 			try {
 				md5Ant = controller.recuperarMd5(fc.getSelectedFile().getAbsolutePath()); //recupera o md5 do arquivo compactado e salva na String md5Ant
 				JOptionPane.showMessageDialog(null, "Agora escolha o arquivo descompactado"); //exibe a mensagem para o usuário escolher o arquivo descompactado
+				fc.setFileFilter(null);
 				fc.setDialogTitle(" Abrir Arquivo Descompactado "); //redefine o título do FileChooser
 				int resp2 = fc.showOpenDialog(null); //abre novamente o menu de abertura de arquivo e salva a resposta do usuário em int resp2
 				if(resp2 == JFileChooser.APPROVE_OPTION) { //caso tenha sido selecionado novamente um arquivo

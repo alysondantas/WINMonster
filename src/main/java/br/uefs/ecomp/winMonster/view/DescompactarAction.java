@@ -1,3 +1,23 @@
+/*******************************************************************************
+
+Autor: Alyson Felipe Oliveira Dantas e Bruno Menezes de Lima
+
+Componente Curricular: MI - Algoritmos II
+
+Concluido em: 06/04/2016
+
+Declaro que este código foi elaborado por esta dupla e não contém nenhum
+
+trecho de código de outro colega ou de outro autor, tais como provindos de livros e
+
+apostilas, e páginas ou documentos eletrônicos da Internet. Qualquer trecho de código
+
+de outra autoria que não a minha está destacado com uma citação para o autor e a fonte
+
+do código, e estou ciente que estes trechos não serão considerados para fins de avaliação.
+
+ ******************************************************************************************/
+
 package br.uefs.ecomp.winMonster.view;
 
 import java.awt.event.*;
@@ -22,8 +42,8 @@ public class DescompactarAction implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		JFileChooser fc = new JFileChooser(); //cria um novo selecionador de arquivos
 		fc.setFileSelectionMode(JFileChooser.FILES_ONLY); //configura o selecionador para só receber arquivos
-		fc.setDialogTitle(" Abrir Arquivo "); //define o título da janela de seleção
-        fc.setFileFilter(new FileNameExtensionFilter("Arquivos .MONSTER", "monster")); //filtro do tipo de arquivos que podem ser abertos
+		fc.setDialogTitle(" Abrir Arquivo para Descompactação "); //define o título da janela de seleção
+        fc.setFileFilter(new FileNameExtensionFilter("Arquivos .MONSTER", "monster")); //filtro do tipo de arquivos que podem ser abertos restringindo somente para .monster
 		int resposta = fc.showOpenDialog(null); //abre a janela de seleção e guarda a ação do usuário em resposta
 		if (resposta == JFileChooser.APPROVE_OPTION) { //caso o usuário tenha selecionado um arquivo
 			try {

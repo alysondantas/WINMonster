@@ -1,3 +1,23 @@
+/*******************************************************************************
+
+Autor: Alyson Felipe Oliveira Dantas e Bruno Menezes de Lima
+
+Componente Curricular: MI - Algoritmos II
+
+Concluido em: 06/04/2016
+
+Declaro que este código foi elaborado por esta dupla e não contém nenhum
+
+trecho de código de outro colega ou de outro autor, tais como provindos de livros e
+
+apostilas, e páginas ou documentos eletrônicos da Internet. Qualquer trecho de código
+
+de outra autoria que não a minha está destacado com uma citação para o autor e a fonte
+
+do código, e estou ciente que estes trechos não serão considerados para fins de avaliação.
+
+ ******************************************************************************************/
+
 package br.uefs.ecomp.winMonster.controller;
 
 import java.io.BufferedReader;
@@ -30,7 +50,7 @@ public class AdministradorController {
 	}
 
 	public String lerArquivo(String local) throws IOException { //método que lê um arquivo de texto e converte todo o seu conteúdo para uma String
-		Reader arq = new InputStreamReader(new FileInputStream(local), "ISO-8859-1"); //inicializo arq como a leitura de arquivos no local especificado
+		Reader arq = new InputStreamReader(new FileInputStream(local), "ISO-8859-1"); //inicializo arq como a leitura de arquivos no local especificado no padrão ISO-8859-1
 		BufferedReader buffRead = new BufferedReader(arq); //crio um novo objeto BuffReader e passo para ele a leitura do local em arq
 		String linha = buffRead.readLine(); //crio uma string auxiliar e já armazeno a primeira linha do arquivo
 		String c = ""; //crio uma string auxiliar para armazenar o conteúdo da string
@@ -49,7 +69,7 @@ public class AdministradorController {
 
 	public void escreverArquivo(String texto, String local, String nome) throws IOException { //método deixado aqui só para inspiração. Não vai ser usado do jeito que está descrito no momento
 		local = local + nome; //anexo o nome do arquivo ao local que ele será escrito
-		BufferedWriter buffWrite = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(local), "ISO-8859-1")); //crio um novo objeto para escrita de arquivos e passo como parâmetro um novo objeto de escrita do arquivo no local especificado
+		BufferedWriter buffWrite = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(local), "ISO-8859-1")); //crio um novo objeto para escrita de arquivos e passo como parâmetro um novo objeto de escrita do arquivo no local especificado no padrão ISO-8859-1
 		buffWrite.append(texto); //anexo essa string no arquivo de texto
 		buffWrite.close(); //fecho o arquivo aberto
 	}
