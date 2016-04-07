@@ -4,6 +4,7 @@ import java.awt.event.*;
 import java.io.IOException;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import br.uefs.ecomp.winMonster.controller.AdministradorController;
 import br.uefs.ecomp.winMonster.exceptions.CriarMD5NuloException;
@@ -22,6 +23,7 @@ public class DescompactarAction implements ActionListener{
 		JFileChooser fc = new JFileChooser(); //cria um novo selecionador de arquivos
 		fc.setFileSelectionMode(JFileChooser.FILES_ONLY); //configura o selecionador para só receber arquivos
 		fc.setDialogTitle(" Abrir Arquivo "); //define o título da janela de seleção
+        fc.setFileFilter(new FileNameExtensionFilter("Arquivos .MONSTER", "monster"));
 		int resposta = fc.showOpenDialog(null); //abre a janela de seleção e guarda a ação do usuário em resposta
 		if (resposta == JFileChooser.APPROVE_OPTION) { //caso o usuário tenha selecionado um arquivo
 			try {

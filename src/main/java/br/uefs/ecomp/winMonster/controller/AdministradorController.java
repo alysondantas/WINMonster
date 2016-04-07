@@ -6,13 +6,16 @@ import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 
 import java.io.IOException;
+import java.awt.Font;
 import java.io.*;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.regex.Pattern;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 
 import br.uefs.ecomp.winMonster.util.*;
 import br.uefs.ecomp.winMonster.exceptions.*;
@@ -157,6 +160,16 @@ public class AdministradorController {
 		String binario = ""; //String para salvar a BitString
 		String resto = "";
 		String md5= ""; //String para salvar o md5
+		JFrame f = new JFrame("Descompactando...");
+		JTextArea textArea = new JTextArea();
+		
+		f.setLocationRelativeTo(null);
+        JTextArea text = new JTextArea();
+        text.setEditable(false);
+        text.setFont(new Font("Tahoma", Font.PLAIN, 13));
+        f.add(text);
+        f.setSize(500, 200);
+        f.setVisible(true);
 
 		////////////SEPARAÇÃO DA STRING DO ARQUIVO ORIGINAL//////////////////
 		
@@ -240,6 +253,7 @@ public class AdministradorController {
 						traducao = traducao + str; //coloco a letra relacionada com o binário encontrada na tradução
 					}
 					
+					textArea.setText(traducao);
 					System.out.println(traducao);
 					binario = binario.substring(binaux.length(), binario.length()); //retira a parte traduzida do binário
 					
