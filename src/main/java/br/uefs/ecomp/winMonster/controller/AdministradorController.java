@@ -248,6 +248,11 @@ public class AdministradorController {
 						it = dicionario.iterador(); //volta o iterador para o início do dicionario
 					}
 				}
+				else {
+					if(!binario.isEmpty()){ //caso o binário não esteja vazio ainda, prepara ele para um novo ciclo
+						aux = binario.substring(0, 1); //igualo a String aux com o primeiro caractere da String binario
+					}
+				}
 			} //fim do ciclo de iteração
 			JOptionPane.showMessageDialog(null, binario);
 		}
