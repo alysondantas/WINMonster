@@ -22,9 +22,9 @@ public class main {
 		//TESTES PARA A GUI
 		
 		AdministradorController controller = new AdministradorController();
-//		GUI gui = new GUI(controller);
-		String aux = controller.lerArquivo("C:\\Users\\Megazord\\Desktop\\New Text Document (2).txt");
-		System.out.println(aux);
+		GUI gui = new GUI(controller);
+//		String aux = controller.lerArquivo("C:\\Users\\Megazord\\Desktop\\New Text Document (2).txt");
+//		System.out.println(aux);
 //		String aux = controller.descompacta("a 100 \\ 101 n 110   111 b 00 \n 01 \n\n25cc03263f1acb2be249f588a618094f\n\nÆ÷\n\n0100");
 		
 		//TESTES PARA CONSOLE
