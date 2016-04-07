@@ -10,22 +10,27 @@ import javax.swing.JOptionPane;
 
 import br.uefs.ecomp.winMonster.controller.*;
 import br.uefs.ecomp.winMonster.exceptions.CaractereInexistenteException;
+import br.uefs.ecomp.winMonster.exceptions.CelulaNulaException;
+import br.uefs.ecomp.winMonster.exceptions.CriarMD5NuloException;
 import br.uefs.ecomp.winMonster.exceptions.DescompactarStringNulaException;
+import br.uefs.ecomp.winMonster.exceptions.FilaVaziaException;
 import br.uefs.ecomp.winMonster.util.Arvore;
 import br.uefs.ecomp.winMonster.util.Fila;
 
 public class main {
-	public static void main (String[] args) throws IOException, DescompactarStringNulaException {
-		//Tire o comentário do teste que quiser usar e comente o outro
+	public static void main (String[] args) throws IOException, DescompactarStringNulaException, FilaVaziaException, CelulaNulaException, CriarMD5NuloException, CaractereInexistenteException {
+		//Tire o comentÃ¡rio do teste que quiser usar e comente o outro
 		
 		
 		//TESTES PARA A GUI
 		
 		AdministradorController controller = new AdministradorController();
-//		GUI gui = new GUI(controller);
-		String aux = controller.lerArquivo("C:\\Users\\Megazord\\Desktop\\New Text Document (2).txt");
-		System.out.println(aux);
-//		String aux = controller.descompacta("a 100 \\ 101 n 110   111 b 00 \n 01 \n\n25cc03263f1acb2be249f588a618094f\n\nÆ÷\n\n0100");
+		GUI gui = new GUI(controller);
+//		String aux = controller.lerArquivo("C:\\Users\\Megazord\\Desktop\\teste.txt.monster");
+//		System.out.println(aux);
+//		System.out.println("oi");
+//		String aux = controller.compactarArquivo("C:\\Users\\Megazord\\Desktop\\teste.txt");
+//		JOptionPane.showMessageDialog(null, aux);
 		
 		//TESTES PARA CONSOLE
 		
