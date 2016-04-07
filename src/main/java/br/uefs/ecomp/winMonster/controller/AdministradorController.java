@@ -106,43 +106,43 @@ public class AdministradorController {
 			return false;		
 	}
 
-	public String criaArquivo() throws CaractereInexistenteException, IOException, FilaVaziaException, CelulaNulaException, CriarMD5NuloException{
-		arvoreHuffman = new Arvore();
-		arvoreHuffman = arvoreHuffman.inserirHuffman(fila);
-		arvoreHuffman.construirDicionario(dicionario);
-		Celula celulaCaractere;
-		String caractere;
-		String novoBinario = "";
-		String binariodic;
-		String md = md5(arquivoOriginal);
-		String dic = "";
-		String arquivoNovo = "";
-		MeuIterador iterador;
+	public String criaArquivo() throws CaractereInexistenteException, IOException, FilaVaziaException, CelulaNulaException, CriarMD5NuloException{//Metodo para criar a string do arquivo compactado com dicionario e md5
+		arvoreHuffman = new Arvore(); // arvore de huffman é instanciada
+		arvoreHuffman = arvoreHuffman.inserirHuffman(fila); // algoritimo da arvore de huffman recebe a fila de prioridade e retornam a arvore pronta
+		arvoreHuffman.construirDicionario(dicionario); // pela arvore é criado o dicionario dela com o binario de cada caractere
+		Celula celulaCaractere; //celula que esta dentro do dicionario
+		String caractere; //string para pegar o caractere
+		String novoBinario = ""; //string para o novo binario
+		String binariodic; //binario que vai estar dentro do dicionario
+		String md = md5(arquivoOriginal); // md5 recebe o md5 do arquivo original
+		String dic = ""; //dicionario
+		String arquivoNovo = ""; //string que é o novo arquivo
+		MeuIterador iterador; //iterador
 		for (int j = 0; j < arquivoOriginal.length(); j++) { //Repetição: Início = Segunda letra da String; Condição = Até o fim da String
-			iterador=dicionario.iterador();
-			while(iterador.temProximo()){
-				celulaCaractere = (Celula) iterador.obterProximo();
-				caractere = celulaCaractere.getCaractere();
-				binariodic = celulaCaractere.getBinario();
+			iterador=dicionario.iterador(); // iterador recebe a primeira celula do dicionario
+			while(iterador.temProximo()){ //enquanto existir proximo
+				celulaCaractere = (Celula) iterador.obterProximo(); //celula recebe a atual e iterador passa pro proximo
+				caractere = celulaCaractere.getCaractere(); //caractere recebe o caractere da celula atual
+				binariodic = celulaCaractere.getBinario(); // binario do dicionario o binario correspondente ao caractere atual
 				if (caractere.charAt(0) == arquivoOriginal.charAt(j)) { //caso a letra do dicionario seja igual a letra atual
 					novoBinario = novoBinario + binariodic;//binario concatena com o binario do dicionario
 				}
 			}
 		} //repete o ciclo
-		iterador=dicionario.iterador();
-		while(iterador.temProximo()){
-			celulaCaractere = (Celula) iterador.obterProximo();
-			caractere = celulaCaractere.getCaractere();
-			if(caractere.equals("\n"))
-				caractere = "\\n";
-			binariodic = celulaCaractere.getBinario();
-			dic = dic + caractere + " " + binariodic + " ";
-		}
+		iterador=dicionario.iterador(); //iterador é reiniciado com o primeiro elemento do dicionario para escrever ele no arquivo
+		while(iterador.temProximo()){ //enquanto existir proximo
+			celulaCaractere = (Celula) iterador.obterProximo(); //celula recebe a atual e iterador passa pro proximo
+			caractere = celulaCaractere.getCaractere(); //caractere recebe o caractere atual
+			if(caractere.equals("\n")) //se for uma quebra de linha
+				caractere = "\\n"; // adiciona um \ a mais para entrar na string sem possiveis conflitos
+			binariodic = celulaCaractere.getBinario(); //binario do dicionario recebe o binario atual
+			dic = dic + caractere + " " + binariodic + " "; //dicionario concatena ele mais o caractere mais o binario respectivo
+		} //repete o ciclo
 		
-		novoBinario = converterBits(novoBinario);
+		novoBinario = converterBits(novoBinario);//novoBinario recebe a string convertida e compactada
 		
-		arquivoNovo = dic + "\n" + "\n" + md + "\n" + "\n" + novoBinario;
-		return arquivoNovo;
+		arquivoNovo = dic + "\n" + "\n" + md + "\n" + "\n" + novoBinario; //novo arquivo recebe o dicionario o md5 e o novoBinario com quebras de linha para diferenciar um do outro
+		return arquivoNovo; //retorna o novo arquivo para ser escrito.
 	}
 
 	public String descompacta(String arquivo) throws IOException, DescompactarStringNulaException{
