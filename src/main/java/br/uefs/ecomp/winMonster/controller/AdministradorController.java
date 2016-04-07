@@ -223,7 +223,7 @@ public class AdministradorController {
 				Celula caux = (Celula)it.obterProximo();
 				caux = (Celula)caux.getObjeto();
 				String binaux = caux.getBinario(); //salvo o binário presente em cada uma das células em binaux
-				for(int i = 1; !aux.equals(binaux) && i <= binario.length(); i++) { //crio um ciclo de repetições para ir aumentando a substring de binario de um em um elemento e comparando ele com o binário da célula iterada enquanto essa substring não for igual ao binário da célula. 
+				for(int i = 1; !aux.equals(binaux) && i <= binaux.length(); i++) { //crio um ciclo de repetições para ir aumentando a substring de binario de um em um elemento e comparando ele com o binário da célula iterada enquanto essa substring não for igual ao binário da célula. 
 					aux = binario.substring(0, i);
 				}
 				if (aux.equals(binaux)) { //após o fim do ciclo de repetições, caso tenha encontrado uma substring que seja igual ao binário da célula
