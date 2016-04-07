@@ -25,8 +25,8 @@ do código, e estou ciente que estes trechos não serão considerados para fins de 
  *Classe para passar um verificador junto ao binario que vai dar break na recursão da criação de caracteres
  */
 public class BinarioDoCaractere { //classe para colocar o binario e um verificador para o metodo de huffman
-	private String binario;
-	private boolean verificador;
+	private String binario;//string para guardar o binario
+	private boolean verificador;//boolean para verificar se encontrou o caractere
 
 	/**
 	 * @return o binario
