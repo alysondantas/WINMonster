@@ -26,7 +26,10 @@ public class AdministradorController {
 	public Fila getDicionario(){
 		return dicionario;
 	}
-
+	
+	public void setArquivoOriginal(String arqmod){
+		arquivoOriginal = arqmod;
+	}
 
 	public String lerArquivo(String local) throws IOException { //método que lê um arquivo de texto e converte todo o seu conteúdo para uma String
 		Reader arq = new InputStreamReader(new FileInputStream(local), "ISO-8859-1"); //inicializo arq como a leitura de arquivos no local especificado
