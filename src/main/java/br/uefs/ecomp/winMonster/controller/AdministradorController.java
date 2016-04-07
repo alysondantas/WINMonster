@@ -32,8 +32,6 @@ public class AdministradorController {
 		Reader arq = new InputStreamReader(new FileInputStream(local), "ISO-8859-1"); //inicializo arq como a leitura de arquivos no local especificado
 		BufferedReader buffRead = new BufferedReader(arq); //crio um novo objeto BuffReader e passo para ele a leitura do local em arq
 		String linha = buffRead.readLine(); //crio uma string auxiliar e já armazeno a primeira linha do arquivo
-		if (linha == null)
-			JOptionPane.showMessageDialog(null, "que porra");
 		String c = ""; //crio uma string auxiliar para armazenar o conteúdo da string
 		
 		while(linha != null) { //enquanto não chegar no fim do arquivo
@@ -172,6 +170,7 @@ public class AdministradorController {
 		binario = converterTexto(binario);
 		System.out.println(binario);
 		//acrescento o resto da BitString salvo no arquivo no binario
+		if (!resto.equals("2"))
 		binario = binario + resto;
 		System.out.println(binario);
 		JOptionPane.showMessageDialog(null, binario);
@@ -281,8 +280,12 @@ public class AdministradorController {
 			conversao = conversao + charAux; //concatena o caractere com a String conversão
 			bits = bits.substring(7, bits.length()); //remove o conjunto de bits convertido
 		}
-			conversao = conversao + "\n\n" + bits; //ao fim da tradução, acrescenta o resto dos bits que não foram convertidos em uma outra sessão do arquivo
-		
+			if (bits.length() == 0) {
+				conversao = conversao + "\n\n" + 2;
+			}
+			else {
+				conversao = conversao + "\n\n" + bits; //ao fim da tradução, acrescenta o resto dos bits que não foram convertidos em uma outra sessão do arquivo
+			}
 		
 		return conversao; //retorna a BitString compactada
 	}
