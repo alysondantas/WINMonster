@@ -23,20 +23,16 @@ public class DescompactarAction implements ActionListener{
 		JFileChooser fc = new JFileChooser(); //cria um novo selecionador de arquivos
 		fc.setFileSelectionMode(JFileChooser.FILES_ONLY); //configura o selecionador para só receber arquivos
 		fc.setDialogTitle(" Abrir Arquivo "); //define o título da janela de seleção
-        fc.setFileFilter(new FileNameExtensionFilter("Arquivos .MONSTER", "monster"));
+        fc.setFileFilter(new FileNameExtensionFilter("Arquivos .MONSTER", "monster")); //filtro do tipo de arquivos que podem ser abertos
 		int resposta = fc.showOpenDialog(null); //abre a janela de seleção e guarda a ação do usuário em resposta
 		if (resposta == JFileChooser.APPROVE_OPTION) { //caso o usuário tenha selecionado um arquivo
 			try {
 				String arquivo = controller.lerArquivo(fc.getSelectedFile().getAbsolutePath()); //salva o conteúdo do arquivo selecionado em String arquivo
-				JOptionPane.showMessageDialog(null, arquivo); //exibe o conteúdo do arquivo
 				JOptionPane.showMessageDialog(null, "Descompactando, por favor aguarde...");
 				String traducao = controller.descompacta(arquivo); //salva o texto descompactado em String traducao
-				JOptionPane.showMessageDialog(null, traducao); //teste para exibir o texto recebido
 				String nomeArq = fc.getSelectedFile().getName(); //salva o nome do arquivo que está na localização do arquivo selecionado na String nomeArq
 				String local = fc.getSelectedFile().getPath().replace(nomeArq, ""); //salva o local do arquivo selecionado removendo o nome do arquivo na String local
 				nomeArq = nomeArq.substring(0, nomeArq.lastIndexOf(".monster")); //tira o ".monster" do nome do arquivo
-				JOptionPane.showMessageDialog(null, nomeArq); //teste para exibir o nome do arquivo
-				JOptionPane.showMessageDialog(null, local); //teste para exibir o local do arquivo
 				if (controller.verifMd5(controller.md5(traducao), controller.recuperarMd5(fc.getSelectedFile().getAbsolutePath())) == true) { //verificação de integridade ao fim da descompactação, comparando o md5 gerado através do texto traduzido com o já armazenado no arquivo compactado
 					JOptionPane.showMessageDialog(null, "Descompactação efeituada com sucesso!\n\nNão houve perda de integridade no arquivo"); //caso os md5 sejam iguais
 				} else {

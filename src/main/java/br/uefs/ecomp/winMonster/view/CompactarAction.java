@@ -29,14 +29,11 @@ public class CompactarAction implements ActionListener {
 			String texto;
 			try {
 				texto = controller.compactarArquivo(fc.getSelectedFile().getAbsolutePath());  //chama o método compactarArquivo do controller, passa o local do arquivo selecionado para ele e salva o texto do arquivo compactado na String texto
-				JOptionPane.showMessageDialog(null, texto); //teste para exibir o texto recebido
 				String nomeArq = fc.getSelectedFile().getName(); //salva o nome do arquivo que está na localização do arquivo selecionado na String nomeArq
-				JOptionPane.showMessageDialog(null, nomeArq); //teste para exibir o nome do arquivo
 				String local = fc.getSelectedFile().getPath().replace(nomeArq, ""); //salva o local do arquivo selecionado removendo o nome do arquivo na String local
-				JOptionPane.showMessageDialog(null, local); //teste para exibir o local do arquivo		
 				try { 
 					controller.escreverArquivo(texto, local, nomeArq + ".monster"); //chama o método de escreverArquivo no controller passando o texto compactado com dicionário e md5, o local do arquivo e o novo nome concatenado com a extensão ".monster"
-//					controller.escreverBits(texto, local + nomeArq + ".monster");
+					JOptionPane.showMessageDialog(null, "Arquivo compactado com sucesso!!");
 				} catch (IOException e1) {
 					JOptionPane.showMessageDialog(null, "IOException");
 					e1.printStackTrace();

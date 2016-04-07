@@ -1,21 +1,16 @@
 package br.uefs.ecomp.winMonster.view;
 
-import java.io.File;
-import java.io.IOException;
 import javax.swing.*;
 
 import br.uefs.ecomp.winMonster.controller.AdministradorController;
 
-import java.awt.*;
-import java.awt.event.*;
 
-public class GUI extends JFrame implements ActionListener {
+public class GUI extends JFrame {
 	private AdministradorController controller;
 
 	private JButton button1;
 	private JButton button2;
 	private JButton button3;
-	private JFileChooser file;
 	private Splash splash;
 	
 	public GUI(AdministradorController controller) {
@@ -55,7 +50,6 @@ public class GUI extends JFrame implements ActionListener {
 		
 		//implementação das ações dos botões
 		button1.addActionListener(new CompactarAction(controller));
-		//botão 2 e botão 3 não implementados
 		button2.addActionListener(new DescompactarAction(controller));
 		button3.addActionListener(new md5Action());
 		
@@ -69,13 +63,6 @@ public class GUI extends JFrame implements ActionListener {
 		
 		//fazer a janela aparecer para o usuário
 		this.setVisible(true);
-	}
-
-	//ação que eu deixei só para testes futuros. Vou retirar antes de enviar o projeto final
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == button1) {
-			//códigos de teste futuros aqui
-		}
 	}
 
 }

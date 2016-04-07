@@ -4,6 +4,7 @@ import java.awt.event.*;
 import java.io.IOException;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import br.uefs.ecomp.winMonster.controller.AdministradorController;
 import br.uefs.ecomp.winMonster.exceptions.CriarMD5NuloException;
@@ -19,6 +20,7 @@ public class md5Action implements ActionListener{
 		JFileChooser fc = new JFileChooser(); //crio um FileChooser para auxiliar na seleção do arquivo
 		fc.setFileSelectionMode(JFileChooser.FILES_ONLY); //por padrão o FileChooser só permitirá a seleção de arquivos
 		fc.setDialogTitle(" Abrir Arquivo Original "); //define o título do FileChooser
+        fc.setFileFilter(new FileNameExtensionFilter("Arquivos .MONSTER", "monster")); //filtro do tipo de arquivos que podem ser abertos
 		JOptionPane.showMessageDialog(null, "Escolha o arquivo .monster compactado");
 		int resposta = fc.showOpenDialog(null); //abre o menu de abertura de arquivo e salva a resposta do usuário em int resposta
 		if (resposta == JFileChooser.APPROVE_OPTION) { //caso o usuário selecione um arquivo
