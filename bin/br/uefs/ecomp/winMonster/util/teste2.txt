@@ -1,0 +1,1 @@
+agua azul com chileno velho e arquivo com string meio grande aqui... Vai que não funciona quando o arquivo tem mais de 10 palvras, numeros como 12345 e outros caracteres como %$#*&¨@!? vai que né?
